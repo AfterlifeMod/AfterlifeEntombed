@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "DFD",
+    "DND"
+  ],
+  "key": {
+    "G": {
+      "item": "afterlifeentombed:godstone_of_thoth"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:quill_of_thoth" 
+  }
+  
+}

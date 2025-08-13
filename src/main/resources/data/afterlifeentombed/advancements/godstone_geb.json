@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:godstone_of_geb"
+    },
+    "title": {
+      "translate": "advancement.afterlifeentombed.by_the_power_of_geb.title"
+    },
+    "description": {
+      "translate": "advancement.afterlifeentombed.by_the_power_of_geb.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "afterlifeentombed:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["afterlifeentombed:godstone_of_geb"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

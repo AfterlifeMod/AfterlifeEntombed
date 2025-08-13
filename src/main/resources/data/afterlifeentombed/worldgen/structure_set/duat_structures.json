@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "afterlifeentombed:obelisk_structure",
+      "weight": 2
+    },
+    {
+      "structure": "afterlifeentombed:red_obelisk_structure",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 16,
+    "separation": 10,
+    "salt": 10387320
+  }
+}

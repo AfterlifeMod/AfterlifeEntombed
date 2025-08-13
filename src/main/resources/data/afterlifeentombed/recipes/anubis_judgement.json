@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDG",
+    "DG ",
+    "S  "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "afterlifeentombed:godstone_of_anubis"
+    },
+    "D": {
+      "item": "afterlifeentombed:dusksteel_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:anubis_judgement" 
+  }
+  
+}

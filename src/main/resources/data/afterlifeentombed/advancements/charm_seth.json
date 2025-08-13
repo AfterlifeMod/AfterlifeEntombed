@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:crown_of_seth"
+    },
+    "title": {
+      "translate": "advancement.afterlifeentombed.and_i_am_become_seth.title"
+    },
+    "description": {
+      "translate": "advancement.afterlifeentombed.and_i_am_become_seth.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "afterlifeentombed:godstone_seth",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["afterlifeentombed:crown_of_seth"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

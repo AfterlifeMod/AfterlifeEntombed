@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/sand",
+  "textures": {
+    "particle": "minecraft:block/crying_obsidian",
+    "all": "afterlifeentombed:block/dark_sand"
+  }
+}

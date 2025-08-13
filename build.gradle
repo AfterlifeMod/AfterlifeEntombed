@@ -1,0 +1,183 @@
+buildscript {
+    repositories {
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
+        // Add SpongePowered Maven repository to find the MixinGradle plugin
+        maven { url = 'https://repo.spongepowered.org/maven' }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.0+', changing: true
+        // MixinGradle plugin for applying Mixin transformations
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT' 
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '6.0+'
+    // The Mixin plugin is applied using 'apply plugin' syntax below, as per documentation.
+    // id 'org.spongepowered.mixin' version '0.7-SNAPSHOT' // Removed from here
+}
+
+// Apply the Mixin plugin as per the documentation's recommended syntax
+apply plugin: 'org.spongepowered.mixin'
+
+version = '1.1.6'
+group = 'com.dracolich777.afterlifeentombed'
+archivesBaseName = 'afterlifeentombed'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+
+minecraft {
+    // The mappings can be changed at any time and must be in the following format.
+    // Channel:   Version:
+    // official   MCVersion            Official field/method names from Mojang mapping files
+    // parchment  YYYY.MM.DD-MCVersion  Open community-sourced parameter names and javadocs layered on top of official
+    
+    mappings channel: 'official', version: '1.20.1'
+    
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                afterlifeentombed {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                // Ensure mod ID matches archivesBaseName for consistency
+                afterlifeentombed {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                // Ensure mod ID matches archivesBaseName for consistency
+                afterlifeentombed {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            // Ensure mod ID matches archivesBaseName for consistency
+            args '--mod', 'afterlifeentombed', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                // Ensure mod ID matches archivesBaseName for consistency
+                afterlifeentombed {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        forRepositories(fg.repository)
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
+    
+    // Existing dependencies
+    implementation fg.deobf("maven.modrinth:aaa-particles:y71X65Qm")
+    implementation fg.deobf("maven.modrinth:architectury-api:1MKTLiiG")
+    
+    // New dependencies
+    implementation fg.deobf("maven.modrinth:curios:5.9.1+1.20.1")           // Curios API - latest stable version
+    implementation fg.deobf("maven.modrinth:patchouli:1.20.1-84.1-forge")   // Patchouli - latest version
+    implementation fg.deobf("maven.modrinth:geckolib:4.2.1")                 // GeckoLib - Forge 1.20.1 version
+}
+
+// Example for how to get properties into the manifest for reading at runtime.
+jar {
+    manifest {
+        attributes([
+                // Ensure Specification-Title matches archivesBaseName for consistency
+                "Specification-Title"     : "afterlifeentombed",
+                "Specification-Vendor"    : "dracolich777",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "dracolich777",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+// Example configuration to allow publishing using the maven-publish plugin
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar')
+
+// Mixin configuration
+mixin {
+    // Add the main source set for Mixin transformations.
+    // Ensure 'main.refmap.json' is the correct refmap name for your project.
+    add sourceSets.main, "main.refmap.json"
+    // Removed 'sourceSets.another' as it was not defined and would cause an error.
+    // If you have another source set for Mixins, define it in your build script
+    // and then uncomment and adjust the line below:
+    // add sourceSets.another, "another.refmap.json"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}

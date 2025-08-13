@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "G G",
+    "G G"
+  ],
+  "key": {
+    "G": {
+      "item": "afterlifeentombed:godsteel_ingot_of_ra"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:ra_boots" 
+  }
+  
+}

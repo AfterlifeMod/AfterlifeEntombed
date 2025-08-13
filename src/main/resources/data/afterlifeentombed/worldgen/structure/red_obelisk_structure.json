@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:jigsaw",
+  "biomes": [
+    "afterlifeentombed:dusksand_flats",
+    "afterlifeentombed:sand_dunes",
+    "minecraft:badlands"
+  ],
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "beard_thin",
+  "start_pool": "afterlifeentombed:red_obelisk_pool",
+  "size": 1,
+  "max_distance_from_center": 16,
+  "use_expansion_hack": false,
+  "start_height": {
+    "type": "minecraft:uniform",
+    "min_inclusive": {
+      "above_bottom": 0
+    },
+    "max_inclusive": {
+      "above_bottom": 0
+    }
+  },
+  "project_start_to_heightmap": "WORLD_SURFACE_WG"
+}

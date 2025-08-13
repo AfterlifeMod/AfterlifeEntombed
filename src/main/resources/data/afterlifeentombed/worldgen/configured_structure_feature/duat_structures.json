@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:random_spread",
+  "spacing": 32,
+  "separation": 8,
+  "salt": 10387320,
+  "structures": {
+    "afterlifeentombed:obelisk_structure": 1,
+    "afterlifeentombed:red_obelisk_structure": 1
+  }
+}

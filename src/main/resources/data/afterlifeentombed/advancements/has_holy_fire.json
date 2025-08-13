@@ -1,0 +1,33 @@
+{
+  "parent": "afterlifeentombed:root",
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:creative_icon" 
+    },
+    "title": {
+      "translate": "advancements.afterlifeentombed.has_holy_fire.title"
+    },
+    "description": {
+      "translate": "advancements.afterlifeentombed.has_holy_fire.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "player_has_holy_fire_effect": { 
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "afterlifeentombed:holy_fire": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_has_holy_fire_effect"
+    ]
+  ]
+}

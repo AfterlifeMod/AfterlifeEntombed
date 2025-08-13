@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "GKG",
+    "GKG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "I": {
+      "item": "afterlifeentombed:godstone_of_isis"
+    },
+    "K": {
+      "item": "afterlifeentombed:rod_of_kevin"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:wand_of_isis" 
+  }
+  
+}

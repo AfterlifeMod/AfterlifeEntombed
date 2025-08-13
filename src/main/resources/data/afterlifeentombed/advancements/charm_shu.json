@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:breath_of_shu"
+    },
+    "title": {
+      "translate": "advancement.afterlifeentombed.breath_taking.title"
+    },
+    "description": {
+      "translate": "advancement.afterlifeentombed.breath_taking.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "afterlifeentombed:godstone_shu",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["afterlifeentombed:breath_of_shu"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "afterlifeentombed:dusksteel"
+    }
+  ],
+  "result": {
+    "item": "afterlifeentombed:dusksteel_ingot",
+    "count": 9
+  }
+}

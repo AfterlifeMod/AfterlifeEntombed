@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:token_of_horus"
+    },
+    "title": {
+      "translate": "advancement.afterlifeentombed.eye_see_you.title"
+    },
+    "description": {
+      "translate": "advancement.afterlifeentombed.eye_see_you.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "afterlifeentombed:godstone_horus",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["afterlifeentombed:token_of_horus"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

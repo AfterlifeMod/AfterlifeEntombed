@@ -1,0 +1,23 @@
+{
+  "type": "afterlifeentombed:godhold_crafting",
+  "pattern": [
+    "OEO",
+    "ECE",
+    "OEO"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "C": {
+      "item": "minecraft:command_block"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:godhold",
+    "count": 2
+  }
+}

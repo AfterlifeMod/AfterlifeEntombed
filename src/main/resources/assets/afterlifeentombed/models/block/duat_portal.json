@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/sea_lantern",
+  "textures": {
+    "particle": "minecraft:block/crying_obsidian",
+    "all": "afterlifeentombed:block/duat_portal"
+  }
+}

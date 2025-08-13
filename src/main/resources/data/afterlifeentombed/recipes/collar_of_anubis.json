@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GNG",
+    "GSG",
+    "GMG"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:netherite_block"
+    },
+    "S": {
+      "item": "afterlifeentombed:godstone_of_anubis"
+    },
+    "M": {
+      "item": "minecraft:milk_bucket"
+    },
+    "G": {
+      "item": "minecraft:gilded_blackstone"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:collar_of_anubis" 
+  }
+  
+}

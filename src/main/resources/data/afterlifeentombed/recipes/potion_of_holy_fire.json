@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "ingredient": {
+    "item": "afterlifeentombed:godstone_of_ra"
+  },
+  "base": {
+    "potion": "minecraft:awkward"
+  },
+  "result": {
+    "potion": "afterlifeentombed:holy_fire_potion"
+  }
+}

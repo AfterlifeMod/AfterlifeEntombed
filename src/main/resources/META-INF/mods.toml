@@ -1,0 +1,55 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All rights reserved"
+
+[[mods]]
+
+modId="afterlifeentombed"
+version="1.1.7"
+displayName="Afterlife Entombed"
+logoFile="assets/afterlifeentombed/textures/gui/afterliefeentombed_logo.jpg"
+description='''
+A mod that adds gods and their powers and items.
+
+Credits:
+Lead Developer - Dracolich777
+
+Developer and Artist - Evicly
+
+Artist - Meradex
+
+Artist - Kwebble
+
+Artist - ElementalEnd
+
+Artist - Calstar9000
+'''
+
+
+[[dependencies.afterlifeentombed]]
+modId="forge"
+mandatory=true
+versionRange="[47.2.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.afterlifeentombed]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.afterlifeentombed]]
+modId="curios"
+mandatory=true
+versionRange="[5.4.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.afterlifeentombed]]
+modId="patchouli"
+mandatory=false
+versionRange="[1.20.1-84,)"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "afterlifeentombed:dusksand_clump"
+  },
+  "result": "afterlifeentombed:dusksteel_ingot",
+  "experience": 0.7,
+  "cookingtime": 400
+}

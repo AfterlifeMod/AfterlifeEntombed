@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "ingredient": {
+    "item": "afterlifeentombed:godstone_of_shu"
+  },
+  "base": {
+    "potion": "minecraft:awkward"
+  },
+  "result": {
+    "potion": "afterlifeentombed:revenge_of_shu_potion"
+  }
+}

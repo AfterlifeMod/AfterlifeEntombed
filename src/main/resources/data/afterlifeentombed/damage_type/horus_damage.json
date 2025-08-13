@@ -1,0 +1,6 @@
+{
+    "message_id": "horus_damage",
+    "exhaustion": 0.7,
+    "scaling": "never",
+    "effects": "hurt"
+}

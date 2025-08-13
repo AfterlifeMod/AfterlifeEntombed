@@ -1,0 +1,33 @@
+{
+  "parent": "afterlifeentombed:root",
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:creative_icon2" 
+    },
+    "title": {
+      "translate": "advancements.afterlifeentombed.has_horus_revenge.description"
+    },
+    "description": {
+      "translate": "advancements.afterlifeentombed.has_horus_revenge.title"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "player_has_horus_revenge_effect": { 
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "afterlifeentombed:revenge_of_horus": {}
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "player_has_horus_revenge_effect"
+    ]
+  ]
+}

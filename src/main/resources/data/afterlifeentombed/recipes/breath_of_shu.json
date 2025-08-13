@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "DGD",
+    "PPP"
+  ],
+  "key": {
+    "G": {
+      "item": "afterlifeentombed:godstone_of_shu"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "minecraft:phantom_membrane"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:breath_of_shu" 
+  }
+  
+}

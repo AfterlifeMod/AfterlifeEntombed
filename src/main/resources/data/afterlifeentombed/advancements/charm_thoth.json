@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:quill_of_thoth"
+    },
+    "title": {
+      "translate": "advancement.afterlifeentombed.wisdom_feather.title"
+    },
+    "description": {
+      "translate": "advancement.afterlifeentombed.wisdom_feather.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "afterlifeentombed:godstone_thoth",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["afterlifeentombed:quill_of_thoth"]
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

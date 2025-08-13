@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "afterlifeentombed:item/crown_of_seth"
+  }
+}

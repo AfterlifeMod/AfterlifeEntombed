@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "ADS",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "S": {
+      "item": "afterlifeentombed:godstone_of_seth"
+    },
+    "A": {
+      "item": "afterlifeentombed:godstone_of_anubis"
+    },
+    "D": {
+      "item": "afterlifeentombed:dusksteel_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:shabti" 
+  }
+  
+}

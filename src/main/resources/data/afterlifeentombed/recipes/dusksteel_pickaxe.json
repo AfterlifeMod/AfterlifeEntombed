@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "D": {
+      "item": "afterlifeentombed:dusksteel_ingot"
+    },
+    "S": {
+      "item": "afterlifeentombed:rod_of_kevin"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:dusksteel_pickaxe"
+  }
+}

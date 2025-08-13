@@ -1,0 +1,36 @@
+{
+  "type": "afterlifeentombed:duat",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "afterlifeentombed:sand_dunes",
+          "parameters": {
+            "temperature": 0.8,
+            "humidity": 0.0,
+            "continentalness": 0.0,
+            "erosion": 0.0,
+            "weirdness": 0.0,
+            "depth": 0.0,
+            "offset": 0.0
+          }
+        },
+        {
+          "biome": "afterlifeentombed:dusksand_flats",
+          "parameters": {
+            "temperature": 0.9,
+            "humidity": 0.1,
+            "continentalness": 0.5,
+            "erosion": 0.3,
+            "weirdness": 0.8,
+            "depth": 0.2,
+            "offset": 0.9
+          }
+        }
+      ]
+    },
+    "settings": "afterlifeentombed:duat"
+  }
+}

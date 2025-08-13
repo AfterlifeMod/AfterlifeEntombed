@@ -1,0 +1,33 @@
+{
+  "parent": "afterlifeentombed:root",
+  "display": {
+    "icon": {
+      "item": "afterlifeentombed:godseeker_sword"
+    },
+    "title": {
+      "translate": "advancements.afterlifeentombed.meet_godseeker.title"
+    },
+    "description": {
+      "translate": "advancements.afterlifeentombed.meet_godseeker.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+  "interacted_with_godseeker": {
+    "trigger": "minecraft:player_interacted_with_entity",
+    "conditions": {
+      "entity": {
+        "type": "afterlifeentombed:godseeker"
+      }
+    }
+  }
+},
+"requirements": [
+  [
+    "interacted_with_godseeker"
+  ]
+]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NGN",
+    " K ",
+    " K "
+  ],
+  "key": {
+    "G": {
+      "item": "afterlifeentombed:godstone_of_geb"
+    },
+    "K": {
+      "item": "afterlifeentombed:rod_of_kevin"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:hammer_of_geb" 
+  }
+  
+}

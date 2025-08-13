@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "afterlifeentombed:godsteel_template"
+  },
+  "base": {
+    "item": "afterlifeentombed:dusksteel_ingot"
+  },
+  "addition": {
+    "item": "afterlifeentombed:godstone_of_ra"
+  },
+  "result": {
+    "item": "afterlifeentombed:godsteel_ingot_of_ra"
+  }
+}

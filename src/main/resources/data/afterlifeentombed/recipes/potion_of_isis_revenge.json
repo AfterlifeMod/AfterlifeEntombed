@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:brewing",
+  "ingredient": {
+    "item": "afterlifeentombed:godstone_of_isis"
+  },
+  "base": {
+    "potion": "minecraft:awkward"
+  },
+  "result": {
+    "potion": "afterlifeentombed:revenge_of_isis_potion"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "GSG",
+    " D "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "afterlifeentombed:godstone_of_geb"
+    },
+    "D": {
+      "item": "afterlifeentombed:dusksteel_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:gebs_might" 
+  }
+  
+}

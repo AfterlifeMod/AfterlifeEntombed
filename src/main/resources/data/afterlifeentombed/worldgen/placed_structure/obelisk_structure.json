@@ -1,0 +1,10 @@
+{
+  "structure": "afterlifeentombed:obelisk_structure",
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 16,
+    "separation": 10,
+    "spread_type": "triangular",
+    "salt": 10387320
+  }
+}

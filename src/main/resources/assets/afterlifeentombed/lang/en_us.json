@@ -1,0 +1,265 @@
+{
+  "item.afterlifeentombed.dusksand_item": "Block of Dusksand",
+  "block.afterlifeentombed.dusksand": "Block of Dusksand",
+  "item.afterlifeentombed.dusksand_clump": "Dusksand Clump",
+  "item.afterlifeentombed.dusksteel_ingot": "Dusksteel Ingot",
+  "block.afterlifeentombed.dusksteel": "Dusksteel Block",
+   "item.afterlifeentombed.dusksteel_pickaxe": "Dusksteel Pickaxe",
+   "item.afterlifeentombed.dusksteel_axe": "Dusksteel Axe",
+   "item.afterlifeentombed.dusksteel_shovel": "Dusksteel Shovel",
+   "item.afterlifeentombed.dusksteel_hoe": "Dusksteel Hoe",
+  "block.afterlifeentombed.godhold": "Godhold",
+  "item.afterlifeentombed.godhold": "Godhold",
+  "container.afterlifeentombed.godhold": "Godhold",
+  "block.afterlifeentombed.seth_curse_block": "Cursestone of Seth",
+  
+
+  "item.afterlifeentombed.godstone_of_ra": "Godstone of Ra",
+  "item.afterlifeentombed.ring_of_ra": "Ring of Ra",
+  "item.afterlifeentombed.godstone_of_ra.tooltip": "A shard of Ra's power",
+  "item.afterlifeentombed.ring_of_ra.tooltip": "Bask in the Ra power",
+  "item.afterlifeentombed.ring_of_ra.effect": "Grants Fire Immunity",
+  "item.afterlifeentombed.ring_of_ra.lava_walking": "You can walk on lava",
+
+  "item.afterlifeentombed.godstone_of_horus": "Godstone of Horus",
+  "item.afterlifeentombed.godstone_of_horus.tooltip": "A shard of Horus' power",
+  "item.afterlifeentombed.token_of_horus": "Token of Horus",
+  "item.afterlifeentombed.token_of_horus.tooltip": "The all-seeing eye of protection",
+  "item.afterlifeentombed.token_of_horus.resistance": "Grants Resistance I while worn",
+  "item.afterlifeentombed.token_of_horus.totem_effect": "Prevents death with a 5-minute cooldown",
+  "item.afterlifeentombed.token_of_horus.cooldown": "Cooldown: %s",
+  "item.afterlifeentombed.token_of_horus.ready": "You are protected",
+  "item.afterlifeentombed.token_of_horus.activated": "The Eye of Horus has saved you!",
+  
+ "item.afterlifeentombed.godstone_of_thoth": "Godstone of Thoth",
+  "item.afterlifeentombed.godstone_of_thoth.tooltip": "A shard of Thoth's power",
+  "item.afterlifeentombed.quill_of_thoth": "Quill of Thoth",
+  "item.afterlifeentombed.quill_of_thoth.tooltip": "Thoth's knowledge flows through this charm",
+  "item.afterlifeentombed.quill_of_thoth.effect1": "You gain double experience",
+  
+  "item.afterlifeentombed.godstone_of_shu": "Godstone of Shu",
+  "item.afterlifeentombed.godstone_of_shu.tooltip": "A shard of Shu's power",
+  "item.afterlifeentombed.breath_of_shu": "Breath of Shu",
+  "item.afterlifeentombed.breath_of_shu.tooltip": "A breath of Shu's fresh air",
+  "item.afterlifeentombed.breath_of_shu.tooltip2": "Gives you an extra jump",
+  
+  "item.afterlifeentombed.godstone_of_geb": "Godstone of Geb",
+  "item.afterlifeentombed.godstone_of_geb.tooltip": "A shard of Geb's power",
+  "item.afterlifeentombed.hammer_of_geb": "Hammer of Geb",
+  "item.afterlifeentombed.hammer_of_geb.tooltip.line1": "The mighty hammer of the earth god",
+  "item.afterlifeentombed.hammer_of_geb.tooltip.line2": "Grants Strength",
+  "item.afterlifeentombed.hammer_of_geb.tooltip.line3": "You are stronger the closer you are to Geb's domain",
+  
+  "item.afterlifeentombed.godstone_of_isis": "Godstone of Isis",
+  "item.afterlifeentombed.godstone_of_isis.tooltip": "A shard of Isis' power",
+  "item.afterlifeentombed.wand_of_isis": "Wand of Isis",
+  "item.afterlifeentombed.wand_of_isis.tooltip": "Blesses you to bend matter like the godess Isis",
+  "item.afterlifeentombed.wand_of_isis.block": "",
+
+  "item.afterlifeentombed.godstone_of_seth": "Godstone of Seth",
+  "item.afterlifeentombed.godstone_of_seth.tooltip": "A shard of Seth's power",
+  "item.afterlifeentombed.crown_of_seth": "Crown of Seth",
+  "item.afterlifeentombed.crown_of_seth.tooltip": "Gives you Bad Omen",
+  "item.afterlifeentombed.crown_of_seth.tooltip.invis": "Makes you truly invisible",
+
+  "item.afterlifeentombed.godstone_of_anubis": "Godstone of Anubis",
+  "item.afterlifeentombed.godstone_of_anubis.tooltip": "A shard of Anubis' power",
+  "item.afterlifeentombed.collar_of_anubis": "Collar of Anubis",
+  "item.afterlifeentombed.collar_of_anubis.tooltip1": "Anubis' blessed collar",
+  "item.afterlifeentombed.collar_of_anubis.tooltip2": "Empowers you to mete out the jugdement of anubis",
+
+  "effect.afterlifeentombed.revenge_of_seth": "Wrath of Seth",
+  "effect.afterlifeentombed.holy_fire": "Wrath of Ra",
+  "effect.afterlifeentombed.revenge_of_thoth": "Wrath of Thoth",
+  "effect.afterlifeentombed.revenge_of_shu": "Wrath of Shu",
+  "effect.afterlifeentombed.revenge_of_isis": "Wrath of Isis",
+  "effect.afterlifeentombed.revenge_of_horus": "Wrath of Horus",
+  "effect.afterlifeentombed.revenge_of_anubis": "Wrath of Anubis",
+  "effect.afterlifeentombed.revenge_of_geb": "Wrath of Geb",
+  "effect.afterlifeentombed.mirage": "Mirage",
+  "effect.afterlifeentombed.judged_unworthy": "Judged Unworthy",
+  "effect.afterlifeentombed.judged_worthy": "Judged Worthy",
+  "effect.afterlifeentombed.swarmed_by_locusts": "Swarmed",
+  
+  "item.minecraft.potion.effect.revenge_of_seth": "Potion of Revenge of Seth",
+  "item.minecraft.potion.effect.holy_fire": "Potion of Holy Fire",
+  "item.minecraft.potion.effect.revenge_of_thoth": "Potion of Revenge of Thoth",
+  "item.minecraft.potion.effect.revenge_of_shu": "Potion of Revenge of Shu",
+  "item.minecraft.potion.effect.revenge_of_isis": "Potion of Revenge of Isis",
+  "item.minecraft.potion.effect.revenge_of_geb": "Potion of Revenge of Geb",
+  "item.minecraft.potion.effect.revenge_of_horus": "Potion of Revenge of Horus",
+  "item.minecraft.potion.effect.revenge_of_anubis": "Potion of Revenge of Anubis",
+
+
+  "item.minecraft.splash_potion.effect.revenge_of_seth": "Splash Potion of Revenge of Seth",
+  "item.minecraft.splash_potion.effect.holy_fire": "Splash Potion of Holy Fire",
+  "item.minecraft.splash_potion.effect.revenge_of_thoth": "Splash Potion of Revenge of Thoth",
+  "item.minecraft.splash_potion.effect.revenge_of_shu": "Splash Potion of Revenge of Shu",
+  "item.minecraft.splash_potion.effect.revenge_of_isis": "Splash Potion of Revenge of Isis",
+  "item.minecraft.splash_potion.effect.revenge_of_geb": "Splash Potion of Revenge of Geb",
+  "item.minecraft.splash_potion.effect.revenge_of_horus": "Splash Potion of Revenge of Horus",
+  "item.minecraft.splash_potion.effect.revenge_of_anubis": "Splash Potion of Revenge of Anubis",
+
+
+  "item.minecraft.lingering_potion.effect.revenge_of_seth": "Lingering Potion of Revenge of Seth",
+  "item.minecraft.lingering_potion.effect.holy_fire": "Lingering Potion of Holy Fire",
+  "item.minecraft.lingering_potion.effect.revenge_of_thoth": "Lingering Potion of Revenge of Thoth",
+  "item.minecraft.lingering_potion.effect.revenge_of_shu": "Lingering Potion of Revenge of Shu",
+  "item.minecraft.lingering_potion.effect.revenge_of_isis": "Lingering Potion of Revenge of Isis",
+  "item.minecraft.lingering_potion.effect.revenge_of_geb": "Lingering Potion of Revenge of Geb",
+  "item.minecraft.lingering_potion.effect.revenge_of_horus": "Lingering Potion of Revenge of Horus",
+  "item.minecraft.lingering_potion.effect.revenge_of_anubis": "Lingering Potion of Revenge of Anubis",
+
+
+  "item.minecraft.tipped_arrow.effect.revenge_of_seth": "Arrow of Revenge of Seth",
+  "item.minecraft.tipped_arrow.effect.holy_fire": "Arrow of Holy Fire",
+  "item.minecraft.tipped_arrow.effect.revenge_of_thoth": "Arrow of Revenge of Thoth",
+  "item.minecraft.tipped_arrow.effect.revenge_of_shu": "Arrow of Revenge of Shu",
+  "item.minecraft.tipped_arrow.effect.revenge_of_isis": "Arrow of Revenge of Isis",
+  "item.minecraft.tipped_arrow.effect.revenge_of_geb": "Arrow of Revenge of Geb",
+  "item.minecraft.tipped_arrow.effect.revenge_of_horus": "Arrow of Revenge of Horus",
+  "item.minecraft.tipped_arrow.effect.revenge_of_anubis": "Arrow of Revenge of Anubis",
+
+  "item.afterlifeentombed.armor_of_ra.tooltip.line1": "Blessed armor of the sun god Ra",
+  "item.afterlifeentombed.armor_of_ra.tooltip.set_bonus": "Full Set Bonus:",
+  "item.afterlifeentombed.armor_of_ra.tooltip.fire_resistance": "• Fire Resistance",
+  "item.afterlifeentombed.armor_of_ra.tooltip.holy_fire": "• Attackers burn with holy fire",
+  "item.afterlifeentombed.armor_of_ra.tooltip.unbreakable": "• Unbreakable",
+
+  "item.afterlifeentombed.ra_helmet": "Ra's Crown",
+  "item.afterlifeentombed.ra_chestplate": "Ra's Breastplate",
+  "item.afterlifeentombed.ra_leggings": "Ra's Legguards",
+  "item.afterlifeentombed.ra_boots": "Ra's Sandals",
+  
+  "item.afterlifeentombed.armor_of_seth.tooltip.line1": "Blessed armor of the chaos god Seth",
+  "item.afterlifeentombed.armor_of_seth.tooltip.set_bonus": "Full Set Bonus:",
+  "item.afterlifeentombed.armor_of_seth.tooltip.fire_resistance": "• Immune to Poison and Disease",
+  "item.afterlifeentombed.armor_of_seth.tooltip.holy_fire": "• Attackers get reversed controls",
+  "item.afterlifeentombed.armor_of_seth.tooltip.unbreakable": "• Unbreakable",
+
+  "item.afterlifeentombed.seth_helmet": "Seth's Crown",
+  "item.afterlifeentombed.seth_chestplate": "Seth's Breastplate",
+  "item.afterlifeentombed.seth_leggings": "Seth's Legguards",
+  "item.afterlifeentombed.seth_boots": "Seth's Sandals",
+
+  "item.afterlifeentombed.seths_trickery": "Seth's Trickery",
+  "tooltip.afterlifeentombed.seths_trickery.tooltip1": "The cursed dagger of the god Seth",
+  "tooltip.afterlifeentombed.seths_trickery.tooltip2": "Striking enemies inflicts Seth's wrath upon them",
+  "tooltip.afterlifeentombed.seths_trickery.tooltip3": "Right Click to teleport behind your foe",
+
+  "item.afterlifeentombed.gebs_might": "Geb's Might",
+  "tooltip.afterlifeentombed.gebs_might.tooltip1": "The Mighty weapon of the god Geb",
+  "tooltip.afterlifeentombed.gebs_might.tooltip2": "Striking enemies inflicts Geb's wrath upon them",
+  "tooltip.afterlifeentombed.gebs_might.tooltip3": "Right Click to knock foes backs",
+
+  "item.afterlifeentombed.anubis_judgement": "Anubis' Judgement",
+  "tooltip.afterlifeentombed.anubis_judgement.tooltip1": "The holy staff of the god Anubis",
+  "tooltip.afterlifeentombed.anubis_judgement.tooltip2": "Striking your foes invokes the wrath of the desert upon them",
+  "tooltip.afterlifeentombed.anubis_judgement.tooltip3": "Striking foes inflicts the ire of Anubis on them",
+  
+  "item.afterlifeentombed.prickly_pear_helmet": "Prickly Pear Helmet",
+  "item.afterlifeentombed.prickly_pear_chestplate": "Prickly Pear Chestplate",
+  "item.afterlifeentombed.prickly_pear_leggings": "Prickly Pear Leggings",
+  "item.afterlifeentombed.prickly_pear_boots": "Prickly Pear Boots",
+  "tooltip.afterlifeentombed.thorns_effect": "Reflects damage and applies stored effect",
+  "tooltip.afterlifeentombed.stored_effect": "Stored Effect: %s (%s)",
+  "tooltip.afterlifeentombed.no_effect": "No effect stored - craft with a potion!",
+  
+  "item.afterlifeentombed.godsteel_ingot_of_ra": "Godsteel Ingot of Ra",
+  "item.afterlifeentombed.godsteel_ingot_of_ra.tooltip.line1": "Divine metal forged by the sun god",
+  "item.afterlifeentombed.godsteel_ingot_of_ra.tooltip.line2": "Eternal and unbreakable",
+  "item.afterlifeentombed.godsteel_ingot_of_ra.tooltip.line3": "Burns with holy fire",
+  
+  "item.afterlifeentombed.godsteel_template": "Godsteel Smithing Template",
+  "item.afterlifeentombed.godsteel_template.tooltip.line1": "Ancient template of divine craftsmanship",
+  "item.afterlifeentombed.godsteel_template.tooltip.line2": "Used in smithing table",
+  "item.afterlifeentombed.godsteel_template.tooltip.line3": "Combines with Netherite and the Godstone of your choice",
+
+  "item.afterlifeentombed.godseeker_sword": "Godseeker Sword",
+  
+  "item.afterlifeentombed.dev_wrench": "Dev Wrench",
+  "item.afterlifeentombed.dev_wrench.tooltip.line1": "Developer's Utility",
+  "item.afterlifeentombed.dev_wrench.tooltip.line2": "Displays debug information when equipped.",
+  
+  "item.afterlifeentombed.rod_of_kevin": "Rod of Kevin",
+  "item.afterlifeentombed.rod_of_kevin.tooltip": "Used in the crafting of divine things that regular sticks would be dumb for",
+
+  "item.afterlifeentombed.shabti": "Shabti",
+  "item.afterlifeentombed.shabti.tooltip": "Creates an illusory duplicate that mimics your appearance",
+  "entity.afterlifeentombed.shabti": "Shabti",
+
+  "entity.afterlifeentombed.godseeker": "Godseeker",
+
+  "advancements.afterlifeentombed.root.title": "Afterlife Entombed",
+  "advancements.afterlifeentombed.root.description": "Begin your journey into the duat.",
+  
+
+  "advancement.afterlifeentombed.by_the_power_of_ra.title": "By the Power of Ra",
+  "advancement.afterlifeentombed.by_the_power_of_ra.description": "Obtain the Godstone of Ra, the sun god",
+
+  "advancement.afterlifeentombed.by_the_power_of_thoth.title": "By the Power of Thoth",
+  "advancement.afterlifeentombed.by_the_power_of_thoth.description": "Obtain the Godstone of Thoth, wisdom incarnate",
+
+  "advancement.afterlifeentombed.by_the_power_of_horus.title": "By the Power of Horus",
+  "advancement.afterlifeentombed.by_the_power_of_horus.description": "Obtain the Godstone of Horus, the falcon-eyed protector",
+
+  "advancement.afterlifeentombed.by_the_power_of_isis.title": "By the Power of Isis",
+  "advancement.afterlifeentombed.by_the_power_of_isis.description": "Obtain the Godstone of Isis, the magic weaver",
+
+  "advancement.afterlifeentombed.by_the_power_of_seth.title": "By the Power of Seth",
+  "advancement.afterlifeentombed.by_the_power_of_seth.description": "Obtain the Godstone of Seth, chaos unleashed",
+
+  "advancement.afterlifeentombed.by_the_power_of_geb.title": "By the Power of Geb",
+  "advancement.afterlifeentombed.by_the_power_of_geb.description": "Obtain the Godstone of Geb, the earth's foundation",
+
+  "advancement.afterlifeentombed.by_the_power_of_shu.title": "By the Power of Shu",
+  "advancement.afterlifeentombed.by_the_power_of_shu.description": "Obtain the Godstone of Shu, master of air and light",
+
+  "advancement.afterlifeentombed.by_the_power_of_anubis.title": "By the Power of Anubis",
+  "advancement.afterlifeentombed.by_the_power_of_anubis.description": "Obtain the Godstone of Anubis, guardian of the afterlife",
+
+  "advancement.afterlifeentombed.ring_bearer.title": "If you liked it then you shoulda put a ring on it",
+  "advancement.afterlifeentombed.ring_bearer.description": "Obtain the Ring of Ra",
+
+  "advancement.afterlifeentombed.wisdom_feather.title": "Neeeeerrrrrddddd!",
+  "advancement.afterlifeentombed.wisdom_feather.description": "Obtain the Quill of Thoth",
+
+  "advancement.afterlifeentombed.eye_see_you.title": "I always feel like somebody's watching me...",
+  "advancement.afterlifeentombed.eye_see_you.description": "Obtain the Token of Horus",
+
+  "advancement.afterlifeentombed.wand_erful.title": "It's 'Wingardium Levio-SA'",
+  "advancement.afterlifeentombed.wand_erful.description": "Obtain the Wand of Isis",
+
+  "advancement.afterlifeentombed.and_i_am_become_seth.title": "I Am Become Seth...",
+  "advancement.afterlifeentombed.and_i_am_become_seth.description": "Obtain the Crown of Seth",
+  "advancement.afterlifeentombed.weapon_seth.description": "Craft the exquisite dagger of chaos",
+  "advancement.afterlifeentombed.weapon_seth.title": "Blink 182",
+
+  "advancement.afterlifeentombed.hammer_time.title": "HAMMER TIME",
+  "advancement.afterlifeentombed.hammer_time.description": "Obtain the Hammer of Geb",
+
+  "advancement.afterlifeentombed.breath_taking.title": "Windfall",
+  "advancement.afterlifeentombed.breath_taking.description": "Obtain the Breath of Shu",
+
+  "advancement.afterlifeentombed.dead_serious.title": "Good do- I mean God",
+  "advancement.afterlifeentombed.dead_serious.description": "Obtain the Collar of Anubis",
+
+  "advancements.afterlifeentombed.trade_with_godseeker.title": "An Offer you can't Confuse",
+  "advancements.afterlifeentombed.trade_with_godseeker.description": "Successfully trade with the mysterious Godseeker.",
+  
+  "advancements.afterlifeentombed.meet_godseeker.title": "Reddering Trader",
+  "advancements.afterlifeentombed.meet_godseeker.description": "Encounter the Godseeker",
+
+  "advancements.afterlifeentombed.has_holy_fire.title": "The Smell of Cactus in the Morning",
+  "advancements.afterlifeentombed.has_holy_fire.description": "Receive a smite from Ra",
+  "advancements.afterlifeentombed.has_horus_revenge.title": "Naked and Afraid",
+  "advancements.afterlifeentombed.has_horus_revenge.description": "Recive a smite from Horus",
+
+  "death.attack.holy_fire": "%1$s was consumed by holy fire",
+  "death.attack..holy_fire.player": "%1$s was consumed by holy fire whilst fighting %2$s",
+  "death.attack.afterlifeentombed.horus_damage": "%1$s relied too much on the protection of Horus",
+  "death.attack.afterlifeentombed.horus_damage.player": "%1$s was oblitterated by Horus whilst fighting %2$s",
+
+  "enchantment.afterlifeentombed.skybound": "Skybound",
+  "enchantment.afterlifeentombed.skybound.desc": "Launches you upward when hitting enemies"
+}
