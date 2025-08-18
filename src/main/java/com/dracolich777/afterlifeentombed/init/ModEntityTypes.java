@@ -1,6 +1,7 @@
 package com.dracolich777.afterlifeentombed.init;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
+import com.dracolich777.afterlifeentombed.mobs.HorusArrowEntity;
 import com.dracolich777.afterlifeentombed.mobs.GodseekerEntity;
 import com.dracolich777.afterlifeentombed.mobs.ScorpionWhipProjectileEntity;
 import com.dracolich777.afterlifeentombed.mobs.ShabtiEntity;
@@ -38,6 +39,14 @@ public class ModEntityTypes {
                             .clientTrackingRange(10)
                             .updateInterval(1)
                             .build(AfterlifeEntombedMod.MOD_ID + ":shabti"));
+
+    public static final RegistryObject<EntityType<HorusArrowEntity>> HORUS_ARROW =
+            ENTITY_TYPES.register("horus_arrow",
+                    () -> EntityType.Builder.<HorusArrowEntity>of(HorusArrowEntity::new, MobCategory.MISC)
+                            .sized(0.5F, 0.5F)
+                            .clientTrackingRange(4)
+                            .updateInterval(20)
+                            .build(AfterlifeEntombedMod.MOD_ID + ":horus_arrow"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

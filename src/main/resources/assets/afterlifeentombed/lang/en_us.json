@@ -188,6 +188,10 @@
   "item.afterlifeentombed.shabti.tooltip": "Creates an illusory duplicate that mimics your appearance",
   "entity.afterlifeentombed.shabti": "Shabti",
 
+  "item.afterlifeentombed.horus_protection_bow": "Horus' Protection",
+  "item.afterlifeentombed.horus_protection_bow.tooltip": "The divine bow of the sky god Horus",
+  "item.afterlifeentombed.horus_protection_bow.tooltip2": "Arrows shot from this bow fly straight and true",
+
   "entity.afterlifeentombed.godseeker": "Godseeker",
 
   "advancements.afterlifeentombed.root.title": "Afterlife Entombed",

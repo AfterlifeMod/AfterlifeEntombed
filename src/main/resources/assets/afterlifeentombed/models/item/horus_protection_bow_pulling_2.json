@@ -1,0 +1,6 @@
+{
+  "parent": "afterlifeentombed:item/horus_protection_bow",
+  "textures": {
+    "layer0": "afterlifeentombed:item/horus_protection_bow_pulling_2"
+  }
+}

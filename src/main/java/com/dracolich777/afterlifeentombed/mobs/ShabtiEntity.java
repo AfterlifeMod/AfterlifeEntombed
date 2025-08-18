@@ -239,14 +239,17 @@ public class ShabtiEntity extends LivingEntity {
         // Only allow the owner to hurt/kill this entity
         if (damageSource.getEntity() instanceof Player player) {
             if (this.ownerUUID != null && this.ownerUUID.equals(player.getUUID())) {
-                // Owner instantly kills the shabti - drop the item
-                if (!level().isClientSide && player instanceof ServerPlayer serverPlayer) {
+                // Set health to 0 to kill the entity
+                this.setHealth(0.0f);
+                boolean actuallyHurt = super.hurt(damageSource, amount);
+                
+                // Only give the item back if the entity actually died
+                if (!level().isClientSide && player instanceof ServerPlayer serverPlayer && !this.isAlive()) {
                     ShabtiItem.giveShabtiItem(serverPlayer);
                     player.sendSystemMessage(Component.literal("Shabti returned to your inventory"));
                 }
-                // Set health to 0 to kill the entity
-                this.setHealth(0.0f);
-                return super.hurt(damageSource, amount);
+                
+                return actuallyHurt;
             }
         }
         return false; // Invulnerable to all other damage

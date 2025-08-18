@@ -29,6 +29,7 @@ import com.dracolich777.afterlifeentombed.items.GodstoneOfSeth;
 import com.dracolich777.afterlifeentombed.items.GodstoneOfShu;
 import com.dracolich777.afterlifeentombed.items.GodstoneOfThoth;
 import com.dracolich777.afterlifeentombed.items.HammerOfGeb;
+import com.dracolich777.afterlifeentombed.items.HorusProtectionBow;
 import com.dracolich777.afterlifeentombed.items.PricklyPearArmor;
 import com.dracolich777.afterlifeentombed.items.PricklyPearArmorMaterial;
 import com.dracolich777.afterlifeentombed.items.QuillOfThoth;
@@ -195,6 +196,9 @@ public static final RegistryObject<DusksteelShovelItem> DUSKSTEEL_SHOVEL = ITEMS
 
     public static final RegistryObject<Item> SHABTI = ITEMS.register("shabti",
             () -> new ShabtiItem(new Item.Properties().stacksTo(1).fireResistant()));
+
+    public static final RegistryObject<Item> HORUS_PROTECTION_BOW = ITEMS.register("horus_protection_bow",
+            () -> new HorusProtectionBow(new Item.Properties().stacksTo(1).durability(0).setNoRepair().fireResistant()));
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS
             = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AfterlifeEntombedMod.MOD_ID);
 
@@ -235,11 +239,15 @@ public static final RegistryObject<DusksteelShovelItem> DUSKSTEEL_SHOVEL = ITEMS
                         output.accept(PRICKLY_PEAR_BOOTS.get());
                         output.accept(DUSKSTEEL_PICKAXE.get());
                         output.accept(DUSKSTEEL_AXE.get());
+                        output.accept(DUSKSTEEL_SHOVEL.get());
+                        output.accept(DUSKSTEEL_HOE.get());
                         output.accept(SETHS_TRICKERY.get());
                         output.accept(ANUBIS_JUDGEMENT.get());
                         output.accept(GEBS_MIGHT.get());
+                        output.accept(HORUS_PROTECTION_BOW.get());
                         output.accept(DEV_WRENCH.get());
                         output.accept(SHABTI.get());
+                        
 
                     })
                     .build());

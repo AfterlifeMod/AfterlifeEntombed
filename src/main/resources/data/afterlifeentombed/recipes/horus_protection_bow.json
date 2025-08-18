@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "key": {
+    "H": {
+      "item": "afterlifeentombed:godstone_of_horus"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "R": {
+      "item": "afterlifeentombed:rod_of_kevin"
+    }
+  },
+  "pattern": [
+    " RS",
+    "RHS",
+    " RS"
+  ],
+  "result": {
+    "item": "afterlifeentombed:horus_protection_bow"
+  }
+}
