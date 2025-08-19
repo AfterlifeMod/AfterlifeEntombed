@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CGC",
+    "GWG",
+    "CGC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:chiseled_sandstone"
+    },
+    "G": {
+      "item": "afterlifeentombed:godstone_of_geb"
+    },
+    "W": {
+      "item": "minecraft:emerald_block"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:geb_curse_block" 
+  }
+  
+}

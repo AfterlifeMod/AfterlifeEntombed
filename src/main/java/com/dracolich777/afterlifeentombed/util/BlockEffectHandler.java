@@ -23,6 +23,12 @@ public class BlockEffectHandler {
         if (blockState.getBlock() == ModBlocks.SETH_CURSE_BLOCK.get()) {
             applySethCurse(player);
         }
+        if (blockState.getBlock() == ModBlocks.GEB_CURSE_BLOCK.get()) {
+            applyGebCurse(player);
+        }
+        if (blockState.getBlock() == ModBlocks.THOTH_CURSE_BLOCK.get()) {
+            applyThothCurse(player);
+        }
     }
 
     private static void applyDarkness(Player player) {
@@ -36,5 +42,17 @@ public class BlockEffectHandler {
         int amplifier = 0;
 
         player.addEffect(new MobEffectInstance(ModEffects.REVENGE_OF_SETH.get(), duration, amplifier, false, true, true));
+    }
+    private static void applyGebCurse(Player player) {
+        int duration = 240; // 3 seconds (20 ticks per second)
+        int amplifier = 0;
+
+        player.addEffect(new MobEffectInstance(ModEffects.REVENGE_OF_GEB.get(), duration, amplifier, false, true, true));
+    }
+    private static void applyThothCurse(Player player) {
+        int duration = 600; // 3 seconds (20 ticks per second)
+        int amplifier = 0;
+
+        player.addEffect(new MobEffectInstance(ModEffects.REVENGE_OF_THOTH.get(), duration, amplifier, false, true, true));
     }
 }

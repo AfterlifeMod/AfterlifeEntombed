@@ -1,7 +1,7 @@
 package com.dracolich777.afterlifeentombed.init;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
-import com.dracolich777.afterlifeentombed.blockentities.GodHoldBlockEntity;
+// import com.dracolich777.afterlifeentombed.blockentities.GodHoldBlockEntity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "particle": "afterlifeentombed:block/thoth_curse_block",
+    "bottom": "minecraft:block/cut_sandstone",
+    "top": "afterlifeentombed:block/thoth_curse_block",
+    "side": "minecraft:block/cut_sandstone"
+  }
+}

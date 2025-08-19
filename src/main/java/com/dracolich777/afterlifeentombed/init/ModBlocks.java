@@ -4,8 +4,10 @@ import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.blocks.DuatPortalBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksandBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksteelBlock;
-import com.dracolich777.afterlifeentombed.blocks.GodHoldBlock;
+// import com.dracolich777.afterlifeentombed.blocks.GodHoldBlock;
 import com.dracolich777.afterlifeentombed.blocks.SethCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.GebCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.ThothCurseBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -55,11 +57,23 @@ public class ModBlocks {
     public static final RegistryObject<Item> SETH_CURSE_BLOCK_ITEM = ITEMS.register("seth_curse_block",
             () -> new BlockItem(SETH_CURSE_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> GODHOLD = BLOCKS.register("godhold",
-            GodHoldBlock::new);
+    public static final RegistryObject<Block> GEB_CURSE_BLOCK = BLOCKS.register("geb_curse_block",
+            GebCurseBlock::new);
 
-    public static final RegistryObject<Item> GODHOLD_ITEM = ITEMS.register("godhold",
-            () -> new BlockItem(GODHOLD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> GEB_CURSE_BLOCK_ITEM = ITEMS.register("geb_curse_block",
+            () -> new BlockItem(GEB_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> THOTH_CURSE_BLOCK = BLOCKS.register("thoth_curse_block",
+            ThothCurseBlock::new);
+
+    public static final RegistryObject<Item> SHU_CURSE_BLOCK_ITEM = ITEMS.register("thoth_curse_block",
+            () -> new BlockItem(THOTH_CURSE_BLOCK.get(), new Item.Properties()));
+
+//     public static final RegistryObject<Block> GODHOLD = BLOCKS.register("godhold",
+//             GodHoldBlock::new);
+
+//     public static final RegistryObject<Item> GODHOLD_ITEM = ITEMS.register("godhold",
+//             () -> new BlockItem(GODHOLD.get(), new Item.Properties()));
 
     // Register the Creative Tab
     public static final RegistryObject<CreativeModeTab> AFTERLIFE_ENTOMBED_TAB = CREATIVE_MODE_TABS.register(
@@ -71,8 +85,9 @@ public class ModBlocks {
                         output.accept(DUSKSAND_ITEM.get());
                         output.accept(DUSKSTEEL_ITEM.get());
                         output.accept(SETH_CURSE_BLOCK_ITEM.get());
+                        output.accept(GEB_CURSE_BLOCK_ITEM.get());
                         output.accept(DUAT_PORTAL_ITEM.get());
-                        output.accept(GODHOLD_ITEM.get());
+                        // output.accept(GODHOLD_ITEM.get());
                     })
                     .build()
     );
