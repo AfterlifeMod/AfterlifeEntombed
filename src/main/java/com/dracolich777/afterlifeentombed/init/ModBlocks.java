@@ -4,10 +4,15 @@ import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.blocks.DuatPortalBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksandBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksteelBlock;
-// import com.dracolich777.afterlifeentombed.blocks.GodHoldBlock;
+import com.dracolich777.afterlifeentombed.blocks.GodHoldBlock;
 import com.dracolich777.afterlifeentombed.blocks.SethCurseBlock;
 import com.dracolich777.afterlifeentombed.blocks.GebCurseBlock;
 import com.dracolich777.afterlifeentombed.blocks.ThothCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.RaCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.HorusCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.ShuCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.IsisCurseBlock;
+import com.dracolich777.afterlifeentombed.blocks.AnubisCurseBlock;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -66,14 +71,44 @@ public class ModBlocks {
     public static final RegistryObject<Block> THOTH_CURSE_BLOCK = BLOCKS.register("thoth_curse_block",
             ThothCurseBlock::new);
 
-    public static final RegistryObject<Item> SHU_CURSE_BLOCK_ITEM = ITEMS.register("thoth_curse_block",
+    public static final RegistryObject<Item> THOTH_CURSE_BLOCK_ITEM = ITEMS.register("thoth_curse_block",
             () -> new BlockItem(THOTH_CURSE_BLOCK.get(), new Item.Properties()));
 
-//     public static final RegistryObject<Block> GODHOLD = BLOCKS.register("godhold",
-//             GodHoldBlock::new);
+    public static final RegistryObject<Block> RA_CURSE_BLOCK = BLOCKS.register("ra_curse_block",
+            RaCurseBlock::new);
 
-//     public static final RegistryObject<Item> GODHOLD_ITEM = ITEMS.register("godhold",
-//             () -> new BlockItem(GODHOLD.get(), new Item.Properties()));
+    public static final RegistryObject<Item> RA_CURSE_BLOCK_ITEM = ITEMS.register("ra_curse_block",
+            () -> new BlockItem(RA_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> HORUS_CURSE_BLOCK = BLOCKS.register("horus_curse_block",
+            HorusCurseBlock::new);
+
+    public static final RegistryObject<Item> HORUS_CURSE_BLOCK_ITEM = ITEMS.register("horus_curse_block",
+            () -> new BlockItem(HORUS_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> SHU_CURSE_BLOCK = BLOCKS.register("shu_curse_block",
+            ShuCurseBlock::new);
+
+    public static final RegistryObject<Item> SHU_CURSE_BLOCK_ITEM = ITEMS.register("shu_curse_block",
+            () -> new BlockItem(SHU_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> ISIS_CURSE_BLOCK = BLOCKS.register("isis_curse_block",
+            IsisCurseBlock::new);
+
+    public static final RegistryObject<Item> ISIS_CURSE_BLOCK_ITEM = ITEMS.register("isis_curse_block",
+            () -> new BlockItem(ISIS_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> ANUBIS_CURSE_BLOCK = BLOCKS.register("anubis_curse_block",
+            AnubisCurseBlock::new);
+
+    public static final RegistryObject<Item> ANUBIS_CURSE_BLOCK_ITEM = ITEMS.register("anubis_curse_block",
+            () -> new BlockItem(ANUBIS_CURSE_BLOCK.get(), new Item.Properties()));
+
+    public static final RegistryObject<Block> GODHOLD = BLOCKS.register("godhold",
+            GodHoldBlock::new);
+
+    public static final RegistryObject<Item> GODHOLD_ITEM = ITEMS.register("godhold",
+            () -> new BlockItem(GODHOLD.get(), new Item.Properties()));
 
     // Register the Creative Tab
     public static final RegistryObject<CreativeModeTab> AFTERLIFE_ENTOMBED_TAB = CREATIVE_MODE_TABS.register(
@@ -86,8 +121,14 @@ public class ModBlocks {
                         output.accept(DUSKSTEEL_ITEM.get());
                         output.accept(SETH_CURSE_BLOCK_ITEM.get());
                         output.accept(GEB_CURSE_BLOCK_ITEM.get());
+                        output.accept(THOTH_CURSE_BLOCK_ITEM.get());
+                        output.accept(RA_CURSE_BLOCK_ITEM.get());
+                        output.accept(HORUS_CURSE_BLOCK_ITEM.get());
+                        output.accept(SHU_CURSE_BLOCK_ITEM.get());
+                        output.accept(ISIS_CURSE_BLOCK_ITEM.get());
+                        output.accept(ANUBIS_CURSE_BLOCK_ITEM.get());
                         output.accept(DUAT_PORTAL_ITEM.get());
-                        // output.accept(GODHOLD_ITEM.get());
+                        output.accept(GODHOLD_ITEM.get());
                     })
                     .build()
     );

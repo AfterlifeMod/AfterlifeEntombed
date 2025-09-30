@@ -4,7 +4,6 @@ package com.dracolich777.afterlifeentombed.client; // Adjust package as necessar
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 // import com.dracolich777.afterlifeentombed.client.particles.RitualCircleParticle;
 import com.dracolich777.afterlifeentombed.client.renderer.GodseekerRenderer;
-import com.dracolich777.afterlifeentombed.client.renderer.HorusArrowRenderer;
 import com.dracolich777.afterlifeentombed.client.renderer.ShabtiEntityRenderer;
 import com.dracolich777.afterlifeentombed.init.ModEntityTypes;
 
@@ -24,7 +23,6 @@ public class ClientSetup {
             EntityRenderers.register(ModEntityTypes.GODSEEKER.get(), GodseekerRenderer::new);
             // MenuScreens.register(ModContainers.GODSEEKER_SWORD_CONTAINER.get(), GodseekerSwordScreen::new);
             EntityRenderers.register(ModEntityTypes.SHABTI.get(), ShabtiEntityRenderer::new);
-            EntityRenderers.register(ModEntityTypes.HORUS_ARROW.get(), HorusArrowRenderer::new);
             
 
         });

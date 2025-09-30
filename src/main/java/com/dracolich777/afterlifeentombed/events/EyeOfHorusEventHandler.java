@@ -1,8 +1,10 @@
 package com.dracolich777.afterlifeentombed.events;
+import com.dracolich777.afterlifeentombed.util.ParticleManager;
 
 import com.dracolich777.afterlifeentombed.items.TokenOfHorus;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,8 +32,6 @@ public class EyeOfHorusEventHandler {
                             // Check if the charm is on cooldown
                             if (tokenOfHorus.isOnCooldown(stack, entity.level())) {
                                 // Apply revenge effect for 1 minute (1200 ticks)
-                                // You'll need to register this effect in your mod
-                                // For now, I'll use a placeholder - replace with your actual effect
                                 MobEffectInstance revengeEffect = new MobEffectInstance(
                                     ModEffects.REVENGE_OF_HORUS.get(), // Use .get() to get the actual MobEffect
                                     1200, // 1 minute (60 seconds * 20 ticks)
@@ -40,6 +40,7 @@ public class EyeOfHorusEventHandler {
                                     true, // Show particles
                                     true // Show icon
                                 );
+                                entity.addEffect(revengeEffect);
                                 
                                 return;
                                 
@@ -49,6 +50,19 @@ public class EyeOfHorusEventHandler {
                             if (tokenOfHorus.tryActivateTotem(entity, stack, event.getSource())) {
                                 // Cancel the damage event to prevent death
                                 event.setCanceled(true);
+                                
+                                // Spawn Horus shield particle at half scale if entity is a player
+                                if (entity instanceof Player player) {
+                                    ParticleManager.sendParticleToPlayer(
+                                        player,
+                                        "horus_shield",
+                                        entity.getX(),
+                                        entity.getY() + entity.getBbHeight() * 0.5, // Middle of the entity
+                                        entity.getZ(),
+                                        0.5f // Half scale
+                                    );
+                                }
+                                
                                 return;
                             }
                         }

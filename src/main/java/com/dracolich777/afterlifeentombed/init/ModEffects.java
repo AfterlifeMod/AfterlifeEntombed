@@ -13,7 +13,7 @@ import com.dracolich777.afterlifeentombed.effects.RevengeOfIsisEffect;
 import com.dracolich777.afterlifeentombed.effects.RevengeOfHorusEffect;
 import com.dracolich777.afterlifeentombed.effects.SwarmedEffect;
 import com.dracolich777.afterlifeentombed.effects.RevengeOfGebEffect;
-// import com.dracolich777.afterlifeentombed.effects.MirageEffect;
+import com.dracolich777.afterlifeentombed.effects.MirageEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -58,8 +58,8 @@ public class ModEffects {
         public static final RegistryObject<MobEffect> SWARMED = 
         MOB_EFFECTS.register("swarmed_by_locusts", SwarmedEffect::new);
 
-        // public static final RegistryObject<MobEffect> MIRAGE =
-        // MOB_EFFECTS.register("mirage", () -> new MirageEffect(MobEffectCategory.HARMFUL, 0xfff3a3));
+        public static final RegistryObject<MobEffect> MIRAGE =
+        MOB_EFFECTS.register("mirage", () -> new MirageEffect(MobEffectCategory.HARMFUL, 0xfff3a3));
 
     
     

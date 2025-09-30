@@ -32,16 +32,33 @@ public class CrownClientHandler {
                 .isPresent();
         
         if (hasCrown) {
-            // If the player being rendered is the client player themselves
-            if (player.getUUID().equals(clientPlayer.getUUID())) {
-                // Make them translucent so they can see themselves but know they're invisible
-                RenderSystem.enableBlend();
-                RenderSystem.defaultBlendFunc();
-                // You can adjust this alpha value (0.3f = 30% opacity)
-                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 0.3f);
-            } else {
-                // For other players viewing someone with the crown, cancel rendering completely
-                event.setCanceled(true);
+            // Check if invisibility should be active yet (delay for dissolve effect)
+            boolean shouldBeInvisible = true;
+            
+            // Check the NBT timing data to see if we're still in the delay period
+            var entityData = player.getPersistentData();
+            if (entityData.getBoolean("crown_invisibility_pending")) {
+                long equipTime = entityData.getLong("crown_equip_time");
+                long currentTime = player.level().getGameTime();
+                
+                // Don't apply invisibility until 60 ticks (3 seconds) have passed
+                if (currentTime - equipTime < 60) {
+                    shouldBeInvisible = false;
+                }
+            }
+            
+            if (shouldBeInvisible) {
+                // If the player being rendered is the client player themselves
+                if (player.getUUID().equals(clientPlayer.getUUID())) {
+                    // Make them translucent so they can see themselves but know they're invisible
+                    RenderSystem.enableBlend();
+                    RenderSystem.defaultBlendFunc();
+                    // You can adjust this alpha value (0.3f = 30% opacity)
+                    RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 0.3f);
+                } else {
+                    // For other players viewing someone with the crown, cancel rendering completely
+                    event.setCanceled(true);
+                }
             }
         }
     }
@@ -58,10 +75,27 @@ public class CrownClientHandler {
                 .findEquippedCurio(ModItems.CROWN_OF_SETH.get(), player)
                 .isPresent();
         
-        if (hasCrown && player.getUUID().equals(clientPlayer.getUUID())) {
-            // Restore normal rendering state after rendering the translucent player
-            RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-            RenderSystem.disableBlend();
+        if (hasCrown) {
+            // Check if invisibility should be active yet (delay for dissolve effect)
+            boolean shouldBeInvisible = true;
+            
+            // Check the NBT timing data to see if we're still in the delay period
+            var entityData = player.getPersistentData();
+            if (entityData.getBoolean("crown_invisibility_pending")) {
+                long equipTime = entityData.getLong("crown_equip_time");
+                long currentTime = player.level().getGameTime();
+                
+                // Don't apply invisibility until 60 ticks (3 seconds) have passed
+                if (currentTime - equipTime < 60) {
+                    shouldBeInvisible = false;
+                }
+            }
+            
+            if (shouldBeInvisible && player.getUUID().equals(clientPlayer.getUUID())) {
+                // Restore normal rendering state after rendering the translucent player
+                RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.disableBlend();
+            }
         }
     }
 }

@@ -9,9 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.effect.MobEffectInstance;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -47,28 +45,19 @@ public class BreathOfShuItem extends Item implements ICurioItem {
     
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
-        // Called when the item is equipped
+        // Called when the item is equipped - double jump functionality is handled by DoubleJumpHandler
         ICurioItem.super.onEquip(slotContext, prevStack, stack);
     }
     
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
-        LivingEntity entity = slotContext.entity();
-        
-        entity.removeEffect(MobEffects.SLOW_FALLING);
+        // Called when the item is unequipped - cleanup is handled by DoubleJumpHandler
+        ICurioItem.super.onUnequip(slotContext, newStack, stack);
     }
     
      @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        LivingEntity entity = slotContext.entity();
-        Level level = entity.level();
-        
-        // Refresh fire resistance effect every 20 ticks (1 second) to ensure it stays active
-        if (level.getGameTime() % 20 == 0) {
-            if (!entity.hasEffect(MobEffects.SLOW_FALLING)) {
-                entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 
-                    Integer.MAX_VALUE, 0, false, false, true));
-            }
-        }
-        }
+        // Double jump functionality is handled by DoubleJumpHandler event
+        // No continuous effects needed for this item
     }
+}

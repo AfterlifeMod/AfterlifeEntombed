@@ -1,7 +1,5 @@
 package com.dracolich777.afterlifeentombed.items;
 
-import com.dracolich777.afterlifeentombed.mobs.HorusArrowEntity;
-
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -61,12 +59,14 @@ public class HorusProtectionBow extends BowItem {
                     if (!level.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem)(arrowStack.getItem() instanceof ArrowItem ? arrowStack.getItem() : Items.ARROW);
                         
-                        // Create our custom gravity-less arrow instead of a normal arrow
-                        HorusArrowEntity arrow = new HorusArrowEntity(level, player);
+                        // Create regular arrow using the arrow item's createArrow method
+                        AbstractArrow arrow = arrowitem.createArrow(level, arrowStack, player);
                         arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity * 3.0F, 1.0F);
                         
+                        // Disable gravity only for full charge arrows (velocity == 1.0F)
                         if (velocity == 1.0F) {
                             arrow.setCritArrow(true);
+                            arrow.setNoGravity(true); // Disable gravity for full charge arrows
                         }
 
                         int powerLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
