@@ -1,8 +1,16 @@
 package com.dracolich777.afterlifeentombed.util;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.network.NetworkHandler;
 import com.dracolich777.afterlifeentombed.network.ParticleEffectPacket;
+
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
 import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.resources.ResourceLocation;
@@ -10,12 +18,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Programmatic particle manager for AAA particles in Afterlife: Entombed
@@ -33,7 +35,7 @@ public class ParticleManager {
         registerParticle("seth_appear", "seth_crown_appear");
         registerParticle("ra_ring", "ra_ring");
         registerParticle("horus_shield", "horus_shield");
-        registerParticle("shu_jump", "shu_jump_2");
+        registerParticle("shu_jump", "shu_jump2");
         
         LOGGER.info("ParticleManager initialized with {} particles", PARTICLES.size());
     }

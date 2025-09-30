@@ -15,13 +15,13 @@ import com.dracolich777.afterlifeentombed.init.ModItems;
 import com.dracolich777.afterlifeentombed.init.ModMenuTypes;
 import com.dracolich777.afterlifeentombed.init.ModRecipeTypes;
 import com.dracolich777.afterlifeentombed.network.NetworkHandler;
-import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
-import net.minecraft.resources.ResourceLocation;
 import com.dracolich777.afterlifeentombed.util.BlockEffectEvents;
 import com.dracolich777.afterlifeentombed.util.GodstoneBrewingRecipe;
 import com.dracolich777.afterlifeentombed.util.ModPotionTypes;
-import com.dracolich777.afterlifeentombed.util.ModPotions; // Make sure this is imported
+import com.dracolich777.afterlifeentombed.util.ModPotions;
 
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
+import net.minecraft.resources.ResourceLocation; // Make sure this is imported
 import net.minecraftforge.api.distmarker.Dist; // Make sure this is imported
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -91,6 +91,16 @@ public class AfterlifeEntombedMod {
                 LOGGER.info("ModParticles class loaded successfully");
             } catch (ClassNotFoundException e) {
                 LOGGER.error("Failed to load ModParticles class: {}", e.getMessage());
+            }
+            
+            // Force initialization of ParticleManager class to trigger static block
+            try {
+                Class.forName("com.dracolich777.afterlifeentombed.util.ParticleManager");
+                LOGGER.info("ParticleManager class loaded successfully");
+                // Test if particles are registered
+                LOGGER.info("Available particles: {}", com.dracolich777.afterlifeentombed.util.ParticleManager.getAvailableParticles());
+            } catch (ClassNotFoundException e) {
+                LOGGER.error("Failed to load ParticleManager class: {}", e.getMessage());
             }
             
             LOGGER.info("Afterlife Entombed mod successfully loaded with AAA particles support!");
