@@ -85,7 +85,7 @@ public class DoubleJumpHandler {
                     for (int i = 0; i < 5; i++) {
                         double offsetX = (Math.random() - 0.5) * 0.8;
                         double offsetZ = (Math.random() - 0.5) * 0.8;
-                        ParticleManager.spawnParticle(player.level(), "shu_jump", 
+                        ParticleManager.spawnParticle(player.level(), "shu", 
                             player.getX() + offsetX, player.getY() - 0.3, player.getZ() + offsetZ, 0.5f, 0.5f, 0.5f);
                     }
                 }
