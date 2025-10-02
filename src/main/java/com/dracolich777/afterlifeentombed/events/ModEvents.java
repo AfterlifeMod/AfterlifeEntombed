@@ -1,4 +1,7 @@
 package com.dracolich777.afterlifeentombed.events;
+import com.dracolich777.afterlifeentombed.items.CloakOfKonshu;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 // import com.dracolich777.afterlifeentombed.capabilities.GodseekerSwordCapability;
@@ -40,6 +43,10 @@ import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = AfterlifeEntombedMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEvents {
+    @SubscribeEvent
+    public static void onPlayerDeath(LivingDeathEvent event) {
+        CloakOfKonshu.onPlayerDeath(event);
+    }
 
     private static final Map<GodType, MobEffect> POSITIVE_EFFECTS = new EnumMap<>(GodType.class);
     private static final Map<GodType, MobEffect> REVENGE_EFFECTS = new EnumMap<>(GodType.class);

@@ -4,6 +4,7 @@ import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.items.AnubisJudgement;
 import com.dracolich777.afterlifeentombed.items.ArmorOfRa;
 import com.dracolich777.afterlifeentombed.items.BreathOfShuItem;
+import com.dracolich777.afterlifeentombed.items.CloakOfKonshu;
 import com.dracolich777.afterlifeentombed.items.CollarOfAnubis;
 import com.dracolich777.afterlifeentombed.items.CreativeIcon;
 import com.dracolich777.afterlifeentombed.items.CreativeIcon2;
@@ -43,11 +44,11 @@ import com.dracolich777.afterlifeentombed.items.TokenOfHorus;
 import com.dracolich777.afterlifeentombed.items.WandOfIsis;
 import com.dracolich777.afterlifeentombed.items.WhipOfScorpionItem;
 
-import net.minecraft.core.registries.Registries; // Import for Registries
-import net.minecraft.network.chat.Component; // Import for Component
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab; // Import for CreativeModeTab
-import net.minecraft.world.item.CreativeModeTabs; // Import for CreativeModeTabs
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -55,6 +56,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
+
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AfterlifeEntombedMod.MOD_ID);
 
@@ -197,8 +199,10 @@ public static final RegistryObject<DusksteelShovelItem> DUSKSTEEL_SHOVEL = ITEMS
     public static final RegistryObject<Item> SHABTI = ITEMS.register("shabti",
             () -> new ShabtiItem(new Item.Properties().stacksTo(1).fireResistant()));
 
-    public static final RegistryObject<Item> HORUS_PROTECTION_BOW = ITEMS.register("horus_protection_bow",
-            () -> new HorusProtectionBow(new Item.Properties().stacksTo(1).durability(0).setNoRepair().fireResistant()));
+public static final RegistryObject<Item> HORUS_PROTECTION_BOW = ITEMS.register("horus_protection_bow",
+        () -> new HorusProtectionBow(new Item.Properties().stacksTo(1).durability(0).setNoRepair().fireResistant()));
+public static final RegistryObject<Item> CLOAK_OF_KONSHU = ITEMS.register("cloak_of_konshu",
+        () -> new CloakOfKonshu(new Item.Properties().stacksTo(1).fireResistant()));
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS
             = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, AfterlifeEntombedMod.MOD_ID);
 
@@ -247,6 +251,7 @@ public static final RegistryObject<DusksteelShovelItem> DUSKSTEEL_SHOVEL = ITEMS
                         output.accept(HORUS_PROTECTION_BOW.get());
                         output.accept(DEV_WRENCH.get());
                         output.accept(SHABTI.get());
+                        output.accept(CLOAK_OF_KONSHU.get());
                         
 
                     })

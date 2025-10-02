@@ -40,6 +40,8 @@ public class ParticleManager {
         registerParticle("haze2", "haze2");
         registerParticle("haze3", "haze3");
         registerParticle("shu", "haze_flash");
+        registerParticle("shield_bubble", "shield_wall");
+        
         LOGGER.info("ParticleManager initialized with {} particles", PARTICLES.size());
     }
 
