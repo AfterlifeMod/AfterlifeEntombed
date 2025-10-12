@@ -1,30 +1,28 @@
 package com.dracolich777.afterlifeentombed.items;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-
 import java.util.List;
 
 import javax.annotation.Nullable;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
-import com.dracolich777.afterlifeentombed.util.ParticleManager;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.level.Level;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import top.theillusivec4.curios.api.SlotContext; 
-import top.theillusivec4.curios.api.type.capability.ICurioItem; 
-import net.minecraft.sounds.SoundEvents; 
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public class CrownOfSeth extends Item implements ICurioItem {
 
@@ -106,22 +104,18 @@ public class CrownOfSeth extends Item implements ICurioItem {
         }
         
         // Send particle effect to client if on server side
-        if (!level.isClientSide() && entity instanceof Player player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Sending seth_dissolve particle to player");
-            // Use the new ParticleManager server-side helper
-            ParticleManager.sendParticleToPlayer(
-                player,
-                "seth_dissolve",
-                entity.getX(), 
-                entity.getY() + entity.getBbHeight() * 0.8, // Higher up, at head level
-                entity.getZ(),
-                0.7f, 0.7f, 0.7f  // Slightly smaller scale for dissolve effect
-            );
-            
-            // Schedule invisibility effect after a delay (60 ticks = 3 seconds)
-            // This allows the dissolve particle to play while the player is still visible
-            level.scheduleTick(entity.blockPosition(), net.minecraft.world.level.block.Blocks.AIR, 60);
-            
+        if (!level.isClientSide() && entity instanceof Player) {
+            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown equipped, particle effects removed as per consolidation to AfterLibs");
+        }
+        
+        // Client side particle effects removed - now handled entirely by AfterLibs
+        if (level.isClientSide()) {
+            AfterlifeEntombedMod.LOGGER.info("CLIENT: Crown equipped, particle effects removed as per consolidation to AfterLibs");
+        }
+        
+        // Schedule invisibility effect after a delay (60 ticks = 3 seconds)
+        // This allows the dissolve particle to play while the player is still visible
+        if (!level.isClientSide()) {
             // Use a different approach - store the delay in NBT and handle it in curioTick
             CompoundTag entityData = entity.getPersistentData();
             entityData.putLong("crown_equip_time", level.getGameTime());
@@ -137,17 +131,13 @@ public class CrownOfSeth extends Item implements ICurioItem {
         AfterlifeEntombedMod.LOGGER.info("CrownOfSeth onUnequip called! Entity: {}, ClientSide: {}", entity, level.isClientSide());
         
         // Send particle effect to client if on server side
-        if (!level.isClientSide() && entity instanceof Player player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Sending seth_appear particle to player");
-            // Use the new ParticleManager server-side helper
-            ParticleManager.sendParticleToPlayer(
-                player,
-                "seth_appear",
-                entity.getX(), 
-                entity.getY() + entity.getBbHeight() * 0.8, // Higher up, at head level
-                entity.getZ(),
-                0.8f, 0.8f, 0.8f  // Slightly larger scale for appear effect
-            );
+        if (!level.isClientSide() && entity instanceof Player) {
+            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown unequipped, particle effects removed as per consolidation to AfterLibs");
+        }
+        
+        // Client side particle effects removed - now handled entirely by AfterLibs
+        if (level.isClientSide()) {
+            AfterlifeEntombedMod.LOGGER.info("CLIENT: Crown unequipped, particle effects removed as per consolidation to AfterLibs");
         }
         
         // Clean up timing data

@@ -1,5 +1,4 @@
 package com.dracolich777.afterlifeentombed.events;
-import com.dracolich777.afterlifeentombed.util.ParticleManager;
 
 import com.dracolich777.afterlifeentombed.items.TokenOfHorus;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -128,7 +127,7 @@ public class EyeOfHorusEventHandler {
                                 
                                 // Spawn Horus shield particle at half scale if entity is a player
                                 if (entity instanceof Player player) {
-                                    ParticleManager.sendParticleToPlayer(
+                                    com.dracolich777.afterlibs.AfterLibs.NETWORK.sendParticleToPlayer(
                                         player,
                                         "horus_shield",
                                         entity.getX(),

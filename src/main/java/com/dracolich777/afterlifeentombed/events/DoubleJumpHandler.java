@@ -1,17 +1,13 @@
 package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.init.ModItems;
-import com.dracolich777.afterlifeentombed.network.NetworkHandler;
-import com.dracolich777.afterlifeentombed.network.ParticleEffectPacket;
-import com.dracolich777.afterlifeentombed.util.ParticleManager;
+import com.dracolich777.afterlibs.AfterLibs;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.HashMap;
@@ -85,7 +81,8 @@ public class DoubleJumpHandler {
                     for (int i = 0; i < 5; i++) {
                         double offsetX = (Math.random() - 0.5) * 0.8;
                         double offsetZ = (Math.random() - 0.5) * 0.8;
-                        ParticleManager.spawnParticle(player.level(), "shu", 
+                        // Use AfterLibs centralized particle system with the correct particle name
+                        AfterLibs.PARTICLES.spawnParticle(player.level(), "shu_jump2", 
                             player.getX() + offsetX, player.getY() - 0.3, player.getZ() + offsetZ, 0.5f, 0.5f, 0.5f);
                     }
                 }

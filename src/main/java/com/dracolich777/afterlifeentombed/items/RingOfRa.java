@@ -21,11 +21,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
-import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
-import com.dracolich777.afterlifeentombed.network.NetworkHandler;
-import com.dracolich777.afterlifeentombed.network.ParticleEffectPacket;
-import net.minecraftforge.network.PacketDistributor;
-
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Iterator;

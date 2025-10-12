@@ -5,11 +5,11 @@ license="All rights reserved"
 [[mods]]
 
 modId="afterlifeentombed"
-version="1.1.7"
+version="1.1.8"
 displayName="Afterlife Entombed"
 logoFile="assets/afterlifeentombed/textures/gui/afterliefeentombed_logo.jpg"
 description='''
-A mod that adds gods and their powers and items.
+A mod that adds egyptian gods and their powers and items.
 
 Credits:
 Lead Developer - Dracolich777
@@ -38,6 +38,13 @@ modId="minecraft"
 mandatory=true
 versionRange="[1.20.1,1.21)"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.afterlifeentombed]]
+modId="afterlibs"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="AFTER"
 side="BOTH"
 
 [[dependencies.afterlifeentombed]]

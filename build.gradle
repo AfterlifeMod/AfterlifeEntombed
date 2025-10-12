@@ -126,14 +126,22 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
     
-    // Existing dependencies
+    // AfterLibs framework dependency as a separate mod
+    // CRITICAL: Must use the non-reobfuscated JAR from build/libs (not reobfJar output)
+    // The JAR file afterlibs-1.0.0.jar should be the raw output before reobfuscation
+    // If AfterLibs has reobfJar finalization, you need the jar task output, not the reobf output
+    compileOnly files("../AfterLibs/build/libs/afterlibs-1.0.0.jar")
+    
+    // For development/testing: Add AfterLibs to the run configurations
+    // This allows you to test with AfterLibs loaded without manually copying it
+    runtimeOnly files("../AfterLibs/build/libs/afterlibs-1.0.0.jar")
+    
+    // Runtime dependencies (these should also be provided by AfterLibs or installed separately)
     implementation fg.deobf("maven.modrinth:aaa-particles:y71X65Qm")
     implementation fg.deobf("maven.modrinth:architectury-api:1MKTLiiG")
-    
-    // New dependencies
-    implementation fg.deobf("maven.modrinth:curios:5.9.1+1.20.1")           // Curios API - latest stable version
-    implementation fg.deobf("maven.modrinth:patchouli:1.20.1-84.1-forge")   // Patchouli - latest version
-    implementation fg.deobf("maven.modrinth:geckolib:4.2.1")                 // GeckoLib - Forge 1.20.1 version
+    implementation fg.deobf("maven.modrinth:curios:5.9.1+1.20.1")
+    implementation fg.deobf("maven.modrinth:patchouli:1.20.1-84.1-forge")
+    implementation fg.deobf("maven.modrinth:geckolib:4.2.1")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
