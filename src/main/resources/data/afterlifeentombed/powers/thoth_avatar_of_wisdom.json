@@ -1,0 +1,9 @@
+{
+  "type": "origins:cooldown",
+  "name": "Avatar of Wisdom",
+  "description": "Ascend to ultimate knowledge. All abilities become free and cooldowns are removed for 60 seconds.",
+  "cooldown": 12000,
+  "hud_render": {
+    "should_render": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:seth_trickster_god",
+    "afterlifeentombed:seth_agent_of_evil",
+    "afterlifeentombed:seth_chaos_vs_order",
+    "afterlifeentombed:seth_one_with_chaos",
+    "afterlifeentombed:seth_one_with_chaos_active",
+    "afterlifeentombed:seth_damage_negation",
+    "afterlifeentombed:seth_desert_walker",
+    "afterlifeentombed:seth_chaos_incarnate",
+    "afterlifeentombed:seth_chaos_incarnate_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_seth"
+  },
+  "order": 101,
+  "impact": 3,
+  "name": "Avatar of Seth",
+  "description": "Channel the chaotic power of Seth, God of Storms and Disorder. Master deception, chaos, and darkness to overwhelm your enemies.",
+  "unchoosable": true
+}

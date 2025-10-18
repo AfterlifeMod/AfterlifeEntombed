@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Summon Undead",
+  "description": "Summon a horde of undead servants to fight for you",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "key": {
+    "key": "key.loadToolbarActivator",
+    "continuous": false
+  },
+  "condition": {
+    "type": "origins:power",
+    "power": "afterlifeentombed:god_avatar_tracker"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

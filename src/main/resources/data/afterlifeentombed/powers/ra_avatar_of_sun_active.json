@@ -1,0 +1,12 @@
+{
+  "type": "origins:toggle",
+  "name": "Avatar of Sun Active",
+  "description": "Avatar transformation active state",
+  "active_by_default": false,
+  "key": {
+    "key": "key.use",
+    "continuous": false
+  },
+  "retain_state": false,
+  "hidden": true
+}

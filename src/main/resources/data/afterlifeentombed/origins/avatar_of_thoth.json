@@ -1,0 +1,23 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:thoth_reduced_health",
+    "afterlifeentombed:thoth_knowledge_damage",
+    "afterlifeentombed:thoth_scholarly_teleport",
+    "afterlifeentombed:thoth_scholarly_teleport_active",
+    "afterlifeentombed:thoth_experience_multiplier",
+    "afterlifeentombed:thoth_experience_multiplier_active",
+    "afterlifeentombed:thoth_divine_enchant",
+    "afterlifeentombed:thoth_divine_enchant_active",
+    "afterlifeentombed:thoth_avatar_of_wisdom",
+    "afterlifeentombed:thoth_avatar_of_wisdom_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_thoth"
+  },
+  "order": 103,
+  "impact": 3,
+  "name": "Avatar of Thoth",
+  "description": "Channel the power of Thoth, God of Knowledge and Wisdom. Harness experience to enhance your abilities, teleport to workstations, and bestow divine enchantments. Knowledge is power incarnate.",
+  "unchoosable": false
+}

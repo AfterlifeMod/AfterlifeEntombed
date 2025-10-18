@@ -1,0 +1,38 @@
+{
+  "type": "origins:multiple",
+  "name": "One with Chaos",
+  "description": "Become invisible and phase through blocks for up to 2 minutes. Cooldown equals time used.",
+  "activate": {
+    "type": "origins:active_self",
+    "key": "primary",
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "trigger god_avatar_ability set 1"
+    },
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "phasing": {
+    "type": "origins:phasing",
+    "blacklist": false,
+    "render_type": "blindness",
+    "view_distance": 10.0,
+    "phase_down_condition": {
+      "type": "origins:sneaking"
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "afterlifeentombed:seth_one_with_chaos_active"
+    }
+  },
+  "invisibility": {
+    "type": "origins:invisibility",
+    "render_armor": false,
+    "condition": {
+      "type": "origins:power_active",
+      "power": "afterlifeentombed:seth_one_with_chaos_active"
+    }
+  }
+}

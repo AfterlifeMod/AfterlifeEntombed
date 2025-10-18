@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Avatar of Wisdom - Active",
+  "description": "Press the ability key to activate Avatar of Wisdom",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:thoth/avatar_of_wisdom"
+  },
+  "key": {
+    "key": "key.saveToolbarActivator"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

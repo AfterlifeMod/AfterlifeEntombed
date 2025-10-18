@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Launch - Active",
+  "description": "Press the ability key to activate",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:shu/launch"
+  },
+  "key": {
+    "key": "key.origins.primary_active"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

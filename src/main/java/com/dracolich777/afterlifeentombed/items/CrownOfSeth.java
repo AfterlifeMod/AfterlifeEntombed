@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
+import com.dracolich777.afterlibs.api.AfterLibsAPI;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -105,7 +106,11 @@ public class CrownOfSeth extends Item implements ICurioItem {
         
         // Send particle effect to client if on server side
         if (!level.isClientSide() && entity instanceof Player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown equipped, particle effects removed as per consolidation to AfterLibs");
+            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown equipped, spawning seth_crown_disolve particle");
+            // Spawn dissolve particle at head position with scale 1
+            double headY = entity.getY() + entity.getBbHeight() * 0.8; // Head height
+            AfterLibsAPI.spawnAfterlifeParticle(level, "seth_crown_disolve", 
+                entity.getX(), headY, entity.getZ(), 1.0f);
         }
         
         // Client side particle effects removed - now handled entirely by AfterLibs
@@ -132,7 +137,11 @@ public class CrownOfSeth extends Item implements ICurioItem {
         
         // Send particle effect to client if on server side
         if (!level.isClientSide() && entity instanceof Player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown unequipped, particle effects removed as per consolidation to AfterLibs");
+            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown unequipped, spawning seth_crown_appear particle");
+            // Spawn appear particle at head position with scale 1
+            double headY = entity.getY() + entity.getBbHeight() * 0.8; // Head height
+            AfterLibsAPI.spawnAfterlifeParticle(level, "seth_crown_appear", 
+                entity.getX(), headY, entity.getZ(), 1.0f);
         }
         
         // Client side particle effects removed - now handled entirely by AfterLibs

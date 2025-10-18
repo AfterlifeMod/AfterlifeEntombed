@@ -1,0 +1,13 @@
+{
+  "type": "origins:multiple",
+  "name": "Summon Undead (Active)",
+  "description": "Grants summon undead ability trigger",
+  "hidden": true,
+  "summon_power": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:nothing"
+    }
+  }
+}

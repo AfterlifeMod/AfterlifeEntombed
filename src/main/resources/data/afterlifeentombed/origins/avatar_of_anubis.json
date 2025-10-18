@@ -1,0 +1,23 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:anubis_undead_pacify",
+    "afterlifeentombed:anubis_daylight_weakness",
+    "afterlifeentombed:anubis_undead_command",
+    "afterlifeentombed:anubis_undead_command_active",
+    "afterlifeentombed:anubis_lifelink",
+    "afterlifeentombed:anubis_lifelink_active",
+    "afterlifeentombed:anubis_summon_undead",
+    "afterlifeentombed:anubis_summon_undead_active",
+    "afterlifeentombed:anubis_avatar_of_death",
+    "afterlifeentombed:anubis_avatar_of_death_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_anubis"
+  },
+  "order": 102,
+  "impact": 3,
+  "name": "Avatar of Anubis",
+  "description": "Channel the power of Anubis, God of Death and the Underworld. Command souls, pass judgment on the living, and walk between life and death.",
+  "unchoosable": true
+}

@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Solar Flare",
+  "description": "Fire a burning projectile that explodes on impact, cleansing the area with holy fire (10s cooldown)",
+  "key": "primary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 1"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

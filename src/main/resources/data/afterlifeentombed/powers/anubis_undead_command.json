@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Undead Command",
+  "description": "Activate to command undead. Hit a player to set target, or wait 10s to detonate all nearby undead",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 1"
+  },
+  "key": {
+    "key": "key.origins.primary_active",
+    "continuous": false
+  },
+  "condition": {
+    "type": "origins:power",
+    "power": "afterlifeentombed:god_avatar_tracker"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

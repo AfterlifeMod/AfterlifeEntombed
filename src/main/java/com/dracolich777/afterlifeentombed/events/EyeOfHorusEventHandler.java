@@ -1,6 +1,7 @@
 package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.items.TokenOfHorus;
+import com.dracolich777.afterlibs.api.AfterLibsAPI;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -126,15 +127,11 @@ public class EyeOfHorusEventHandler {
                                 }
                                 
                                 // Spawn Horus shield particle at half scale if entity is a player
-                                if (entity instanceof Player player) {
-                                    com.dracolich777.afterlibs.AfterLibs.NETWORK.sendParticleToPlayer(
-                                        player,
-                                        "horus_shield",
-                                        entity.getX(),
-                                        entity.getY() + entity.getBbHeight() * 0.5, // Middle of the entity
-                                        entity.getZ(),
-                                        0.5f // Half scale
-                                    );
+                                if (entity instanceof Player) {
+                                    // Spawn horus_shield particle at head height with 0.5 scale
+                                    double headY = entity.getY() + entity.getBbHeight() * 0.8; // Head height
+                                    AfterLibsAPI.spawnAfterlifeParticle(entity.level(), "horus_shield",
+                                        entity.getX(), headY, entity.getZ(), 0.5f);
                                 }
                                 
                                 return;

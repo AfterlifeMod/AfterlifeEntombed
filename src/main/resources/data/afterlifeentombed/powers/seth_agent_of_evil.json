@@ -1,0 +1,44 @@
+{
+  "type": "origins:multiple",
+  "name": "Agent of Evil",
+  "description": "Immune to negative effects, gain night vision, and immune to fire damage",
+  "night_vision": {
+    "type": "origins:night_vision",
+    "strength": 1.0
+  },
+  "fire_immunity": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "inFire"
+    }
+  },
+  "lava_immunity": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "lava"
+    }
+  },
+  "hot_floor_immunity": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "hotFloor"
+    }
+  },
+  "on_fire_immunity": {
+    "type": "origins:invulnerability",
+    "damage_condition": {
+      "type": "origins:name",
+      "name": "onFire"
+    }
+  },
+  "prevent_effects": {
+    "type": "origins:prevent_entity_status_effects",
+    "effect": {
+      "type": "origins:in_tag",
+      "tag": "afterlifeentombed:negative_effects"
+    }
+  }
+}

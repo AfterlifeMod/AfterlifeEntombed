@@ -3,6 +3,8 @@ package com.dracolich777.afterlifeentombed;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.dracolich777.afterlibs.AfterLibs;
+import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
 import com.dracolich777.afterlifeentombed.capabilities.GodseekerSwordCapability;
 import com.dracolich777.afterlifeentombed.client.ClientControlHandler;
 import com.dracolich777.afterlifeentombed.events.ModEventBusSubscribers;
@@ -14,12 +16,14 @@ import com.dracolich777.afterlifeentombed.init.ModEntityTypes;
 import com.dracolich777.afterlifeentombed.init.ModItems;
 import com.dracolich777.afterlifeentombed.init.ModMenuTypes;
 import com.dracolich777.afterlifeentombed.init.ModRecipeTypes;
+import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.util.BlockEffectEvents;
 import com.dracolich777.afterlifeentombed.util.GodstoneBrewingRecipe;
 import com.dracolich777.afterlifeentombed.util.ModPotionTypes;
 import com.dracolich777.afterlifeentombed.util.ModPotions;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -49,6 +53,7 @@ public class AfterlifeEntombedMod {
         MinecraftForge.EVENT_BUS.register(PortalActivationHandler.class);
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerCapabilities);
 
         modEventBus.register(ModEventBusSubscribers.class);
         GodseekerSwordCapability.register(modEventBus);
@@ -57,9 +62,20 @@ public class AfterlifeEntombedMod {
         // MinecraftForge.EVENT_BUS.register(MobDropHandler.class);
     }
 
+    @SubscribeEvent
+    public void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.register(GodAvatarCapability.IGodAvatar.class);
+    }
+
     @SubscribeEvent // Add this annotation
     public void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            // Initialize AfterLibs components
+            AfterLibs.commonSetup();
+            
+            // Register network packets for God Avatar system
+            GodAvatarPackets.register();
+            
             // ModEvents.init();
             ModPotionTypes.registerPotionVariants();
             event.enqueueWork(GodstoneBrewingRecipe::registerAll);

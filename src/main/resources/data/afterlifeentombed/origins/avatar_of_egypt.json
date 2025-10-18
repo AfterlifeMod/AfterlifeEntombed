@@ -1,0 +1,13 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:consume_godstone"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:creative_icon2"
+  },
+  "order": 100,
+  "impact": 3,
+  "name": "Avatar of Egypt",
+  "description": "You have been chosen by the ancient Egyptian gods. Hold a Godstone in your main hand and use it to become the avatar of that specific god, gaining their unique powers and weaknesses."
+}

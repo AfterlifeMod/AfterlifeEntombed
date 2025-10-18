@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Scholarly Teleport - Active",
+  "description": "Press the ability key to teleport to your last used workstation",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:thoth/scholarly_teleport"
+  },
+  "key": {
+    "key": "key.origins.primary_active"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

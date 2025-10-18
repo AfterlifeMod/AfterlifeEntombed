@@ -1,0 +1,20 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:ra_suns_blessing",
+    "afterlifeentombed:ra_night_weakness",
+    "afterlifeentombed:ra_solar_flare",
+    "afterlifeentombed:ra_purifying_light",
+    "afterlifeentombed:ra_holy_inferno",
+    "afterlifeentombed:ra_avatar_of_sun",
+    "afterlifeentombed:ra_avatar_of_sun_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_ra"
+  },
+  "order": 101,
+  "impact": 3,
+  "name": "Avatar of Ra",
+  "description": "Channel the power of Ra, the Sun God. Wield cleansing fire and radiant light to purify the world. Gain strength during the day but weaken at night and in darkness.",
+  "unchoosable": true
+}

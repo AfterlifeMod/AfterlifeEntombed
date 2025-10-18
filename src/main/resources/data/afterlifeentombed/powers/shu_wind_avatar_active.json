@@ -1,0 +1,22 @@
+{
+  "type": "origins:active_self",
+  "name": "Wind Avatar - Active",
+  "description": "Press SHIFT + PRIMARY ABILITY to activate Wind Avatar form",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:shu/wind_avatar"
+  },
+  "key": {
+    "key": "key.loadToolbarActivator"
+  },
+  "cooldown": 6000,
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Divine Enchantment - Active",
+  "description": "Press the ability key to enchant your held item",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:thoth/divine_enchant"
+  },
+  "key": {
+    "key": "key.useability"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

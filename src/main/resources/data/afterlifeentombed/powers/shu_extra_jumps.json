@@ -1,0 +1,11 @@
+{
+  "type": "origins:resource",
+  "name": "Extra Jumps",
+  "description": "Gain 3 extra jumps",
+  "max": 3,
+  "min": 0,
+  "start_value": 3,
+  "hud_render": {
+    "should_render": false
+  }
+}

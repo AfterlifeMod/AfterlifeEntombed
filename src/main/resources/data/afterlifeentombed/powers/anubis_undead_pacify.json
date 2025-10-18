@@ -1,0 +1,11 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Death's Bargain",
+  "description": "The closer you are to death, the more armor you gain. Opponents you've recently struck lose armor the closer they are to death.",
+  "interval": 1,
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:anubis/deaths_bargain"
+  },
+  "hidden": true
+}

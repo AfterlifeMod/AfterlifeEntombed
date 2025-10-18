@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:poison",
+    "minecraft:wither",
+    "minecraft:weakness",
+    "minecraft:slowness",
+    "minecraft:mining_fatigue",
+    "minecraft:nausea",
+    "minecraft:blindness",
+    "minecraft:hunger",
+    "minecraft:instant_damage",
+    "minecraft:bad_omen",
+    "minecraft:darkness",
+    "afterlifeentombed:revenge_of_seth",
+    "afterlifeentombed:revenge_of_anubis",
+    "afterlifeentombed:revenge_of_horus",
+    "afterlifeentombed:revenge_of_thoth",
+    "afterlifeentombed:revenge_of_shu",
+    "afterlifeentombed:revenge_of_isis",
+    "afterlifeentombed:revenge_of_geb",
+    "afterlifeentombed:holy_fire",
+    "afterlifeentombed:judged_unworthy"
+  ]
+}

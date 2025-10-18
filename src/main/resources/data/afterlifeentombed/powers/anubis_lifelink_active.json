@@ -1,0 +1,13 @@
+{
+  "type": "origins:multiple",
+  "name": "Lifelink (Active)",
+  "description": "Grants lifelink ability trigger",
+  "hidden": true,
+  "lifelink_power": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:nothing"
+    }
+  }
+}

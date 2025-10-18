@@ -1,0 +1,23 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:shu_reduced_health",
+    "afterlifeentombed:shu_wind_walker",
+    "afterlifeentombed:shu_inside_weakness",
+    "afterlifeentombed:shu_launch",
+    "afterlifeentombed:shu_launch_active",
+    "afterlifeentombed:shu_air_boost",
+    "afterlifeentombed:shu_air_boost_active",
+    "afterlifeentombed:shu_extra_jumps",
+    "afterlifeentombed:shu_wind_avatar",
+    "afterlifeentombed:shu_wind_avatar_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_shu"
+  },
+  "order": 101,
+  "impact": 3,
+  "name": "Avatar of Shu",
+  "description": "Channel the power of Shu, God of Air and Wind. Master the skies with incredible mobility and freedom. Gain enhanced speed and no fall damage, but suffer weakness when confined indoors.",
+  "unchoosable": true
+}

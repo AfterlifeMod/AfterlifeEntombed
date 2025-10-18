@@ -1,0 +1,46 @@
+{
+  "type": "origins:multiple",
+  "name": "Night Weakness",
+  "description": "No natural regeneration at night, reduced damage output (-30%). Take damage in complete darkness.",
+  "reduced_damage": {
+    "type": "origins:modify_damage_dealt",
+    "damage_condition": {
+      "type": "origins:attacker_condition",
+      "condition": {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    },
+    "modifier": {
+      "operation": "multiply_total",
+      "value": -0.3
+    },
+    "condition": {
+      "type": "origins:daytime",
+      "inverted": true
+    }
+  },
+  "shadow_bane": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "execute at @s unless block ~ ~ ~ #minecraft:wools unless block ~ ~1 ~ #minecraft:wools if predicate afterlifeentombed:in_darkness run damage @s 2 minecraft:magic"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:light_level",
+          "comparison": "==",
+          "compare_to": 0
+        },
+        {
+          "type": "origins:power_active",
+          "power": "afterlifeentombed:ra_avatar_of_sun_active",
+          "inverted": true
+        }
+      ]
+    }
+  }
+}

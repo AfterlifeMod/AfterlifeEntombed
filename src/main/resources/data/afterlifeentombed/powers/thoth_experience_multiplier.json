@@ -1,0 +1,9 @@
+{
+  "type": "origins:cooldown",
+  "name": "Experience Surge",
+  "description": "Mark the next mob you kill to grant 12x experience.",
+  "cooldown": 1200,
+  "hud_render": {
+    "should_render": false
+  }
+}

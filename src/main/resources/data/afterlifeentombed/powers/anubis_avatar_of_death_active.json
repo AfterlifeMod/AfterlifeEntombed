@@ -1,0 +1,13 @@
+{
+  "type": "origins:multiple",
+  "name": "Avatar of Death (Active)",
+  "description": "Grants avatar of death ability trigger",
+  "hidden": true,
+  "avatar_power": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:nothing"
+    }
+  }
+}

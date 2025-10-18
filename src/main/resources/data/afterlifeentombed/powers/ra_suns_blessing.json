@@ -1,0 +1,27 @@
+{
+  "type": "origins:multiple",
+  "name": "Sun's Blessing",
+  "description": "Regeneration during daytime, Strength at noon. Emit radiant light around you.",
+  "day_regen": {
+    "type": "origins:effect_immunity",
+    "effects": [],
+    "condition": {
+      "type": "origins:daytime"
+    }
+  },
+  "radiant_aura": {
+    "type": "origins:particle",
+    "particle": "minecraft:end_rod",
+    "frequency": 10,
+    "count": 3,
+    "speed": 0.0,
+    "spread": {
+      "x": 2.0,
+      "y": 1.0,
+      "z": 2.0
+    },
+    "offset_y": 1.0,
+    "visible_in_first_person": false,
+    "visible_while_invisible": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "origins:active_self",
+  "name": "Consume Godstone",
+  "description": "Hold a Godstone in your main hand and activate this ability to become the avatar of that god.",
+  "key": "primary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_consume_godstone set 1"
+  },
+  "cooldown": 20,
+  "hud_render": {
+    "should_render": true,
+    "sprite_location": "origins:textures/gui/community/huang/resource/active_overlay_6.png",
+    "bar_index": 6
+  },
+  "condition": {
+    "type": "origins:equipped_item",
+    "equipment_slot": "mainhand",
+    "item_condition": {
+      "type": "origins:ingredient",
+      "ingredient": {
+        "tag": "afterlifeentombed:godstones"
+      }
+    }
+  }
+}

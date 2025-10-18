@@ -1,0 +1,11 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Knowledge is Power",
+  "description": "Your damage increases based on the experience you possess. Each level grants additional strength.",
+  "interval": 1,
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:thoth/knowledge_damage"
+  },
+  "hidden": true
+}

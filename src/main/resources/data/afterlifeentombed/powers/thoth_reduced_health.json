@@ -1,0 +1,10 @@
+{
+  "type": "origins:attribute",
+  "name": "Scholar's Fragility",
+  "description": "Your focus on knowledge over physical prowess leaves you more vulnerable",
+  "modifier": {
+    "attribute": "minecraft:generic.max_health",
+    "operation": "add_base_value",
+    "value": -10.0
+  }
+}

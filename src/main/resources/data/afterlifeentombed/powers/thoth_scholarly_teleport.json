@@ -1,0 +1,9 @@
+{
+  "type": "origins:cooldown",
+  "name": "Scholarly Teleport",
+  "description": "Teleport to the last enchanting table, smithing table, or anvil you used. Costs experience levels.",
+  "cooldown": 600,
+  "hud_render": {
+    "should_render": false
+  }
+}

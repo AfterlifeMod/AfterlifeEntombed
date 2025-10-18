@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Extra Jumps - Active",
+  "description": "Press the ability key to activate",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:shu/extra_jump"
+  },
+  "key": {
+    "key": "key.saveToolbarActivator"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

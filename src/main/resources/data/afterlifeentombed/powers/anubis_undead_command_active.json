@@ -1,0 +1,13 @@
+{
+  "type": "origins:multiple",
+  "name": "Undead Command (Active)",
+  "description": "Grants undead command ability trigger",
+  "hidden": true,
+  "command_power": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:nothing"
+    }
+  }
+}

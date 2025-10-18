@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Air Boost - Active",
+  "description": "Press the ability key to activate",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:shu/air_boost"
+  },
+  "key": {
+    "key": "key.origins.secondary_active"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

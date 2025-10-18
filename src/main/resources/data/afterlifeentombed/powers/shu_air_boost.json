@@ -1,0 +1,11 @@
+{
+  "type": "origins:resource",
+  "name": "Air Boost",
+  "description": "Boost forward in the air",
+  "max": 1,
+  "min": 0,
+  "start_value": 0,
+  "hud_render": {
+    "should_render": false
+  }
+}

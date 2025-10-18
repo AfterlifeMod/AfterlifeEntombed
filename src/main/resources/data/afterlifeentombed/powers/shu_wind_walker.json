@@ -1,0 +1,36 @@
+{
+  "type": "origins:multiple",
+  "name": "Wind Walker",
+  "description": "Gain constant speed boost and move with grace across the land",
+  "movement_speed": {
+    "type": "origins:attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "value": 0.1
+    }
+  },
+  "speed_effect": {
+    "type": "origins:active_self",
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "effect give @s speed 1 1 true"
+    },
+    "key": {
+      "key": "key.use"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "afterlifeentombed:god_avatar_tracker"
+        },
+        {
+          "type": "origins:constant",
+          "value": false
+        }
+      ]
+    }
+  }
+}

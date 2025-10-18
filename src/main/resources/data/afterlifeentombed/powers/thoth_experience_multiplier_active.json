@@ -1,0 +1,21 @@
+{
+  "type": "origins:active_self",
+  "name": "Experience Surge - Active",
+  "description": "Press the ability key to activate experience multiplier",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "function afterlifeentombed:thoth/experience_multiplier"
+  },
+  "key": {
+    "key": "key.origins.secondary_active"
+  },
+  "condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:power",
+        "power": "afterlifeentombed:god_avatar_tracker"
+      }
+    ]
+  }
+}

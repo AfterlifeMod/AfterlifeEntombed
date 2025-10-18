@@ -41,13 +41,6 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.afterlifeentombed]]
-modId="afterlibs"
-mandatory=true
-versionRange="[1.0.0,)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies.afterlifeentombed]]
 modId="curios"
 mandatory=true
 versionRange="[5.4.0,)"

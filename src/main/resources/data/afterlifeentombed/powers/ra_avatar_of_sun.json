@@ -1,0 +1,41 @@
+{
+  "type": "origins:multiple",
+  "name": "Avatar of the Sun",
+  "description": "Transform into a 10ft avatar of burning light with unlimited abilities and massive buffs (1min duration, 5min cooldown)",
+  "activate": {
+    "type": "origins:active_self",
+    "key": "key.saveToolbarActivator",
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "trigger god_avatar_ability set 4"
+    },
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "size_increase": {
+    "type": "origins:modify_size",
+    "scale_type": "width",
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "afterlifeentombed:ra_avatar_of_sun_active"
+    }
+  },
+  "height_increase": {
+    "type": "origins:modify_size",
+    "scale_type": "height",
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 1.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "afterlifeentombed:ra_avatar_of_sun_active"
+    }
+  }
+}

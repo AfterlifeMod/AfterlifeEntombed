@@ -1,0 +1,45 @@
+{
+  "type": "origins:multiple",
+  "name": "Inside Weakness",
+  "description": "When indoors, you suffer Slowness and reduced damage output",
+  "slowness": {
+    "type": "origins:active_self",
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "effect give @s slowness 1 0 true"
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "afterlifeentombed:god_avatar_tracker"
+        },
+        {
+          "type": "origins:low_light",
+          "light_level": 12
+        }
+      ]
+    }
+  },
+  "reduced_damage": {
+    "type": "origins:modify_damage_dealt",
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 0.75
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "afterlifeentombed:god_avatar_tracker"
+        },
+        {
+          "type": "origins:low_light",
+          "light_level": 12
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Holy Inferno",
+  "description": "Summon a wave of cleansing fire in a cone ahead that purifies corrupted blocks (25s cooldown)",
+  "key": "key.loadToolbarActivator",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

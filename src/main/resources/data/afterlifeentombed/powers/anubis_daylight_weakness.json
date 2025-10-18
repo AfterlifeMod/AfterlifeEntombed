@@ -1,0 +1,42 @@
+{
+  "type": "origins:multiple",
+  "name": "Curse of Ra",
+  "description": "The sun weakens you, as Anubis has no domain over the day",
+  "slowness": {
+    "type": "origins:conditioned_attribute",
+    "modifier": {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "add_multiplied_total",
+      "value": -0.2
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {"type": "origins:exposed_to_sky"},
+        {"type": "origins:daytime"}
+      ]
+    },
+    "tick_rate": 20
+  },
+  "weakness_effect": {
+    "type": "origins:stacking_status_effect",
+    "min_stacks": 0,
+    "max_stacks": 1,
+    "duration_per_stack": 60,
+    "effect": {
+      "effect": "minecraft:weakness",
+      "is_ambient": true,
+      "show_particles": false,
+      "show_icon": true
+    },
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {"type": "origins:exposed_to_sky"},
+        {"type": "origins:daytime"}
+      ]
+    },
+    "tick_rate": 20
+  }
+}
+

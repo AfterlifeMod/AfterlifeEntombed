@@ -1,0 +1,29 @@
+{
+  "type": "origins:multiple",
+  "name": "Chaos Incarnate",
+  "description": "Ultimate power! Become 10 feet tall with massive buffs and unlimited abilities for 1 minute. 5 minute cooldown.",
+  "activate": {
+    "type": "origins:active_self",
+    "key": "key.saveToolbarActivator",
+    "entity_action": {
+      "type": "origins:execute_command",
+      "command": "trigger god_avatar_ability set 4"
+    },
+    "cooldown": 1,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "size_increase": {
+    "type": "origins:modify_size",
+    "scale_types": ["width", "height"],
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 2.0
+    },
+    "condition": {
+      "type": "origins:power_active",
+      "power": "afterlifeentombed:seth_chaos_incarnate_active"
+    }
+  }
+}

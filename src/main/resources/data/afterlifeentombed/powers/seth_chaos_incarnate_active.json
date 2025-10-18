@@ -1,0 +1,11 @@
+{
+  "type": "origins:toggle",
+  "name": "Chaos Incarnate Active",
+  "description": "Hidden power that tracks Chaos Incarnate state",
+  "hidden": true,
+  "active_by_default": false,
+  "key": {
+    "key": "key.origins.primary_active"
+  },
+  "retain_state": false
+}

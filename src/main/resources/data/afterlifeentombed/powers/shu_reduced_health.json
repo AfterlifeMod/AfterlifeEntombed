@@ -1,0 +1,10 @@
+{
+  "type": "origins:attribute",
+  "name": "Ethereal Form",
+  "description": "Your connection to the air makes you lighter and more fragile",
+  "modifier": {
+    "attribute": "minecraft:generic.max_health",
+    "operation": "add_base_value",
+    "value": -6.0
+  }
+}

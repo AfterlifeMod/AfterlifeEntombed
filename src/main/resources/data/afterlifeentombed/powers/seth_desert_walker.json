@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Desert Walker",
+  "description": "While on fire, grants flight. Otherwise, teleport to where you're looking (30 second cooldown).",
+  "key": "key.loadToolbarActivator",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "origins:cooldown",
+  "name": "Divine Enchantment",
+  "description": "Consume experience to enchant your held item with a powerful enchantment.",
+  "cooldown": 2400,
+  "hud_render": {
+    "should_render": false
+  }
+}

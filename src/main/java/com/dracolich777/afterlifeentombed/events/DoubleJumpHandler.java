@@ -1,7 +1,12 @@
 package com.dracolich777.afterlifeentombed.events;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import com.dracolich777.afterlibs.api.AfterLibsAPI;
 import com.dracolich777.afterlifeentombed.init.ModItems;
-import com.dracolich777.afterlibs.AfterLibs;
+
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -9,10 +14,6 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = "afterlifeentombed", value = Dist.CLIENT)
 public class DoubleJumpHandler {
@@ -77,14 +78,9 @@ public class DoubleJumpHandler {
                         net.minecraft.sounds.SoundEvents.ENDER_DRAGON_FLAP, 
                         net.minecraft.sounds.SoundSource.PLAYERS, 0.5F, 1.5F, false);
                     
-                    // Play multiple shu_jump particles at normal scale underneath the player
-                    for (int i = 0; i < 5; i++) {
-                        double offsetX = (Math.random() - 0.5) * 0.8;
-                        double offsetZ = (Math.random() - 0.5) * 0.8;
-                        // Use AfterLibs centralized particle system with the correct particle name
-                        AfterLibs.PARTICLES.spawnParticle(player.level(), "shu_jump2", 
-                            player.getX() + offsetX, player.getY() - 0.3, player.getZ() + offsetZ, 0.5f, 0.5f, 0.5f);
-                    }
+                    // Play haze_flash particle at feet position when activating second jump
+                    AfterLibsAPI.spawnAfterlifeParticle(player.level(), "haze_flash", 
+                        player.getX(), player.getY(), player.getZ(), 1.0f);
                 }
             }
         }

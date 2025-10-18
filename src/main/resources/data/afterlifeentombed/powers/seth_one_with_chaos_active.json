@@ -1,0 +1,7 @@
+{
+  "type": "origins:toggle",
+  "name": "One with Chaos Active",
+  "description": "Tracks whether One with Chaos is currently active",
+  "active_by_default": false,
+  "hidden": true
+}

@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Damage Negation",
+  "description": "Store damage for 10 seconds, then release it on your next attack. 1 minute cooldown.",
+  "key": "secondary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 2"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

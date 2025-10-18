@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Purifying Light",
+  "description": "Create a pillar of radiant light at target location that heals allies and damages hostile mobs (30s cooldown, lasts 45s)",
+  "key": "secondary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 2"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "type": "origins:multiple",
+  "name": "Chaos vs. Order",
+  "description": "You take damage from gold blocks and gold weapons deal extra damage to you",
+  "gold_block_damage": {
+    "type": "origins:action_over_time",
+    "interval": 20,
+    "entity_action": {
+      "type": "origins:and",
+      "actions": [
+        {
+          "type": "origins:execute_command",
+          "command": "execute at @s if block ~ ~-1 ~ minecraft:gold_block run damage @s 4 minecraft:magic"
+        }
+      ]
+    },
+    "condition": {
+      "type": "origins:on_block",
+      "block_condition": {
+        "type": "origins:block",
+        "block": "minecraft:gold_block"
+      }
+    }
+  },
+  "gold_weapon_vulnerability": {
+    "type": "origins:modify_damage_taken",
+    "damage_condition": {
+      "type": "origins:attacker_condition",
+      "condition": {
+        "type": "origins:equipped_item",
+        "equipment_slot": "mainhand",
+        "item_condition": {
+          "type": "origins:or",
+          "conditions": [
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "minecraft:golden_sword"
+              }
+            },
+            {
+              "type": "origins:ingredient",
+              "ingredient": {
+                "item": "minecraft:golden_axe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "modifier": {
+      "operation": "multiply_total",
+      "value": 1.0
+    }
+  }
+}

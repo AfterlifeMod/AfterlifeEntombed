@@ -1,0 +1,32 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Trickster God",
+  "description": "Hitting an entity from behind deals 3x damage",
+  "damage_condition": {
+    "type": "origins:attacker_condition",
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:power",
+          "power": "afterlifeentombed:god_avatar_tracker",
+          "inverted": false
+        },
+        {
+          "type": "origins:sneaking"
+        }
+      ]
+    }
+  },
+  "target_condition": {
+    "type": "origins:relative_rotation",
+    "actor": "target",
+    "comparison": ">",
+    "compare_to": 135.0,
+    "axes": ["y"]
+  },
+  "modifier": {
+    "operation": "multiply_total",
+    "value": 20.0
+  }
+}

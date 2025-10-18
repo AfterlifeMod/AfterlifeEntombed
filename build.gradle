@@ -121,27 +121,32 @@ repositories {
             includeGroup "maven.modrinth"
         }
     }
+    maven {
+        name = "Ladysnake Mods"
+        url = "https://maven.ladysnake.org/releases"
+    }
+    maven {
+        name = "Apace100 Maven"
+        url = "https://maven.apace100.io/releases"
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.3.0'
     
-    // AfterLibs framework dependency as a separate mod
-    // CRITICAL: Must use the non-reobfuscated JAR from build/libs (not reobfJar output)
-    // The JAR file afterlibs-1.0.0.jar should be the raw output before reobfuscation
-    // If AfterLibs has reobfJar finalization, you need the jar task output, not the reobf output
-    compileOnly files("../AfterLibs/build/libs/afterlibs-1.0.0.jar")
-    
-    // For development/testing: Add AfterLibs to the run configurations
-    // This allows you to test with AfterLibs loaded without manually copying it
-    runtimeOnly files("../AfterLibs/build/libs/afterlibs-1.0.0.jar")
-    
-    // Runtime dependencies (these should also be provided by AfterLibs or installed separately)
+    // Runtime dependencies
     implementation fg.deobf("maven.modrinth:aaa-particles:y71X65Qm")
     implementation fg.deobf("maven.modrinth:architectury-api:1MKTLiiG")
     implementation fg.deobf("maven.modrinth:curios:5.9.1+1.20.1")
     implementation fg.deobf("maven.modrinth:patchouli:1.20.1-84.1-forge")
     implementation fg.deobf("maven.modrinth:geckolib:4.2.1")
+    
+    // Note: Origins, Apoli, Calio, and Caelus are required at runtime but must be manually placed in run/mods/
+    // Download from:
+    // - Origins (Forge): https://modrinth.com/mod/origins-forge/version/1.10.0.5-forge
+    // - Apoli (Forge): https://modrinth.com/mod/apoli-forge/version/1.20.1-2.9.0.5
+    // - Calio (Forge): https://modrinth.com/mod/calio/version/1.20.1-1.11.0.1-forge
+    // - Caelus (Forge): https://modrinth.com/mod/caelus/version/3.2.0+1.20.1-forge (required by Apoli)
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
