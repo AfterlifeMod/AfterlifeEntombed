@@ -12,6 +12,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Capability for tracking which god a player has chosen as their avatar.
  * This is used for the Agent of Gods origin system.
@@ -22,6 +25,16 @@ public class GodAvatarCapability {
     public interface IGodAvatar {
         GodType getSelectedGod();
         void setSelectedGod(GodType god);
+        
+        // Unlocked gods tracking (collection system)
+        Set<GodType> getUnlockedGods();
+        void unlockGod(GodType god);
+        void lockGod(GodType god);
+        boolean hasUnlockedGod(GodType god);
+        
+        // God switching grace period to prevent immediate ability activation
+        long getGodSwitchGracePeriod();
+        void setGodSwitchGracePeriod(long endTime);
         
         // Cooldown trackers for Seth abilities
         long getOneWithChaosCooldown();
@@ -138,12 +151,35 @@ public class GodAvatarCapability {
         boolean hasWorkstation();
         void clearWorkstation();
         
+        // Cooldown trackers for Geb abilities
+        long getTelekinesisCooldown();
+        void setTelekinesisCooldown(long cooldown);
+        
+        long getExcavationCooldown();
+        void setExcavationCooldown(long cooldown);
+        
+        long getEarthRiseCooldown();
+        void setEarthRiseCooldown(long cooldown);
+        
+        long getAvatarOfEarthCooldown();
+        void setAvatarOfEarthCooldown(long cooldown);
+        boolean isAvatarOfEarthActive();
+        void setAvatarOfEarthActive(boolean active);
+        long getAvatarOfEarthEndTime();
+        void setAvatarOfEarthEndTime(long endTime);
+        
         CompoundTag serializeNBT();
         void deserializeNBT(CompoundTag nbt);
     }
 
     public static class GodAvatar implements IGodAvatar {
         private GodType selectedGod = GodType.NONE; // Default to NONE until player selects a god
+        
+        // Unlocked gods collection
+        private Set<GodType> unlockedGods = new HashSet<>();
+        
+        // God switching grace period to prevent immediate ability activation after switching
+        private long godSwitchGracePeriod = 0;
         
         // Cooldown tracking (using game time in ticks)
         private long oneWithChaosCooldown = 0;
@@ -205,6 +241,14 @@ public class GodAvatarCapability {
         private long lastWorkstationY = -65; // Invalid Y position to indicate no workstation
         private long lastWorkstationZ = 0;
         private String lastWorkstationDimension = "";
+        
+        // Geb ability tracking
+        private long telekinesisCooldown = 0;
+        private long excavationCooldown = 0;
+        private long earthRiseCooldown = 0;
+        private long avatarOfEarthCooldown = 0;
+        private boolean avatarOfEarthActive = false;
+        private long avatarOfEarthEndTime = 0;
 
         @Override
         public GodType getSelectedGod() {
@@ -214,6 +258,38 @@ public class GodAvatarCapability {
         @Override
         public void setSelectedGod(GodType god) {
             this.selectedGod = god;
+        }
+
+        @Override
+        public Set<GodType> getUnlockedGods() {
+            return new HashSet<>(unlockedGods); // Return copy to prevent external modification
+        }
+
+        @Override
+        public void unlockGod(GodType god) {
+            if (god != GodType.NONE) {
+                unlockedGods.add(god);
+            }
+        }
+
+        @Override
+        public void lockGod(GodType god) {
+            unlockedGods.remove(god);
+        }
+
+        @Override
+        public boolean hasUnlockedGod(GodType god) {
+            return unlockedGods.contains(god);
+        }
+
+        @Override
+        public long getGodSwitchGracePeriod() {
+            return godSwitchGracePeriod;
+        }
+
+        @Override
+        public void setGodSwitchGracePeriod(long endTime) {
+            this.godSwitchGracePeriod = endTime;
         }
 
         @Override
@@ -658,11 +734,84 @@ public class GodAvatarCapability {
         public void clearWorkstation() {
             lastWorkstationY = -65; // Set to invalid position
         }
+        
+        // Geb ability getters/setters
+        @Override
+        public long getTelekinesisCooldown() {
+            return telekinesisCooldown;
+        }
+        
+        @Override
+        public void setTelekinesisCooldown(long cooldown) {
+            this.telekinesisCooldown = cooldown;
+        }
+        
+        @Override
+        public long getExcavationCooldown() {
+            return excavationCooldown;
+        }
+        
+        @Override
+        public void setExcavationCooldown(long cooldown) {
+            this.excavationCooldown = cooldown;
+        }
+        
+        @Override
+        public long getEarthRiseCooldown() {
+            return earthRiseCooldown;
+        }
+        
+        @Override
+        public void setEarthRiseCooldown(long cooldown) {
+            this.earthRiseCooldown = cooldown;
+        }
+        
+        @Override
+        public long getAvatarOfEarthCooldown() {
+            return avatarOfEarthCooldown;
+        }
+        
+        @Override
+        public void setAvatarOfEarthCooldown(long cooldown) {
+            this.avatarOfEarthCooldown = cooldown;
+        }
+        
+        @Override
+        public boolean isAvatarOfEarthActive() {
+            return avatarOfEarthActive;
+        }
+        
+        @Override
+        public void setAvatarOfEarthActive(boolean active) {
+            this.avatarOfEarthActive = active;
+        }
+        
+        @Override
+        public long getAvatarOfEarthEndTime() {
+            return avatarOfEarthEndTime;
+        }
+        
+        @Override
+        public void setAvatarOfEarthEndTime(long endTime) {
+            this.avatarOfEarthEndTime = endTime;
+        }
 
         @Override
         public CompoundTag serializeNBT() {
             CompoundTag nbt = new CompoundTag();
             nbt.putString("SelectedGod", selectedGod.name());
+            nbt.putLong("GodSwitchGracePeriod", godSwitchGracePeriod);
+            
+            // Serialize unlocked gods
+            StringBuilder unlockedGodsStr = new StringBuilder();
+            for (GodType god : unlockedGods) {
+                if (unlockedGodsStr.length() > 0) {
+                    unlockedGodsStr.append(",");
+                }
+                unlockedGodsStr.append(god.name());
+            }
+            nbt.putString("UnlockedGods", unlockedGodsStr.toString());
+            
             nbt.putLong("OneWithChaosCooldown", oneWithChaosCooldown);
             nbt.putInt("OneWithChaosTimeUsed", oneWithChaosTimeUsed);
             nbt.putBoolean("OneWithChaosActive", oneWithChaosActive);
@@ -711,6 +860,13 @@ public class GodAvatarCapability {
             nbt.putLong("LastWorkstationY", lastWorkstationY);
             nbt.putLong("LastWorkstationZ", lastWorkstationZ);
             nbt.putString("LastWorkstationDimension", lastWorkstationDimension);
+            // Geb ability fields
+            nbt.putLong("TelekinesisCooldown", telekinesisCooldown);
+            nbt.putLong("ExcavationCooldown", excavationCooldown);
+            nbt.putLong("EarthRiseCooldown", earthRiseCooldown);
+            nbt.putLong("AvatarOfEarthCooldown", avatarOfEarthCooldown);
+            nbt.putBoolean("AvatarOfEarthActive", avatarOfEarthActive);
+            nbt.putLong("AvatarOfEarthEndTime", avatarOfEarthEndTime);
             return nbt;
         }
 
@@ -735,6 +891,25 @@ public class GodAvatarCapability {
             }
             
             // Safely read all other values with defaults
+            godSwitchGracePeriod = nbt.contains("GodSwitchGracePeriod") ? nbt.getLong("GodSwitchGracePeriod") : 0;
+            
+            // Deserialize unlocked gods
+            unlockedGods.clear();
+            if (nbt.contains("UnlockedGods")) {
+                String unlockedStr = nbt.getString("UnlockedGods");
+                if (!unlockedStr.isEmpty()) {
+                    String[] godNames = unlockedStr.split(",");
+                    for (String godName : godNames) {
+                        try {
+                            GodType god = GodType.valueOf(godName.trim());
+                            unlockedGods.add(god);
+                        } catch (IllegalArgumentException e) {
+                            // Invalid god name, skip it
+                        }
+                    }
+                }
+            }
+            
             oneWithChaosCooldown = nbt.contains("OneWithChaosCooldown") ? nbt.getLong("OneWithChaosCooldown") : 0;
             oneWithChaosTimeUsed = nbt.contains("OneWithChaosTimeUsed") ? nbt.getInt("OneWithChaosTimeUsed") : 0;
             oneWithChaosActive = nbt.contains("OneWithChaosActive") && nbt.getBoolean("OneWithChaosActive");
@@ -783,6 +958,13 @@ public class GodAvatarCapability {
             lastWorkstationY = nbt.contains("LastWorkstationY") ? nbt.getLong("LastWorkstationY") : -65;
             lastWorkstationZ = nbt.contains("LastWorkstationZ") ? nbt.getLong("LastWorkstationZ") : 0;
             lastWorkstationDimension = nbt.contains("LastWorkstationDimension") ? nbt.getString("LastWorkstationDimension") : "";
+            // Geb ability fields
+            telekinesisCooldown = nbt.contains("TelekinesisCooldown") ? nbt.getLong("TelekinesisCooldown") : 0;
+            excavationCooldown = nbt.contains("ExcavationCooldown") ? nbt.getLong("ExcavationCooldown") : 0;
+            earthRiseCooldown = nbt.contains("EarthRiseCooldown") ? nbt.getLong("EarthRiseCooldown") : 0;
+            avatarOfEarthCooldown = nbt.contains("AvatarOfEarthCooldown") ? nbt.getLong("AvatarOfEarthCooldown") : 0;
+            avatarOfEarthActive = nbt.contains("AvatarOfEarthActive") && nbt.getBoolean("AvatarOfEarthActive");
+            avatarOfEarthEndTime = nbt.contains("AvatarOfEarthEndTime") ? nbt.getLong("AvatarOfEarthEndTime") : 0;
         }
     }
 

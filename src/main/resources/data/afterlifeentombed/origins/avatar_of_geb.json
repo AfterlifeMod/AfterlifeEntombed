@@ -1,0 +1,23 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:geb_earth_immunity",
+    "afterlifeentombed:geb_slowness",
+    "afterlifeentombed:geb_underground_buffs",
+    "afterlifeentombed:geb_telekinesis",
+    "afterlifeentombed:geb_telekinesis_active",
+    "afterlifeentombed:geb_excavation",
+    "afterlifeentombed:geb_excavation_active",
+    "afterlifeentombed:geb_earth_rise",
+    "afterlifeentombed:geb_avatar_of_earth",
+    "afterlifeentombed:geb_avatar_of_earth_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_geb"
+  },
+  "order": 106,
+  "impact": 3,
+  "name": "Avatar of Geb",
+  "description": "Channel the ancient power of Geb, God of Earth and Stone. Command the very ground beneath your feet and become one with the earth itself.",
+  "unchoosable": true
+}

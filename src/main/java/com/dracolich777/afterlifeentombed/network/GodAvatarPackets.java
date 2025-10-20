@@ -2,7 +2,9 @@ package com.dracolich777.afterlifeentombed.network;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class GodAvatarPackets {
@@ -39,5 +41,24 @@ public class GodAvatarPackets {
                 HudNotificationPacket::encode,
                 HudNotificationPacket::new,
                 HudNotificationPacket::handle);
+        
+        INSTANCE.registerMessage(id(), SwitchGodPacket.class,
+                SwitchGodPacket::encode,
+                SwitchGodPacket::new,
+                SwitchGodPacket::handle);
+        
+        INSTANCE.registerMessage(id(), SyncUnlockedGodsPacket.class,
+                SyncUnlockedGodsPacket::encode,
+                SyncUnlockedGodsPacket::decode,
+                SyncUnlockedGodsPacket::handle);
+        
+        INSTANCE.registerMessage(id(), SyncOreMarkersPacket.class,
+                SyncOreMarkersPacket::encode,
+                SyncOreMarkersPacket::decode,
+                SyncOreMarkersPacket::handle);
+    }
+    
+    public static <MSG> void sendToServer(MSG message) {
+        INSTANCE.sendToServer(message);
     }
 }

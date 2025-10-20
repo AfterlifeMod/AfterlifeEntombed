@@ -1,0 +1,7 @@
+{
+  "type": "origins:toggle",
+  "name": "Avatar of Earth Active",
+  "description": "Tracks whether Avatar of Earth is currently active",
+  "active_by_default": false,
+  "hidden": true
+}

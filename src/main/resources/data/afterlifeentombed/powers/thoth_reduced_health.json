@@ -1,10 +1,10 @@
 {
   "type": "origins:attribute",
-  "name": "Scholar's Fragility",
-  "description": "Your focus on knowledge over physical prowess leaves you more vulnerable",
+  "name": "Scholarly Body",
+  "description": "Your devotion to knowledge rather than strength has made you physically weak and frail",
   "modifier": {
     "attribute": "minecraft:generic.max_health",
-    "operation": "add_base_value",
-    "value": -10.0
+    "operation": "addition",
+    "value": -6.0
   }
 }

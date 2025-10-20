@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Excavation",
+  "description": "Mine the next block to excavate a 16x16x16 area, leaving ores. If you wait 20 seconds, reveals nearby ores instead. 60 second cooldown.",
+  "key": "secondary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 2"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

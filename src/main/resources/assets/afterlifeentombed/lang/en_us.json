@@ -269,5 +269,8 @@
   "death.attack.smooth_brain.player": "%1$s was not wise enough to triumph over %2$s",
 
   "enchantment.afterlifeentombed.skybound": "Skybound",
-  "enchantment.afterlifeentombed.skybound.desc": "Launches you upward when hitting enemies"
+  "enchantment.afterlifeentombed.skybound.desc": "Launches you upward when hitting enemies",
+
+  "key.categories.afterlifeentombed": "Afterlife Entombed",
+  "key.afterlifeentombed.open_god_selection": "Open God Selection"
 }

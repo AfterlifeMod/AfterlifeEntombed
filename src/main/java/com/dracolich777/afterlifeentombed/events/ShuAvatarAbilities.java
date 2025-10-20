@@ -37,8 +37,6 @@ public class ShuAvatarAbilities {
     public static final int ABILITY_EXTRA_JUMPS = 3;
     public static final int ABILITY_WIND_AVATAR = 4;
     
-    // Track extra jumps used: <player UUID, jumps remaining>
-    private static final Map<UUID, Integer> EXTRA_JUMPS_USED = new HashMap<>();
     // Track cooldowns: <player UUID, ability ID, cooldown end time>
     private static final Map<UUID, Map<Integer, Long>> ABILITY_COOLDOWNS = new HashMap<>();
     // Track Wind Avatar active duration: <player UUID, end time>
@@ -124,7 +122,7 @@ public class ShuAvatarAbilities {
             switch (abilityId) {
                 case ABILITY_LAUNCH -> activateLaunch(player, cap, currentTime);
                 case ABILITY_AIR_BOOST -> activateAirBoost(player, cap, currentTime);
-                case ABILITY_EXTRA_JUMPS -> {} // Extra jumps are now handled by jump events
+                case ABILITY_EXTRA_JUMPS -> activateExtraJump(player, cap, currentTime);
                 case ABILITY_WIND_AVATAR -> activateWindAvatar(player, cap, currentTime);
             }
         });
@@ -207,75 +205,22 @@ public class ShuAvatarAbilities {
     }
     
     /**
-     * Extra Jumps - Get 3 extra jumps while active, play haze flash on jump (2s cooldown)
+     * Extra Jumps - Activate the ability to enable 3 mid-air jumps (10s cooldown after all used)
+     * Press ability button to activate mode, then press jump key in mid-air to use jumps
+     * The actual jump handling is done client-side in ExtraJumpHandler
      */
-    /**
-     * Handle extra jumps when Shu player jumps
-     */
-    @SubscribeEvent
-    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)) return;
-        if (!isShuAvatar(player)) return;
+    private static void activateExtraJump(ServerPlayer player, GodAvatarCapability.IGodAvatar cap, long currentTime) {
+        // Check cooldown (10 seconds = 200 ticks)
+        if (cap.getExtraJumpsCooldown() > currentTime) {
+            long remaining = (cap.getExtraJumpsCooldown() - currentTime) / 20;
+            GodAvatarHudHelper.sendCooldownMessage(player, "Extra Jumps", remaining);
+            return;
+        }
         
-        long currentTime = player.level().getGameTime();
-        UUID playerUUID = player.getUUID();
+        // Activate extra jumps mode - reset counter to 0 (3 jumps available)
+        cap.setExtraJumpsUsed(0);
         
-        player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
-            // Get current jump counter
-            int jumpsUsed = cap.getExtraJumpsUsed();
-            
-            // On first jump (from ground), jumpsUsed should be 0 - reset for new jump sequence
-            // On subsequent jumps (in air), jumpsUsed increments
-            if (jumpsUsed == 0) {
-                // First jump of sequence - don't count this as an extra jump, just reset counter
-                // The LivingJumpEvent includes the natural jump
-                cap.setExtraJumpsUsed(1);
-                return;
-            }
-            
-            // Subsequent jumps (in air) - these are extra jumps
-            if (jumpsUsed < 4) {
-                // Grant extra jump (can have up to 4 total: 1 natural + 3 extra)
-                cap.setExtraJumpsUsed(jumpsUsed + 1);
-                
-                // Boost upward higher (1.2 velocity for higher jumps)
-                player.setDeltaMovement(player.getDeltaMovement().add(0, 1.2, 0));
-                player.hurtMarked = true;
-                
-                // Play haze flash particle at feet
-                if (player.level() instanceof ServerLevel serverLevel) {
-                    AfterLibsAPI.spawnAfterlifeParticle(serverLevel, "haze_flash", 
-                        player.getX(), player.getY(), player.getZ(), 1.0f);
-                }
-                
-                int extraJumpsRemaining = 4 - jumpsUsed - 1;
-                GodAvatarHudHelper.sendActivationMessage(player, "Extra Jump (" + extraJumpsRemaining + " remaining)", GodAvatarHudHelper.COLOR_SHU);
-            } else {
-                // All jumps used, apply cooldown
-                cap.setExtraJumpsCooldown(currentTime + 40);
-                GodAvatarHudHelper.sendNotification(player, "Extra Jumps on cooldown!", GodAvatarHudHelper.COLOR_ERROR, 30);
-            }
-        });
-    }
-    
-    /**
-     * Reset extra jumps when player touches ground
-     */
-    @SubscribeEvent
-    public static void onPlayerLanding(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide) return;
-        
-        Player player = event.player;
-        if (!isShuAvatar(player)) return;
-        
-        UUID playerUUID = player.getUUID();
-        
-        player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
-            // Reset jumps counter when touching ground - allows new jump sequence
-            if (player.onGround() && cap.getExtraJumpsUsed() > 0) {
-                cap.setExtraJumpsUsed(0);
-            }
-        });
+        GodAvatarHudHelper.sendActivationMessage(player, "Extra Jumps Activated (3 jumps available)", GodAvatarHudHelper.COLOR_SHU);
     }
     
     /**
@@ -376,6 +321,16 @@ public class ShuAvatarAbilities {
         
         cap.setWindAvatarActive(false);
         WIND_AVATAR_DURATION.remove(playerUUID);
+        
+        // Remove flight ability if player isn't in creative
+        if (!player.getAbilities().instabuild) {
+            player.getAbilities().mayfly = false;
+            player.getAbilities().flying = false;
+            player.onUpdateAbilities();
+        }
+        
+        // Add slow falling to prevent fall damage (1 minute = 1200 ticks)
+        player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 1200, 0, false, true));
         
         // Set full cooldown (5 minutes = 6000 ticks)
         cap.setWindAvatarCooldown(currentTime + 6000);

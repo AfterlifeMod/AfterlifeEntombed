@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Telekinesis",
+  "description": "Command a block to float and follow you. Deactivate to place it down. 30 second cooldown after deactivation.",
+  "key": "primary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 1"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

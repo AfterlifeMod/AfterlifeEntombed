@@ -50,8 +50,19 @@ public class GodAvatarCommandHandler {
             // If a trigger was set, activate the ability and reset
             if (abilityId > 0) {
                 player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(godAvatar -> {
+                    // Check if in grace period after god switch
+                    long currentTime = player.level().getGameTime();
+                    if (currentTime < godAvatar.getGodSwitchGracePeriod()) {
+                        // Still in grace period, ignore ability activation
+                        return;
+                    }
+                    
                     // Route to correct god's ability handler based on selected god
                     GodType selectedGod = godAvatar.getSelectedGod();
+                    
+                    // Debug logging
+                    com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("GodAvatarCommandHandler: Player {} triggered ability {} for god {}", 
+                        player.getName().getString(), abilityId, selectedGod);
                     
                     switch (selectedGod) {
                         case SETH -> SethAvatarAbilities.activateAbility(player, abilityId);
@@ -59,7 +70,8 @@ public class GodAvatarCommandHandler {
                         case SHU -> ShuAvatarAbilities.activateAbility(player, abilityId);
                         case ANUBIS -> AnubisAvatarAbilities.activateAbility(player, abilityId);
                         case THOTH -> ThothAvatarAbilities.activateAbility(player, abilityId);
-                        case HORUS, ISIS, GEB -> 
+                        case GEB -> GebAvatarAbilities.activateAbility(player, abilityId);
+                        case HORUS, ISIS -> 
                             player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§e" + selectedGod.name() + " abilities are not yet implemented!"));
                         default -> player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§cNo god selected!"));
                     }
@@ -79,21 +91,26 @@ public class GodAvatarCommandHandler {
             
             // Set the god in capability
             player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
-                // Get the previous god type before switching
-                GodType previousGodType = cap.getSelectedGod();
+                // Unlock the god permanently (no ejection of previous godstone)
+                cap.unlockGod(newGodType);
                 
-                // Give back the previous god's godstone (if not NONE)
-                if (previousGodType != GodType.NONE && previousGodType != newGodType) {
-                    ItemStack previousGodstone = getPreviousGodstone(previousGodType);
-                    if (!previousGodstone.isEmpty()) {
-                        // Add to inventory or drop if full
-                        if (!player.getInventory().add(previousGodstone)) {
-                            player.drop(previousGodstone, false);
-                        }
-                    }
-                }
+                // Also save to persistent storage
+                com.dracolich777.afterlifeentombed.util.UnlockedGodsSavedData savedData = 
+                    com.dracolich777.afterlifeentombed.util.UnlockedGodsSavedData.get(player.getServer());
+                savedData.unlockGod(player.getUUID(), newGodType);
                 
+                // Switch to the newly unlocked god
                 cap.setSelectedGod(newGodType);
+                
+                // Sync unlocked gods to client
+                com.dracolich777.afterlifeentombed.network.GodAvatarPackets.INSTANCE.send(
+                    net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
+                    new com.dracolich777.afterlifeentombed.network.SyncUnlockedGodsPacket(cap.getUnlockedGods())
+                );
+                
+                // Set grace period to prevent immediate ability activation (10 ticks = 0.5 seconds)
+                long currentTime = player.level().getGameTime();
+                cap.setGodSwitchGracePeriod(currentTime + 10);
                 
                 // Grant the appropriate origin tag
                 player.addTag("afterlifeentombed:has_avatar_origin");
@@ -138,6 +155,10 @@ public class GodAvatarCommandHandler {
                         server.getCommands().performPrefixedCommand(
                             server.createCommandSourceStack(),
                             "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_thoth"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
                         );
                         
                         // Now grant the god-specific origin

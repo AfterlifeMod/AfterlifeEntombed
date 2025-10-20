@@ -19,5 +19,5 @@
   "impact": 3,
   "name": "Avatar of Thoth",
   "description": "Channel the power of Thoth, God of Knowledge and Wisdom. Harness experience to enhance your abilities, teleport to workstations, and bestow divine enchantments. Knowledge is power incarnate.",
-  "unchoosable": false
+  "unchoosable": true
 }

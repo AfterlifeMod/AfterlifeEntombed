@@ -1,0 +1,97 @@
+{
+  "type": "origins:multiple",
+  "name": "Earth's Embrace",
+  "description": "When underground, gain Night Vision V and Regeneration III.",
+  "night_vision": {
+    "type": "origins:stacking_status_effect",
+    "min_stacks": 0,
+    "max_stacks": 1,
+    "duration_per_stack": 100,
+    "effect": {
+      "effect": "minecraft:night_vision",
+      "amplifier": 4,
+      "duration": 100,
+      "is_ambient": true,
+      "show_particles": false,
+      "show_icon": true
+    },
+    "tick_rate": 80,
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_nether"
+        },
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_end"
+        },
+        {
+          "type": "origins:exposed_to_sky",
+          "inverted": true
+        },
+        {
+          "type": "origins:in_block_anywhere",
+          "block_condition": {
+            "type": "origins:offset",
+            "y": 1,
+            "condition": {
+              "type": "origins:block",
+              "block": "minecraft:air",
+              "inverted": true
+            }
+          },
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  },
+  "regeneration": {
+    "type": "origins:stacking_status_effect",
+    "min_stacks": 0,
+    "max_stacks": 1,
+    "duration_per_stack": 100,
+    "effect": {
+      "effect": "minecraft:regeneration",
+      "amplifier": 2,
+      "duration": 100,
+      "is_ambient": true,
+      "show_particles": false,
+      "show_icon": true
+    },
+    "tick_rate": 80,
+    "condition": {
+      "type": "origins:or",
+      "conditions": [
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_nether"
+        },
+        {
+          "type": "origins:dimension",
+          "dimension": "minecraft:the_end"
+        },
+        {
+          "type": "origins:exposed_to_sky",
+          "inverted": true
+        },
+        {
+          "type": "origins:in_block_anywhere",
+          "block_condition": {
+            "type": "origins:offset",
+            "y": 1,
+            "condition": {
+              "type": "origins:block",
+              "block": "minecraft:air",
+              "inverted": true
+            }
+          },
+          "comparison": ">",
+          "compare_to": 0
+        }
+      ]
+    }
+  }
+}

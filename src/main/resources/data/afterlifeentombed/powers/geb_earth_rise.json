@@ -1,0 +1,17 @@
+{
+  "type": "origins:active_self",
+  "name": "Earth Rise",
+  "description": "Instantly teleport to the highest safe solid block above you. 20 second cooldown.",
+  "key": {
+    "key": "key.loadToolbarActivator",
+    "continuous": false
+  },
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

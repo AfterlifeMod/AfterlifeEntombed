@@ -2,9 +2,14 @@ package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
+import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.network.SyncGodAvatarDataPacket;
+import com.dracolich777.afterlifeentombed.network.SyncUnlockedGodsPacket;
+import com.dracolich777.afterlifeentombed.util.UnlockedGodsSavedData;
 import net.minecraft.server.level.ServerPlayer;
+
+import java.util.Set;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,10 +26,45 @@ public class GodAvatarSyncHandler {
     
     /**
      * Sync capability data when player logs in
+     * Also restore unlocked gods from persistent storage
      */
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            // Restore unlocked gods from persistent storage
+            UnlockedGodsSavedData savedData = UnlockedGodsSavedData.get(serverPlayer.getServer());
+            Set<GodType> savedUnlockedGods = savedData.getUnlockedGods(serverPlayer.getUUID());
+            
+            serverPlayer.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
+                Set<GodType> capabilityGods = cap.getUnlockedGods();
+                
+                // Restore any gods from saved data that aren't in the capability
+                boolean needsSync = false;
+                for (GodType god : savedUnlockedGods) {
+                    if (!capabilityGods.contains(god)) {
+                        cap.unlockGod(god);
+                        needsSync = true;
+                        AfterlifeEntombedMod.LOGGER.info("Restored unlocked god {} for player {}", 
+                            god, serverPlayer.getGameProfile().getName());
+                    }
+                }
+                
+                // Also save any gods from capability that aren't in saved data
+                for (GodType god : capabilityGods) {
+                    if (!savedUnlockedGods.contains(god)) {
+                        savedData.unlockGod(serverPlayer.getUUID(), god);
+                    }
+                }
+                
+                if (needsSync) {
+                    // Send updated unlocked gods list to client
+                    GodAvatarPackets.INSTANCE.send(
+                        net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> serverPlayer),
+                        new SyncUnlockedGodsPacket(cap.getUnlockedGods())
+                    );
+                }
+            });
+            
             syncToClient(serverPlayer);
         }
     }
@@ -102,10 +142,29 @@ public class GodAvatarSyncHandler {
                 cap.getSummonUndeadCooldown(),
                 cap.getAvatarOfDeathCooldown(),
                 cap.isAvatarOfDeathActive(),
-                cap.getAvatarOfDeathEndTime()
+                cap.getAvatarOfDeathEndTime(),
+                cap.getScholarlyTeleportCooldown(),
+                cap.getExperienceMultiplierCooldown(),
+                cap.isExperienceMultiplierActive(),
+                cap.getDivineEnchantCooldown(),
+                cap.getAvatarOfWisdomCooldown(),
+                cap.isAvatarOfWisdomActive(),
+                cap.getAvatarOfWisdomEndTime(),
+                cap.getTelekinesisCooldown(),
+                cap.getExcavationCooldown(),
+                cap.getEarthRiseCooldown(),
+                cap.getAvatarOfEarthCooldown(),
+                cap.isAvatarOfEarthActive(),
+                cap.getAvatarOfEarthEndTime()
             );
             
             GodAvatarPackets.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), packet);
+            
+            // Also sync unlocked gods
+            GodAvatarPackets.INSTANCE.send(
+                PacketDistributor.PLAYER.with(() -> player),
+                new SyncUnlockedGodsPacket(cap.getUnlockedGods())
+            );
         });
     }
 }

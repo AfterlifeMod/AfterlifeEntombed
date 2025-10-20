@@ -85,7 +85,7 @@ public class GodAvatarHudOverlay {
             int lineY = y + 14;
             
             // Check active abilities and cooldowns
-            renderAbilityStatus(guiGraphics, mc, cap, god, x + 3, lineY, colors, currentTime);
+            renderAbilityStatus(guiGraphics, mc, player, cap, god, x + 3, lineY, colors, currentTime);
             
             // Draw notification if active (below HUD) with shadow
             if (System.currentTimeMillis() < notificationEndTime) {
@@ -136,7 +136,10 @@ public class GodAvatarHudOverlay {
             case HORUS:
             case ISIS:
             case GEB:
-                lines++; // "Ready" message
+                lines++; // Ability 1
+                lines++; // Ability 2
+                lines++; // Ability 3
+                lines++; // Ability 4
                 break;
             case NONE:
                 // Should never happen
@@ -146,7 +149,7 @@ public class GodAvatarHudOverlay {
         return lines * lineHeight;
     }
     
-    private static void renderAbilityStatus(GuiGraphics guiGraphics, Minecraft mc, 
+    private static void renderAbilityStatus(GuiGraphics guiGraphics, Minecraft mc, LocalPlayer player,
                                             GodAvatarCapability.IGodAvatar cap, GodType god, 
                                             int x, int y, GodColorScheme colors, long currentTime) {
         int lineHeight = 9; // Compact line spacing
@@ -286,18 +289,21 @@ public class GodAvatarHudOverlay {
                 }
                 currentY += lineHeight;
                 
-                // Extra Jumps status
-                int jumpsUsed = cap.getExtraJumpsUsed();
-                int jumpsRemaining = 3 - (jumpsUsed > 0 ? jumpsUsed - 1 : 0); // 3 extra jumps available
+                // Extra Jumps status - use client-side tracking
+                int jumpsUsed = com.dracolich777.afterlifeentombed.events.ExtraJumpHandler.getClientJumpsUsed(player.getUUID());
                 if (currentTime < cap.getExtraJumpsCooldown()) {
+                    // On cooldown
                     long cooldown = (cap.getExtraJumpsCooldown() - currentTime) / 20;
                     String status = "Extra Jumps: " + cooldown + "s";
                     guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
-                } else if (jumpsUsed > 0 && jumpsRemaining >= 0) {
-                    String status = "Extra Jumps: " + jumpsRemaining;
-                    guiGraphics.drawString(mc.font, status, x, currentY, colors.ready, true);
+                } else if (jumpsUsed >= 0 && jumpsUsed < 3) {
+                    // Mode active with jumps remaining
+                    int jumpsRemaining = 3 - jumpsUsed;
+                    String status = "Jumps: " + jumpsRemaining + "/3";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
                 } else {
-                    guiGraphics.drawString(mc.font, "Extra Jumps: 3", x, currentY, colors.ready, true);
+                    // Ready to activate
+                    guiGraphics.drawString(mc.font, "Extra Jumps: Ready", x, currentY, colors.ready, true);
                 }
                 currentY += lineHeight;
                 
@@ -411,10 +417,54 @@ public class GodAvatarHudOverlay {
                 }
                 break;
                 
+            case GEB:
+                // Telekinesis (Ability 1)
+                if (currentTime < cap.getTelekinesisCooldown()) {
+                    long cooldown = (cap.getTelekinesisCooldown() - currentTime) / 20;
+                    String status = "Telekinesis: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Telekinesis: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Excavation (Ability 2)
+                if (currentTime < cap.getExcavationCooldown()) {
+                    long cooldown = (cap.getExcavationCooldown() - currentTime) / 20;
+                    String status = "Excavation: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Excavation: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Earth Rise (Ability 3)
+                if (currentTime < cap.getEarthRiseCooldown()) {
+                    long cooldown = (cap.getEarthRiseCooldown() - currentTime) / 20;
+                    String status = "Earth Rise: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Earth Rise: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Avatar of Earth (Ability 4)
+                if (cap.isAvatarOfEarthActive()) {
+                    long remaining = (cap.getAvatarOfEarthEndTime() - currentTime) / 20;
+                    String status = "Avatar: " + formatTime(remaining);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
+                } else if (currentTime < cap.getAvatarOfEarthCooldown()) {
+                    long cooldown = (cap.getAvatarOfEarthCooldown() - currentTime) / 20;
+                    String status = "Avatar: " + formatTime(cooldown);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Avatar: Ready", x, currentY, colors.ready, true);
+                }
+                break;
+                
             // Other gods - show ready message (with shadow)
             case HORUS:
             case ISIS:
-            case GEB:
                 guiGraphics.drawString(mc.font, "Ready", x, currentY, colors.ready, true);
                 break;
                 

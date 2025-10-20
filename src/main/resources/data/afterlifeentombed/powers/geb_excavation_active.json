@@ -1,0 +1,7 @@
+{
+  "type": "origins:toggle",
+  "name": "Excavation Active",
+  "description": "Tracks whether Excavation timer is currently active",
+  "active_by_default": false,
+  "hidden": true
+}

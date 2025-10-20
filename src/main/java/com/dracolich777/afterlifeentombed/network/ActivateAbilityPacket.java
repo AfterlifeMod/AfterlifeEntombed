@@ -1,6 +1,9 @@
 package com.dracolich777.afterlifeentombed.network;
 
+import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
+import com.dracolich777.afterlifeentombed.events.GebAvatarAbilities;
 import com.dracolich777.afterlifeentombed.events.SethAvatarAbilities;
+import com.dracolich777.afterlifeentombed.items.GodType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -28,7 +31,15 @@ public class ActivateAbilityPacket {
         ctx.get().enqueueWork(() -> {
             ServerPlayer player = ctx.get().getSender();
             if (player != null) {
-                SethAvatarAbilities.activateAbility(player, packet.abilityId);
+                // Route to correct god's ability handler
+                player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
+                    GodType god = cap.getSelectedGod();
+                    switch (god) {
+                        case SETH -> SethAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case GEB -> GebAvatarAbilities.activateAbility(player, packet.abilityId);
+                        // Add other gods as they are implemented
+                    }
+                });
             }
         });
         ctx.get().setPacketHandled(true);

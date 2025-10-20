@@ -7,7 +7,7 @@
     "command": "function afterlifeentombed:thoth/divine_enchant"
   },
   "key": {
-    "key": "key.useability"
+    "key": "key.loadToolbarActivator"
   },
   "condition": {
     "type": "origins:and",

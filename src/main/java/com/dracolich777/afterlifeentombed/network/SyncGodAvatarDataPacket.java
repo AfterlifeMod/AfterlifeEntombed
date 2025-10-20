@@ -49,6 +49,21 @@ public class SyncGodAvatarDataPacket {
     private final long avatarOfDeathCooldown;
     private final boolean avatarOfDeathActive;
     private final long avatarOfDeathEndTime;
+    // Thoth ability fields
+    private final long scholarlyTeleportCooldown;
+    private final long experienceMultiplierCooldown;
+    private final boolean experienceMultiplierActive;
+    private final long divineEnchantCooldown;
+    private final long avatarOfWisdomCooldown;
+    private final boolean avatarOfWisdomActive;
+    private final long avatarOfWisdomEndTime;
+    // Geb ability fields
+    private final long telekinesisCooldown;
+    private final long excavationCooldown;
+    private final long earthRiseCooldown;
+    private final long avatarOfEarthCooldown;
+    private final boolean avatarOfEarthActive;
+    private final long avatarOfEarthEndTime;
 
     public SyncGodAvatarDataPacket(GodType god, 
                                    boolean oneWithChaosActive, int oneWithChaosTimeUsed, long oneWithChaosCooldown,
@@ -65,7 +80,13 @@ public class SyncGodAvatarDataPacket {
                                    long undeadCommandCooldown, long lifelinkCooldown,
                                    boolean lifelinkActive, long lifelinkEndTime,
                                    long summonUndeadCooldown, long avatarOfDeathCooldown,
-                                   boolean avatarOfDeathActive, long avatarOfDeathEndTime) {
+                                   boolean avatarOfDeathActive, long avatarOfDeathEndTime,
+                                   long scholarlyTeleportCooldown, long experienceMultiplierCooldown,
+                                   boolean experienceMultiplierActive, long divineEnchantCooldown,
+                                   long avatarOfWisdomCooldown, boolean avatarOfWisdomActive, long avatarOfWisdomEndTime,
+                                   long telekinesisCooldown, long excavationCooldown,
+                                   long earthRiseCooldown, long avatarOfEarthCooldown,
+                                   boolean avatarOfEarthActive, long avatarOfEarthEndTime) {
         this.godName = god.name();
         this.oneWithChaosActive = oneWithChaosActive;
         this.oneWithChaosTimeUsed = oneWithChaosTimeUsed;
@@ -99,6 +120,19 @@ public class SyncGodAvatarDataPacket {
         this.avatarOfDeathCooldown = avatarOfDeathCooldown;
         this.avatarOfDeathActive = avatarOfDeathActive;
         this.avatarOfDeathEndTime = avatarOfDeathEndTime;
+        this.scholarlyTeleportCooldown = scholarlyTeleportCooldown;
+        this.experienceMultiplierCooldown = experienceMultiplierCooldown;
+        this.experienceMultiplierActive = experienceMultiplierActive;
+        this.divineEnchantCooldown = divineEnchantCooldown;
+        this.avatarOfWisdomCooldown = avatarOfWisdomCooldown;
+        this.avatarOfWisdomActive = avatarOfWisdomActive;
+        this.avatarOfWisdomEndTime = avatarOfWisdomEndTime;
+        this.telekinesisCooldown = telekinesisCooldown;
+        this.excavationCooldown = excavationCooldown;
+        this.earthRiseCooldown = earthRiseCooldown;
+        this.avatarOfEarthCooldown = avatarOfEarthCooldown;
+        this.avatarOfEarthActive = avatarOfEarthActive;
+        this.avatarOfEarthEndTime = avatarOfEarthEndTime;
     }
 
     public static void encode(SyncGodAvatarDataPacket packet, FriendlyByteBuf buf) {
@@ -138,6 +172,21 @@ public class SyncGodAvatarDataPacket {
         buf.writeLong(packet.avatarOfDeathCooldown);
         buf.writeBoolean(packet.avatarOfDeathActive);
         buf.writeLong(packet.avatarOfDeathEndTime);
+        // Thoth ability fields
+        buf.writeLong(packet.scholarlyTeleportCooldown);
+        buf.writeLong(packet.experienceMultiplierCooldown);
+        buf.writeBoolean(packet.experienceMultiplierActive);
+        buf.writeLong(packet.divineEnchantCooldown);
+        buf.writeLong(packet.avatarOfWisdomCooldown);
+        buf.writeBoolean(packet.avatarOfWisdomActive);
+        buf.writeLong(packet.avatarOfWisdomEndTime);
+        // Geb ability fields
+        buf.writeLong(packet.telekinesisCooldown);
+        buf.writeLong(packet.excavationCooldown);
+        buf.writeLong(packet.earthRiseCooldown);
+        buf.writeLong(packet.avatarOfEarthCooldown);
+        buf.writeBoolean(packet.avatarOfEarthActive);
+        buf.writeLong(packet.avatarOfEarthEndTime);
     }
 
     public static SyncGodAvatarDataPacket decode(FriendlyByteBuf buf) {
@@ -177,6 +226,21 @@ public class SyncGodAvatarDataPacket {
         long avatarOfDeathCooldown = buf.readLong();
         boolean avatarOfDeathActive = buf.readBoolean();
         long avatarOfDeathEndTime = buf.readLong();
+        // Thoth ability fields
+        long scholarlyTeleportCooldown = buf.readLong();
+        long experienceMultiplierCooldown = buf.readLong();
+        boolean experienceMultiplierActive = buf.readBoolean();
+        long divineEnchantCooldown = buf.readLong();
+        long avatarOfWisdomCooldown = buf.readLong();
+        boolean avatarOfWisdomActive = buf.readBoolean();
+        long avatarOfWisdomEndTime = buf.readLong();
+        // Geb ability fields
+        long telekinesisCooldown = buf.readLong();
+        long excavationCooldown = buf.readLong();
+        long earthRiseCooldown = buf.readLong();
+        long avatarOfEarthCooldown = buf.readLong();
+        boolean avatarOfEarthActive = buf.readBoolean();
+        long avatarOfEarthEndTime = buf.readLong();
         
         try {
             GodType god = GodType.valueOf(godName);
@@ -195,7 +259,13 @@ public class SyncGodAvatarDataPacket {
                 undeadCommandCooldown, lifelinkCooldown,
                 lifelinkActive, lifelinkEndTime,
                 summonUndeadCooldown, avatarOfDeathCooldown,
-                avatarOfDeathActive, avatarOfDeathEndTime);
+                avatarOfDeathActive, avatarOfDeathEndTime,
+                scholarlyTeleportCooldown, experienceMultiplierCooldown,
+                experienceMultiplierActive, divineEnchantCooldown,
+                avatarOfWisdomCooldown, avatarOfWisdomActive, avatarOfWisdomEndTime,
+                telekinesisCooldown, excavationCooldown,
+                earthRiseCooldown, avatarOfEarthCooldown,
+                avatarOfEarthActive, avatarOfEarthEndTime);
         } catch (IllegalArgumentException e) {
             // Invalid god name, return NONE
             return new SyncGodAvatarDataPacket(GodType.NONE, 
@@ -212,6 +282,12 @@ public class SyncGodAvatarDataPacket {
                 0, 0,
                 0, 0,
                 false, 0,
+                0, 0,
+                false, 0,
+                0, 0,
+                false, 0,
+                0, false, 0,
+                0, 0,
                 0, 0,
                 false, 0);
         }
@@ -261,6 +337,21 @@ public class SyncGodAvatarDataPacket {
                         cap.setAvatarOfDeathCooldown(packet.avatarOfDeathCooldown);
                         cap.setAvatarOfDeathActive(packet.avatarOfDeathActive);
                         cap.setAvatarOfDeathEndTime(packet.avatarOfDeathEndTime);
+                        // Thoth ability fields
+                        cap.setScholarlyTeleportCooldown(packet.scholarlyTeleportCooldown);
+                        cap.setExperienceMultiplierCooldown(packet.experienceMultiplierCooldown);
+                        cap.setExperienceMultiplierActive(packet.experienceMultiplierActive);
+                        cap.setDivineEnchantCooldown(packet.divineEnchantCooldown);
+                        cap.setAvatarOfWisdomCooldown(packet.avatarOfWisdomCooldown);
+                        cap.setAvatarOfWisdomActive(packet.avatarOfWisdomActive);
+                        cap.setAvatarOfWisdomEndTime(packet.avatarOfWisdomEndTime);
+                        // Geb ability fields
+                        cap.setTelekinesisCooldown(packet.telekinesisCooldown);
+                        cap.setExcavationCooldown(packet.excavationCooldown);
+                        cap.setEarthRiseCooldown(packet.earthRiseCooldown);
+                        cap.setAvatarOfEarthCooldown(packet.avatarOfEarthCooldown);
+                        cap.setAvatarOfEarthActive(packet.avatarOfEarthActive);
+                        cap.setAvatarOfEarthEndTime(packet.avatarOfEarthEndTime);
                     } catch (IllegalArgumentException e) {
                         // Invalid god name, ignore
                     }

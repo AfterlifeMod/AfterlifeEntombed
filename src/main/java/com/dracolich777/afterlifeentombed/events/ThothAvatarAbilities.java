@@ -188,6 +188,8 @@ public class ThothAvatarAbilities {
      * Consumes random amount of XP (5-15 levels)
      */
     private static void activateDivineEnchant(ServerPlayer player, GodAvatarCapability.IGodAvatar cap, long currentTime) {
+        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Method called for player {}", player.getName().getString());
+        
         // Check if in Avatar of Wisdom mode (no cooldown)
         boolean unlimited = cap.isAvatarOfWisdomActive();
         
@@ -211,16 +213,34 @@ public class ThothAvatarAbilities {
             return;
         }
         
+        // Debug: Log item details
+        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Attempting to enchant {} (isEnchantable: {})", 
+            heldItem.getDescriptionId(), 
+            heldItem.isEnchantable());
+        
         // Get suitable enchantments for this item
+        // Use category matching instead of canEnchant() which may be overly restrictive
         List<EnchantmentInstance> availableEnchants = new ArrayList<>();
         for (Enchantment enchantment : ForgeRegistries.ENCHANTMENTS.getValues()) {
-            if (enchantment.canEnchant(heldItem)) {
-                // Use relatively high level (between 50% and max level)
+            // Filter out curses (curses have negative effects and isCurse() returns true)
+            if (enchantment.isCurse()) {
+                continue;
+            }
+            
+            // Filter out inferior damage enchantments (Smite and Bane of Arthropods)
+            if (enchantment == Enchantments.SMITE || enchantment == Enchantments.BANE_OF_ARTHROPODS) {
+                continue;
+            }
+            
+            // Check if enchantment's category accepts this item
+            if (enchantment.category.canEnchant(heldItem.getItem())) {
+                // Always use maximum level - Thoth grants only the finest enchantments
                 int maxLevel = enchantment.getMaxLevel();
-                int level = Math.max(1, maxLevel / 2 + player.getRandom().nextInt((maxLevel / 2) + 1));
-                availableEnchants.add(new EnchantmentInstance(enchantment, level));
+                availableEnchants.add(new EnchantmentInstance(enchantment, maxLevel));
             }
         }
+        
+        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Found {} suitable enchantments", availableEnchants.size());
         
         if (availableEnchants.isEmpty()) {
             GodAvatarHudHelper.sendNotification(player, "No suitable enchantments for this item!", 
@@ -274,11 +294,16 @@ public class ThothAvatarAbilities {
         currentEnchants.put(selectedEnchant.enchantment, selectedEnchant.level);
         EnchantmentHelper.setEnchantments(currentEnchants, heldItem);
         
+        // Force inventory update to ensure client sees the change
+        player.inventoryMenu.broadcastChanges();
+        
         // Debug logging
         AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Applied {} level {} to {}", 
             selectedEnchant.enchantment.getDescriptionId(), 
             selectedEnchant.level,
             heldItem.getDescriptionId());
+        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Item now has {} enchantments total", 
+            EnchantmentHelper.getEnchantments(heldItem).size());
         
         // Consume XP and set cooldown (skip if unlimited)
         if (!unlimited) {
@@ -425,22 +450,28 @@ public class ThothAvatarAbilities {
         
         // Handle Avatar of Wisdom ultimate
         player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
-            if (!cap.isAvatarOfWisdomActive() || currentTime >= cap.getAvatarOfWisdomEndTime()) {
-                // Avatar is not active or has expired
-                if (cap.isAvatarOfWisdomActive()) {
-                    // Was just deactivated
-                    cap.setAvatarOfWisdomActive(false);
-                    cap.setAvatarOfWisdomCooldown(currentTime + 12000); // 600 seconds (10 minutes)
-                    
-                    // Remove creative flight
-                    if (player.getAbilities().mayfly && !player.isCreative() && !player.isSpectator()) {
-                        player.getAbilities().mayfly = false;
-                        player.getAbilities().flying = false;
-                        player.onUpdateAbilities();
-                    }
-                    
-                    GodAvatarHudHelper.sendDeactivationMessage(player, "Avatar of Wisdom", GodAvatarHudHelper.COLOR_THOTH);
+            if (!cap.isAvatarOfWisdomActive()) {
+                // Not active, nothing to do
+                return;
+            }
+            
+            // Check if expired
+            if (currentTime >= cap.getAvatarOfWisdomEndTime()) {
+                // Just expired - deactivate
+                cap.setAvatarOfWisdomActive(false);
+                cap.setAvatarOfWisdomCooldown(currentTime + 12000); // 600 seconds (10 minutes)
+                
+                // Remove creative flight
+                if (player.getAbilities().mayfly && !player.isCreative() && !player.isSpectator()) {
+                    player.getAbilities().mayfly = false;
+                    player.getAbilities().flying = false;
+                    player.onUpdateAbilities();
                 }
+                
+                // Apply slow falling for 1 minute (1200 ticks) after ultimate ends
+                player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOW_FALLING, 1200, 0, false, true));
+                
+                GodAvatarHudHelper.sendDeactivationMessage(player, "Avatar of Wisdom", GodAvatarHudHelper.COLOR_THOTH);
                 return;
             }
             

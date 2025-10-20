@@ -515,7 +515,9 @@ public class RaAvatarAbilities {
                         case SETH -> "seth_fog";
                         case SHU -> "shujump";
                         case ANUBIS -> "anubis_nuke";
-                        case HORUS, ISIS, GEB, THOTH -> "ra_halo"; // Default to ra_halo for other gods
+                        case THOTH -> "ra_halo";
+                        case GEB -> "ra_halo";
+                        case HORUS, ISIS -> "ra_halo"; // Default to ra_halo for other gods
                         default -> "ra_halo";
                     };
                     AfterLibsAPI.spawnAfterlifeParticle(level, particleName, player.getX(), player.getY() + 1,
@@ -530,7 +532,9 @@ public class RaAvatarAbilities {
                         case RA -> "afterlifeentombed:avatar_of_ra";
                         case SHU -> "afterlifeentombed:avatar_of_shu";
                         case ANUBIS -> "afterlifeentombed:avatar_of_anubis";
-                        case HORUS, ISIS, GEB, THOTH -> "afterlifeentombed:avatar_of_egypt";
+                        case THOTH -> "afterlifeentombed:avatar_of_thoth";
+                        case GEB -> "afterlifeentombed:avatar_of_geb";
+                        case HORUS, ISIS -> "afterlifeentombed:avatar_of_egypt";
                         default -> null;
                     };
 
@@ -552,6 +556,18 @@ public class RaAvatarAbilities {
                                 server.createCommandSourceStack(),
                                 "origin revoke " + player.getGameProfile().getName()
                                         + " origins:origin afterlifeentombed:avatar_of_shu");
+                        server.getCommands().performPrefixedCommand(
+                                server.createCommandSourceStack(),
+                                "origin revoke " + player.getGameProfile().getName()
+                                        + " origins:origin afterlifeentombed:avatar_of_anubis");
+                        server.getCommands().performPrefixedCommand(
+                                server.createCommandSourceStack(),
+                                "origin revoke " + player.getGameProfile().getName()
+                                        + " origins:origin afterlifeentombed:avatar_of_thoth");
+                        server.getCommands().performPrefixedCommand(
+                                server.createCommandSourceStack(),
+                                "origin revoke " + player.getGameProfile().getName()
+                                        + " origins:origin afterlifeentombed:avatar_of_geb");
 
                         // Now grant the new origin
                         server.getCommands().performPrefixedCommand(

@@ -1,0 +1,7 @@
+{
+  "type": "origins:toggle",
+  "name": "Telekinesis Active",
+  "description": "Tracks whether Telekinesis is currently active",
+  "active_by_default": false,
+  "hidden": true
+}

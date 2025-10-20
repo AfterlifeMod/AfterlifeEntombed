@@ -1,0 +1,17 @@
+{
+  "type": "origins:stacking_status_effect",
+  "name": "Burden of Earth",
+  "description": "The weight of the earth slows your movements.",
+  "min_stacks": 0,
+  "max_stacks": 1,
+  "duration_per_stack": 100,
+  "effect": {
+    "effect": "minecraft:slowness",
+    "amplifier": 0,
+    "duration": 100,
+    "is_ambient": true,
+    "show_particles": false,
+    "show_icon": true
+  },
+  "tick_rate": 80
+}
