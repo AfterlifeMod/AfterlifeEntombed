@@ -157,7 +157,7 @@ public class AnubisAvatarAbilities {
                         double distance = entity.position().distanceTo(explosionPos);
                         if (distance > 12) continue;
                         
-                        // Calculate damage based on distance (10-25 damage, closer = more damage)
+                        // Calculate damage based on distance (10-25 damage, closer = more damage).
                         float distanceRatio = (float)(1.0 - (distance / 12.0));
                         float damage = 10.0f + (15.0f * distanceRatio); // 10-25 damage
                         
