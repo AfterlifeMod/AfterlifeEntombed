@@ -138,7 +138,7 @@ public class AnubisAvatarAbilities {
                     
                     // Spawn blood_lance particle at explosion point
                     AfterLibsAPI.spawnAfterlifeParticle(level, "blood_lance", 
-                        explosionPos.x, explosionPos.y + 1, explosionPos.z, 1.0f)
+                        explosionPos.x, explosionPos.y + 1, explosionPos.z, 1.0f);
                     
                     // Kill the undead mob that detonated
                     undeadMob.kill();
