@@ -1,0 +1,16 @@
+{
+  "type": "origins:active_self",
+  "name": "Avatar of Healing (Active)",
+  "description": "Save your toolbar configuration",
+  "key": {
+    "key": "key.saveToolbarActivator"
+  },
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 4"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

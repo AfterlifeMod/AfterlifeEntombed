@@ -146,18 +146,24 @@ public class ShuAvatarAbilities {
         }
         
         // Launch player upward very high (3.5 velocity = ~18 blocks high)
-        player.setDeltaMovement(player.getDeltaMovement().add(0, 3.5, 0));
+        player.push(0, 3.5, 0);
         player.hurtMarked = true;
         
         if (player.level() instanceof ServerLevel serverLevel) {
             // Get all entities in 16 block radius around player
             AABB searchBox = new AABB(player.blockPosition()).inflate(16);
             List<LivingEntity> entities = serverLevel.getEntitiesOfClass(LivingEntity.class, searchBox, 
-                e -> e != player && e instanceof LivingEntity);
+                e -> e != player);
+            
+            com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Shu Launch: Found {} entities in radius", entities.size());
             
             // Launch and inflict Wrath of Shu on each entity
             for (LivingEntity entity : entities) {
-                entity.setDeltaMovement(entity.getDeltaMovement().add(0, 3.5, 0));
+                com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Launching entity: {} (is player: {})", 
+                    entity.getClass().getSimpleName(), entity instanceof net.minecraft.world.entity.player.Player);
+                    
+                // Use push() for more reliable knockback, especially for grounded entities
+                entity.push(0, 3.5, 0);
                 entity.hurtMarked = true;
                 
                 // Apply Wrath of Shu for 30 seconds (600 ticks)

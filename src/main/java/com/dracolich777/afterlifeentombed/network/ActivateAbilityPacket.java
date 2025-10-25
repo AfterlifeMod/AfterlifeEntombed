@@ -1,8 +1,7 @@
 package com.dracolich777.afterlifeentombed.network;
 
 import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
-import com.dracolich777.afterlifeentombed.events.GebAvatarAbilities;
-import com.dracolich777.afterlifeentombed.events.SethAvatarAbilities;
+import com.dracolich777.afterlifeentombed.events.*;
 import com.dracolich777.afterlifeentombed.items.GodType;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,8 +35,13 @@ public class ActivateAbilityPacket {
                     GodType god = cap.getSelectedGod();
                     switch (god) {
                         case SETH -> SethAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case RA -> RaAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case SHU -> ShuAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case ANUBIS -> AnubisAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case THOTH -> ThothAvatarAbilities.activateAbility(player, packet.abilityId);
                         case GEB -> GebAvatarAbilities.activateAbility(player, packet.abilityId);
-                        // Add other gods as they are implemented
+                        case HORUS -> HorusAvatarAbilities.activateAbility(player, packet.abilityId);
+                        case ISIS -> IsisAvatarAbilities.activateAbility(player, packet.abilityId);
                     }
                 });
             }

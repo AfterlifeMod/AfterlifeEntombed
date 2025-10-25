@@ -74,6 +74,8 @@ public class OriginValidationHandler {
                     cap.setPurifyingLightActive(false);
                     cap.setAvatarOfSunActive(false);
                     cap.setAvatarOfEarthActive(false);
+                    cap.setEyeOfProtectionActive(false);
+                    cap.setAvatarOfWarActive(false);
                     
                     AfterlifeEntombedMod.LOGGER.info("Player {} lost Avatar of Egypt origin, resetting god to NONE", 
                         serverPlayer.getName().getString());

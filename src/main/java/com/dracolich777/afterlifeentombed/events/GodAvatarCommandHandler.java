@@ -71,8 +71,8 @@ public class GodAvatarCommandHandler {
                         case ANUBIS -> AnubisAvatarAbilities.activateAbility(player, abilityId);
                         case THOTH -> ThothAvatarAbilities.activateAbility(player, abilityId);
                         case GEB -> GebAvatarAbilities.activateAbility(player, abilityId);
-                        case HORUS, ISIS -> 
-                            player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§e" + selectedGod.name() + " abilities are not yet implemented!"));
+                        case HORUS -> HorusAvatarAbilities.activateAbility(player, abilityId);
+                        case ISIS -> IsisAvatarAbilities.activateAbility(player, abilityId);
                         default -> player.sendSystemMessage(net.minecraft.network.chat.Component.literal("§cNo god selected!"));
                     }
                 });
@@ -160,6 +160,14 @@ public class GodAvatarCommandHandler {
                             server.createCommandSourceStack(),
                             "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
                         );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_horus"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_isis"
+                        );
                         
                         // Now grant the god-specific origin
                         server.getCommands().performPrefixedCommand(
@@ -194,6 +202,10 @@ public class GodAvatarCommandHandler {
                         case SHU -> {
                             // Spawn shu_jump2 particle
                             AfterLibsAPI.spawnAfterlifeParticle(level, "shu_jump2", x, y + 1, z, 1.0f);
+                        }
+                        case ISIS -> {
+                            // Spawn healing_burst particle
+                            AfterLibsAPI.spawnAfterlifeParticle(level, "healing_burst", x, y + 1, z, 1.0f);
                         }
                         default -> {
                             // Other gods will use available particles when their abilities are implemented

@@ -7,32 +7,33 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 /**
- * Packet to sync ore positions from server to client for arrow rendering
+ * Packet to sync ore positions with ore type from server to client for arrow rendering
  */
 public class SyncOreMarkersPacket {
-    private final Set<BlockPos> orePositions;
+    private final Map<BlockPos, String> oreData; // Position -> ore block ID
     private final boolean clear;
     
-    public SyncOreMarkersPacket(Set<BlockPos> orePositions) {
-        this.orePositions = new HashSet<>(orePositions);
+    public SyncOreMarkersPacket(Map<BlockPos, String> oreData) {
+        this.oreData = new HashMap<>(oreData);
         this.clear = false;
     }
     
     public SyncOreMarkersPacket(boolean clear) {
-        this.orePositions = new HashSet<>();
+        this.oreData = new HashMap<>();
         this.clear = clear;
     }
     
     public static void encode(SyncOreMarkersPacket packet, FriendlyByteBuf buf) {
         buf.writeBoolean(packet.clear);
-        buf.writeInt(packet.orePositions.size());
-        for (BlockPos pos : packet.orePositions) {
-            buf.writeBlockPos(pos);
+        buf.writeInt(packet.oreData.size());
+        for (Map.Entry<BlockPos, String> entry : packet.oreData.entrySet()) {
+            buf.writeBlockPos(entry.getKey());
+            buf.writeUtf(entry.getValue());
         }
     }
     
@@ -43,11 +44,13 @@ public class SyncOreMarkersPacket {
         }
         
         int size = buf.readInt();
-        Set<BlockPos> positions = new HashSet<>();
+        Map<BlockPos, String> oreData = new HashMap<>();
         for (int i = 0; i < size; i++) {
-            positions.add(buf.readBlockPos());
+            BlockPos pos = buf.readBlockPos();
+            String oreId = buf.readUtf();
+            oreData.put(pos, oreId);
         }
-        return new SyncOreMarkersPacket(positions);
+        return new SyncOreMarkersPacket(oreData);
     }
     
     public static void handle(SyncOreMarkersPacket packet, Supplier<NetworkEvent.Context> ctx) {
@@ -57,7 +60,7 @@ public class SyncOreMarkersPacket {
                 if (packet.clear) {
                     OreArrowRenderer.clearArrows();
                 } else {
-                    OreArrowRenderer.setOrePositions(packet.orePositions);
+                    OreArrowRenderer.setOreData(packet.oreData);
                 }
             });
         });

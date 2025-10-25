@@ -1,0 +1,12 @@
+{
+  "type": "afterlifeentombed:horus_arena",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "afterlifeentombed:horus_arena",
+      "layers": [],
+      "lakes": false,
+      "features": false
+    }
+  }
+}

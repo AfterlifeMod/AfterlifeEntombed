@@ -1,0 +1,10 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Sky Protector",
+  "description": "After falling more than 10 blocks, gain Slow Falling to safely land.",
+  "interval": 20,
+  "entity_action": {
+    "type": "origins:nothing"
+  },
+  "hidden": true
+}

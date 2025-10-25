@@ -1,0 +1,23 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:horus_strength_passive",
+    "afterlifeentombed:horus_fall_protection",
+    "afterlifeentombed:horus_single_combat",
+    "afterlifeentombed:horus_single_combat_active",
+    "afterlifeentombed:horus_warrior_bond",
+    "afterlifeentombed:horus_warrior_bond_active",
+    "afterlifeentombed:horus_eye_of_protection",
+    "afterlifeentombed:horus_eye_of_protection_active",
+    "afterlifeentombed:horus_avatar_of_war",
+    "afterlifeentombed:horus_avatar_of_war_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_horus"
+  },
+  "order": 107,
+  "impact": 3,
+  "name": "Avatar of Horus",
+  "description": "Embody the warrior spirit of Horus, God of War and Sky. Challenge your foes in single combat, protect your allies, and unleash devastating martial prowess.",
+  "unchoosable": true
+}

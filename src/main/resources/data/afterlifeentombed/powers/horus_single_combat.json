@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Single Combat",
+  "description": "Challenge an enemy to honorable single combat in a isolated arena. Both combatants fight until one is defeated. 2.5 minute cooldown.",
+  "key": "primary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 1"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

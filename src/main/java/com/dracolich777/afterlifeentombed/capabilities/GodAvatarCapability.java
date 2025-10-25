@@ -168,6 +168,48 @@ public class GodAvatarCapability {
         long getAvatarOfEarthEndTime();
         void setAvatarOfEarthEndTime(long endTime);
         
+        // Horus ability getters/setters
+        long getSingleCombatCooldown();
+        void setSingleCombatCooldown(long cooldown);
+        
+        long getWarriorBondCooldown();
+        void setWarriorBondCooldown(long cooldown);
+        
+        long getEyeOfProtectionCooldown();
+        void setEyeOfProtectionCooldown(long cooldown);
+        boolean isEyeOfProtectionActive();
+        void setEyeOfProtectionActive(boolean active);
+        long getEyeOfProtectionEndTime();
+        void setEyeOfProtectionEndTime(long endTime);
+        
+        long getAvatarOfWarCooldown();
+        void setAvatarOfWarCooldown(long cooldown);
+        boolean isAvatarOfWarActive();
+        void setAvatarOfWarActive(boolean active);
+        long getAvatarOfWarEndTime();
+        void setAvatarOfWarEndTime(long endTime);
+        
+        // Isis ability getters/setters
+        long getLightOfIsisCooldown();
+        void setLightOfIsisCooldown(long cooldown);
+        
+        long getStrengthInNumbersCooldown();
+        void setStrengthInNumbersCooldown(long cooldown);
+        
+        long getHeartstealerCooldown();
+        void setHeartstealerCooldown(long cooldown);
+        boolean isHeartstealerActive();
+        void setHeartstealerActive(boolean active);
+        long getHeartstealerEndTime();
+        void setHeartstealerEndTime(long endTime);
+        
+        long getAvatarOfHealingCooldown();
+        void setAvatarOfHealingCooldown(long cooldown);
+        boolean isAvatarOfHealingActive();
+        void setAvatarOfHealingActive(boolean active);
+        long getAvatarOfHealingEndTime();
+        void setAvatarOfHealingEndTime(long endTime);
+        
         CompoundTag serializeNBT();
         void deserializeNBT(CompoundTag nbt);
     }
@@ -249,6 +291,26 @@ public class GodAvatarCapability {
         private long avatarOfEarthCooldown = 0;
         private boolean avatarOfEarthActive = false;
         private long avatarOfEarthEndTime = 0;
+        
+        // Horus ability tracking
+        private long singleCombatCooldown = 0;
+        private long warriorBondCooldown = 0;
+        private long eyeOfProtectionCooldown = 0;
+        private boolean eyeOfProtectionActive = false;
+        private long eyeOfProtectionEndTime = 0;
+        private long avatarOfWarCooldown = 0;
+        private boolean avatarOfWarActive = false;
+        private long avatarOfWarEndTime = 0;
+        
+        // Isis ability tracking
+        private long lightOfIsisCooldown = 0;
+        private long strengthInNumbersCooldown = 0;
+        private long heartstealerCooldown = 0;
+        private boolean heartstealerActive = false;
+        private long heartstealerEndTime = 0;
+        private long avatarOfHealingCooldown = 0;
+        private boolean avatarOfHealingActive = false;
+        private long avatarOfHealingEndTime = 0;
 
         @Override
         public GodType getSelectedGod() {
@@ -795,6 +857,168 @@ public class GodAvatarCapability {
         public void setAvatarOfEarthEndTime(long endTime) {
             this.avatarOfEarthEndTime = endTime;
         }
+        
+        // Horus ability getters/setters
+        @Override
+        public long getSingleCombatCooldown() {
+            return singleCombatCooldown;
+        }
+        
+        @Override
+        public void setSingleCombatCooldown(long cooldown) {
+            this.singleCombatCooldown = cooldown;
+        }
+        
+        @Override
+        public long getWarriorBondCooldown() {
+            return warriorBondCooldown;
+        }
+        
+        @Override
+        public void setWarriorBondCooldown(long cooldown) {
+            this.warriorBondCooldown = cooldown;
+        }
+        
+        @Override
+        public long getEyeOfProtectionCooldown() {
+            return eyeOfProtectionCooldown;
+        }
+        
+        @Override
+        public void setEyeOfProtectionCooldown(long cooldown) {
+            this.eyeOfProtectionCooldown = cooldown;
+        }
+        
+        @Override
+        public boolean isEyeOfProtectionActive() {
+            return eyeOfProtectionActive;
+        }
+        
+        @Override
+        public void setEyeOfProtectionActive(boolean active) {
+            this.eyeOfProtectionActive = active;
+        }
+        
+        @Override
+        public long getEyeOfProtectionEndTime() {
+            return eyeOfProtectionEndTime;
+        }
+        
+        @Override
+        public void setEyeOfProtectionEndTime(long endTime) {
+            this.eyeOfProtectionEndTime = endTime;
+        }
+        
+        @Override
+        public long getAvatarOfWarCooldown() {
+            return avatarOfWarCooldown;
+        }
+        
+        @Override
+        public void setAvatarOfWarCooldown(long cooldown) {
+            this.avatarOfWarCooldown = cooldown;
+        }
+        
+        @Override
+        public boolean isAvatarOfWarActive() {
+            return avatarOfWarActive;
+        }
+        
+        @Override
+        public void setAvatarOfWarActive(boolean active) {
+            this.avatarOfWarActive = active;
+        }
+        
+        @Override
+        public long getAvatarOfWarEndTime() {
+            return avatarOfWarEndTime;
+        }
+        
+        @Override
+        public void setAvatarOfWarEndTime(long endTime) {
+            this.avatarOfWarEndTime = endTime;
+        }
+        
+        // Isis ability getters/setters
+        @Override
+        public long getLightOfIsisCooldown() {
+            return lightOfIsisCooldown;
+        }
+        
+        @Override
+        public void setLightOfIsisCooldown(long cooldown) {
+            this.lightOfIsisCooldown = cooldown;
+        }
+        
+        @Override
+        public long getStrengthInNumbersCooldown() {
+            return strengthInNumbersCooldown;
+        }
+        
+        @Override
+        public void setStrengthInNumbersCooldown(long cooldown) {
+            this.strengthInNumbersCooldown = cooldown;
+        }
+        
+        @Override
+        public long getHeartstealerCooldown() {
+            return heartstealerCooldown;
+        }
+        
+        @Override
+        public void setHeartstealerCooldown(long cooldown) {
+            this.heartstealerCooldown = cooldown;
+        }
+        
+        @Override
+        public boolean isHeartstealerActive() {
+            return heartstealerActive;
+        }
+        
+        @Override
+        public void setHeartstealerActive(boolean active) {
+            this.heartstealerActive = active;
+        }
+        
+        @Override
+        public long getHeartstealerEndTime() {
+            return heartstealerEndTime;
+        }
+        
+        @Override
+        public void setHeartstealerEndTime(long endTime) {
+            this.heartstealerEndTime = endTime;
+        }
+        
+        @Override
+        public long getAvatarOfHealingCooldown() {
+            return avatarOfHealingCooldown;
+        }
+        
+        @Override
+        public void setAvatarOfHealingCooldown(long cooldown) {
+            this.avatarOfHealingCooldown = cooldown;
+        }
+        
+        @Override
+        public boolean isAvatarOfHealingActive() {
+            return avatarOfHealingActive;
+        }
+        
+        @Override
+        public void setAvatarOfHealingActive(boolean active) {
+            this.avatarOfHealingActive = active;
+        }
+        
+        @Override
+        public long getAvatarOfHealingEndTime() {
+            return avatarOfHealingEndTime;
+        }
+        
+        @Override
+        public void setAvatarOfHealingEndTime(long endTime) {
+            this.avatarOfHealingEndTime = endTime;
+        }
 
         @Override
         public CompoundTag serializeNBT() {
@@ -867,6 +1091,24 @@ public class GodAvatarCapability {
             nbt.putLong("AvatarOfEarthCooldown", avatarOfEarthCooldown);
             nbt.putBoolean("AvatarOfEarthActive", avatarOfEarthActive);
             nbt.putLong("AvatarOfEarthEndTime", avatarOfEarthEndTime);
+            // Horus ability fields
+            nbt.putLong("SingleCombatCooldown", singleCombatCooldown);
+            nbt.putLong("WarriorBondCooldown", warriorBondCooldown);
+            nbt.putLong("EyeOfProtectionCooldown", eyeOfProtectionCooldown);
+            nbt.putBoolean("EyeOfProtectionActive", eyeOfProtectionActive);
+            nbt.putLong("EyeOfProtectionEndTime", eyeOfProtectionEndTime);
+            nbt.putLong("AvatarOfWarCooldown", avatarOfWarCooldown);
+            nbt.putBoolean("AvatarOfWarActive", avatarOfWarActive);
+            nbt.putLong("AvatarOfWarEndTime", avatarOfWarEndTime);
+            // Isis ability fields
+            nbt.putLong("LightOfIsisCooldown", lightOfIsisCooldown);
+            nbt.putLong("StrengthInNumbersCooldown", strengthInNumbersCooldown);
+            nbt.putLong("HeartstealerCooldown", heartstealerCooldown);
+            nbt.putBoolean("HeartstealerActive", heartstealerActive);
+            nbt.putLong("HeartstealerEndTime", heartstealerEndTime);
+            nbt.putLong("AvatarOfHealingCooldown", avatarOfHealingCooldown);
+            nbt.putBoolean("AvatarOfHealingActive", avatarOfHealingActive);
+            nbt.putLong("AvatarOfHealingEndTime", avatarOfHealingEndTime);
             return nbt;
         }
 
@@ -965,6 +1207,24 @@ public class GodAvatarCapability {
             avatarOfEarthCooldown = nbt.contains("AvatarOfEarthCooldown") ? nbt.getLong("AvatarOfEarthCooldown") : 0;
             avatarOfEarthActive = nbt.contains("AvatarOfEarthActive") && nbt.getBoolean("AvatarOfEarthActive");
             avatarOfEarthEndTime = nbt.contains("AvatarOfEarthEndTime") ? nbt.getLong("AvatarOfEarthEndTime") : 0;
+            // Horus ability fields
+            singleCombatCooldown = nbt.contains("SingleCombatCooldown") ? nbt.getLong("SingleCombatCooldown") : 0;
+            warriorBondCooldown = nbt.contains("WarriorBondCooldown") ? nbt.getLong("WarriorBondCooldown") : 0;
+            eyeOfProtectionCooldown = nbt.contains("EyeOfProtectionCooldown") ? nbt.getLong("EyeOfProtectionCooldown") : 0;
+            eyeOfProtectionActive = nbt.contains("EyeOfProtectionActive") && nbt.getBoolean("EyeOfProtectionActive");
+            eyeOfProtectionEndTime = nbt.contains("EyeOfProtectionEndTime") ? nbt.getLong("EyeOfProtectionEndTime") : 0;
+            avatarOfWarCooldown = nbt.contains("AvatarOfWarCooldown") ? nbt.getLong("AvatarOfWarCooldown") : 0;
+            avatarOfWarActive = nbt.contains("AvatarOfWarActive") && nbt.getBoolean("AvatarOfWarActive");
+            avatarOfWarEndTime = nbt.contains("AvatarOfWarEndTime") ? nbt.getLong("AvatarOfWarEndTime") : 0;
+            // Isis ability fields
+            lightOfIsisCooldown = nbt.contains("LightOfIsisCooldown") ? nbt.getLong("LightOfIsisCooldown") : 0;
+            strengthInNumbersCooldown = nbt.contains("StrengthInNumbersCooldown") ? nbt.getLong("StrengthInNumbersCooldown") : 0;
+            heartstealerCooldown = nbt.contains("HeartstealerCooldown") ? nbt.getLong("HeartstealerCooldown") : 0;
+            heartstealerActive = nbt.contains("HeartstealerActive") && nbt.getBoolean("HeartstealerActive");
+            heartstealerEndTime = nbt.contains("HeartstealerEndTime") ? nbt.getLong("HeartstealerEndTime") : 0;
+            avatarOfHealingCooldown = nbt.contains("AvatarOfHealingCooldown") ? nbt.getLong("AvatarOfHealingCooldown") : 0;
+            avatarOfHealingActive = nbt.contains("AvatarOfHealingActive") && nbt.getBoolean("AvatarOfHealingActive");
+            avatarOfHealingEndTime = nbt.contains("AvatarOfHealingEndTime") ? nbt.getLong("AvatarOfHealingEndTime") : 0;
         }
     }
 

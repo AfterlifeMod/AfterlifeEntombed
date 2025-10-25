@@ -1,0 +1,16 @@
+{
+  "type": "origins:active_self",
+  "name": "Heartstealer",
+  "description": "For the next 30 seconds, whenever you damage a player and they lose 1 or more full hearts, steal that max health from them and add it to yours. Both reset on death (5 minute cooldown)",
+  "key": {
+    "key": "key.loadToolbarActivator"
+  },
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

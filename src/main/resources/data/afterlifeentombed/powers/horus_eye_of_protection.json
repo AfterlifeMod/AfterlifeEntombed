@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Eye of Protection",
+  "description": "Gain Regeneration III and reflect all damage taken back to the attacker. Lasts 30 seconds. 1 minute cooldown.",
+  "key": "key.loadToolbarActivator",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 3"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

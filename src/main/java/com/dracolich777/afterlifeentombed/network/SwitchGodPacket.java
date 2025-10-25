@@ -96,6 +96,14 @@ public class SwitchGodPacket {
                             server.createCommandSourceStack(),
                             "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
                         );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_horus"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_isis"
+                        );
                         
                         // Grant the new origin
                         server.getCommands().performPrefixedCommand(
@@ -116,6 +124,8 @@ public class SwitchGodPacket {
                         case RA -> AfterLibsAPI.spawnAfterlifeParticle(level, "ra_halo", x, y + 5, z, 0.5f);
                         case HORUS -> AfterLibsAPI.spawnAfterlifeParticle(level, "horus_shield", x, y + 1, z, 1.0f);
                         case SHU -> AfterLibsAPI.spawnAfterlifeParticle(level, "shu_jump2", x, y + 1, z, 1.0f);
+                        case ISIS -> AfterLibsAPI.spawnAfterlifeParticle(level, "healing_burst", x, y + 1, z, 1.0f);
+                        case GEB -> AfterLibsAPI.spawnAfterlifeParticle(level, "earth_aura", x, y + 1, z, 1.0f);
                     }
                 }
                 

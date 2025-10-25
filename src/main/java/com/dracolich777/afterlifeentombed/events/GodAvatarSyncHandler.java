@@ -155,7 +155,23 @@ public class GodAvatarSyncHandler {
                 cap.getEarthRiseCooldown(),
                 cap.getAvatarOfEarthCooldown(),
                 cap.isAvatarOfEarthActive(),
-                cap.getAvatarOfEarthEndTime()
+                cap.getAvatarOfEarthEndTime(),
+                cap.getSingleCombatCooldown(),
+                cap.getWarriorBondCooldown(),
+                cap.getEyeOfProtectionCooldown(),
+                cap.isEyeOfProtectionActive(),
+                cap.getEyeOfProtectionEndTime(),
+                cap.getAvatarOfWarCooldown(),
+                cap.isAvatarOfWarActive(),
+                cap.getAvatarOfWarEndTime(),
+                cap.getLightOfIsisCooldown(),
+                cap.getStrengthInNumbersCooldown(),
+                cap.getHeartstealerCooldown(),
+                cap.isHeartstealerActive(),
+                cap.getHeartstealerEndTime(),
+                cap.getAvatarOfHealingCooldown(),
+                cap.isAvatarOfHealingActive(),
+                cap.getAvatarOfHealingEndTime()
             );
             
             GodAvatarPackets.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), packet);

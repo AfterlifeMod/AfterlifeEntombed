@@ -1,0 +1,11 @@
+{
+  "type": "origins:toggle",
+  "name": "Eye of Protection Active",
+  "description": "The Eye of Protection is currently active, reflecting damage to nearby enemies.",
+  "active_by_default": false,
+  "key": {
+    "key": "key.loadToolbarActivator",
+    "continuous": false
+  },
+  "hidden": true
+}

@@ -322,13 +322,13 @@ public class RaAvatarAbilities {
         if (result.getType() != HitResult.Type.MISS) {
             BlockPos targetPos = result.getBlockPos().above();
 
-            // Store this pillar location - 10 seconds duration
+            // Store this pillar location - 13 seconds duration (260 ticks)
             ACTIVE_LIGHT_PILLARS.computeIfAbsent(player.getUUID(), k -> new HashMap<>())
-                    .put(targetPos, currentTime + 200); // 10 seconds duration
+                    .put(targetPos, currentTime + 260); // 13 seconds duration
 
             // Track that ability is active
             cap.setPurifyingLightActive(true);
-            cap.setPurifyingLightEndTime(currentTime + 200);
+            cap.setPurifyingLightEndTime(currentTime + 260);
 
             // Create initial light pillar particles using AfterLibs
             if (player.level() instanceof ServerLevel serverLevel) {
@@ -368,33 +368,31 @@ public class RaAvatarAbilities {
                 return true; // Remove from map
             }
 
-            // Spawn pillar particles every 5 ticks
+            // Spawn pillar particles every 5 ticks (happens more frequently than damage)
             if (currentTime % 5 == 0) {
                 // Spawn ra_column particle at pillar location
                 AfterLibsAPI.spawnAfterlifeParticle(serverLevel, "ra_column",
                         pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1.5f);
             }
 
-            // Heal allies and damage enemies in radius every second
+            // Damage entities in radius every second (20 ticks)
             if (currentTime % 20 == 0) {
+                // Spawn particle BEFORE checking for entities to damage
+                AfterLibsAPI.spawnAfterlifeParticle(serverLevel, "ra_column",
+                        pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1.5f);
+                
                 AABB areaBox = new AABB(pos).inflate(6);
                 List<LivingEntity> entities = serverLevel.getEntitiesOfClass(LivingEntity.class, areaBox);
 
                 for (LivingEntity entity : entities) {
-                    if (entity instanceof Player allyPlayer) {
-                        // Heal allies
-                        allyPlayer.heal(2.0f); // 1 heart per 3 seconds (roughly)
-
-                        // Cleanse negative effects
-                        allyPlayer.removeEffect(MobEffects.POISON);
-                        allyPlayer.removeEffect(MobEffects.WITHER);
-                        allyPlayer.removeEffect(MobEffects.WEAKNESS);
-                        allyPlayer.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-                    } else if (!(entity instanceof Player)) {
-                        // Damage hostile mobs (anything that's not a player)
-                        entity.hurt(serverLevel.damageSources().magic(), 3.0f);
-                        entity.setSecondsOnFire(5);
+                    // Skip the caster (the player who owns this pillar)
+                    if (entity.equals(player)) {
+                        continue;
                     }
+                    
+                    // Damage ALL entities (including other players)
+                    entity.hurt(serverLevel.damageSources().magic(), 3.0f);
+                    entity.setSecondsOnFire(5);
                 }
             }
 
@@ -453,6 +451,8 @@ public class RaAvatarAbilities {
 
                     for (LivingEntity entity : entities) {
                         if (entity != player) {
+                            com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Holy Inferno damaging entity: {} (is player: {})", 
+                                entity.getClass().getSimpleName(), entity instanceof net.minecraft.world.entity.player.Player);
                             entity.hurt(serverLevel.damageSources().onFire(), 6.0f);
                             entity.setSecondsOnFire(10);
                         }

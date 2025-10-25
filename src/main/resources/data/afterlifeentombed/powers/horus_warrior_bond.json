@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Warrior Bond",
+  "description": "Link your life force with a target entity. Share health and absorption, and damage dealt to one affects both. 30 second cooldown.",
+  "key": "secondary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 2"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

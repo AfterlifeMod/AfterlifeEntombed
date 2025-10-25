@@ -1,0 +1,11 @@
+{
+  "type": "origins:toggle",
+  "name": "Warrior Bond Active",
+  "description": "You are currently bonded with an entity.",
+  "active_by_default": false,
+  "key": {
+    "key": "secondary",
+    "continuous": false
+  },
+  "hidden": true
+}

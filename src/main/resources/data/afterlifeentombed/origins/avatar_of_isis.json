@@ -1,0 +1,19 @@
+{
+  "powers": [
+    "afterlifeentombed:god_avatar_tracker",
+    "afterlifeentombed:isis_healing_magic",
+    "afterlifeentombed:isis_light_of_isis",
+    "afterlifeentombed:isis_strength_in_numbers",
+    "afterlifeentombed:isis_heartstealer",
+    "afterlifeentombed:isis_avatar_of_healing",
+    "afterlifeentombed:isis_avatar_of_healing_active"
+  ],
+  "icon": {
+    "item": "afterlifeentombed:godstone_of_isis"
+  },
+  "order": 108,
+  "impact": 3,
+  "name": "Avatar of Isis",
+  "description": "Channel the divine healing powers of Isis, Goddess of Magic and Life. Restore your allies, steal the vitality of your enemies, and become the ultimate healer.",
+  "unchoosable": true
+}

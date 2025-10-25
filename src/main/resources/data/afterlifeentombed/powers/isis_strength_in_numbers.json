@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Strength in Numbers",
+  "description": "Sneak and target allies to add them to your list (max 10, clears on death). Use without sneaking to fully heal and grant Regeneration, Strength, and Resistance 3 to all allies for 60 seconds (60s cooldown)",
+  "key": "secondary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 2"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

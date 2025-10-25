@@ -393,16 +393,18 @@ public class GebAvatarAbilities {
         
         // Move the block visually
         if (!newPos.equals(oldPos)) {
-            // Remove from old position
-            if (player.level().getBlockState(oldPos).equals(data.state)) {
-                player.level().setBlock(oldPos, Blocks.AIR.defaultBlockState(), 3);
-            }
-            
-            // Place at new position if air and not player's head
+            // First check if we can place at new position
             if (player.level().getBlockState(newPos).isAir() && !newPos.equals(playerHeadPos)) {
+                // Remove from old position ONLY if we can successfully place at new position
+                if (player.level().getBlockState(oldPos).equals(data.state)) {
+                    player.level().setBlock(oldPos, Blocks.AIR.defaultBlockState(), 3);
+                }
+                
+                // Place at new position
                 player.level().setBlock(newPos, data.state, 3);
                 data.currentPos = newPos;
             }
+            // If we can't place at new position, don't remove from old position
         }
     }
     
@@ -495,6 +497,15 @@ public class GebAvatarAbilities {
         BlockPos center = event.getPos();
         int blocksExcavated = excavateArea(player, center);
         
+        // Clear ore markers after excavation is used
+        ORE_MARKERS.remove(playerId);
+        
+        // Clear arrows on client
+        com.dracolich777.afterlifeentombed.network.GodAvatarPackets.INSTANCE.send(
+            net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
+            new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(true)
+        );
+        
         // Only set cooldown if blocks were actually excavated (more than just the one broken by hand)
         if (blocksExcavated > 0) {
             player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
@@ -503,14 +514,6 @@ public class GebAvatarAbilities {
             });
         } else {
             // No blocks excavated, just deactivate without cooldown
-            ORE_MARKERS.remove(playerId);
-            
-            // Clear arrows on client
-            com.dracolich777.afterlifeentombed.network.GodAvatarPackets.INSTANCE.send(
-                net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
-                new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(true)
-            );
-            
             GodAvatarHudHelper.sendNotification(player, "§eExcavation deactivated (no blocks to mine)", GodAvatarHudHelper.COLOR_SPECIAL, 40);
         }
     }
@@ -552,6 +555,7 @@ public class GebAvatarAbilities {
         ServerLevel level = player.serverLevel();
         BlockPos center = player.blockPosition();
         Set<BlockPos> ores = new HashSet<>();
+        Map<BlockPos, String> oreData = new HashMap<>();
         
         // Search in a radius for ores
         int radius = 32;
@@ -563,6 +567,9 @@ public class GebAvatarAbilities {
                     
                     if (isOre(state)) {
                         ores.add(pos.immutable());
+                        // Store block ID for color coding
+                        String blockId = state.getBlock().toString();
+                        oreData.put(pos.immutable(), blockId);
                     }
                 }
             }
@@ -573,10 +580,10 @@ public class GebAvatarAbilities {
         } else {
             ORE_MARKERS.put(player.getUUID(), ores);
             
-            // Send ore positions to client for 3D arrow rendering
+            // Send ore data to client for 3D arrow rendering with colors
             com.dracolich777.afterlifeentombed.network.GodAvatarPackets.INSTANCE.send(
                 net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
-                new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(ores)
+                new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(oreData)
             );
             
             GodAvatarHudHelper.sendNotification(player, 
@@ -613,9 +620,15 @@ public class GebAvatarAbilities {
         
         // If ores changed, update client
         if (oresChanged) {
+            // Rebuild ore data map with remaining ores
+            Map<BlockPos, String> oreData = new HashMap<>();
+            for (BlockPos pos : ores) {
+                BlockState state = player.level().getBlockState(pos);
+                oreData.put(pos, state.getBlock().toString());
+            }
             com.dracolich777.afterlifeentombed.network.GodAvatarPackets.INSTANCE.send(
                 net.minecraftforge.network.PacketDistributor.PLAYER.with(() -> player),
-                new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(ores)
+                new com.dracolich777.afterlifeentombed.network.SyncOreMarkersPacket(oreData)
             );
         }
     }

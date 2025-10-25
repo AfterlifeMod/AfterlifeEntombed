@@ -133,9 +133,19 @@ public class GodAvatarHudOverlay {
                 lines++; // Divine Enchant
                 lines++; // Avatar of Wisdom
                 break;
-            case HORUS:
-            case ISIS:
             case GEB:
+                lines++; // Telekinesis
+                lines++; // Excavation
+                lines++; // Earth Rise
+                lines++; // Avatar of Earth
+                break;
+            case HORUS:
+                lines++; // Single Combat
+                lines++; // Warrior Bond
+                lines++; // Eye of Protection
+                lines++; // Avatar of War
+                break;
+            case ISIS:
                 lines++; // Ability 1
                 lines++; // Ability 2
                 lines++; // Ability 3
@@ -462,12 +472,105 @@ public class GodAvatarHudOverlay {
                 }
                 break;
                 
-            // Other gods - show ready message (with shadow)
             case HORUS:
-            case ISIS:
-                guiGraphics.drawString(mc.font, "Ready", x, currentY, colors.ready, true);
+                // Single Combat (Ability 1)
+                if (currentTime < cap.getSingleCombatCooldown()) {
+                    long cooldown = (cap.getSingleCombatCooldown() - currentTime) / 20;
+                    String status = "Single Combat: " + formatTime(cooldown);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Single Combat: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Warrior Bond (Ability 2)
+                if (currentTime < cap.getWarriorBondCooldown()) {
+                    long cooldown = (cap.getWarriorBondCooldown() - currentTime) / 20;
+                    String status = "Warrior Bond: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Warrior Bond: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Eye of Protection (Ability 3)
+                if (cap.isEyeOfProtectionActive()) {
+                    long remaining = (cap.getEyeOfProtectionEndTime() - currentTime) / 20;
+                    String status = "Protection: " + remaining + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
+                } else if (currentTime < cap.getEyeOfProtectionCooldown()) {
+                    long cooldown = (cap.getEyeOfProtectionCooldown() - currentTime) / 20;
+                    String status = "Protection: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Protection: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Avatar of War (Ability 4)
+                if (cap.isAvatarOfWarActive()) {
+                    long remaining = (cap.getAvatarOfWarEndTime() - currentTime) / 20;
+                    String status = "Avatar: " + remaining + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
+                } else if (currentTime < cap.getAvatarOfWarCooldown()) {
+                    long cooldown = (cap.getAvatarOfWarCooldown() - currentTime) / 20;
+                    String status = "Avatar: " + formatTime(cooldown);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Avatar: Ready", x, currentY, colors.ready, true);
+                }
                 break;
                 
+            case ISIS:
+                // Light of Isis (Ability 1)
+                if (currentTime < cap.getLightOfIsisCooldown()) {
+                    long cooldown = (cap.getLightOfIsisCooldown() - currentTime) / 20;
+                    String status = "Light: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Light: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Strength in Numbers (Ability 2)
+                if (currentTime < cap.getStrengthInNumbersCooldown()) {
+                    long cooldown = (cap.getStrengthInNumbersCooldown() - currentTime) / 20;
+                    String status = "Strength: " + cooldown + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Strength: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Heartstealer (Ability 3)
+                if (cap.isHeartstealerActive() && cap.getHeartstealerEndTime() > currentTime) {
+                    long remaining = (cap.getHeartstealerEndTime() - currentTime) / 20;
+                    String status = "Heartstealer: " + remaining + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
+                } else if (currentTime < cap.getHeartstealerCooldown()) {
+                    long cooldown = (cap.getHeartstealerCooldown() - currentTime) / 20;
+                    String status = "Heartstealer: " + formatTime(cooldown);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Heartstealer: Ready", x, currentY, colors.ready, true);
+                }
+                currentY += lineHeight;
+                
+                // Avatar of Healing (Ability 4)
+                if (cap.isAvatarOfHealingActive() && cap.getAvatarOfHealingEndTime() > currentTime) {
+                    long remaining = (cap.getAvatarOfHealingEndTime() - currentTime) / 20;
+                    String status = "AVATAR: " + remaining + "s";
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.ultimate, true);
+                } else if (currentTime < cap.getAvatarOfHealingCooldown()) {
+                    long cooldown = (cap.getAvatarOfHealingCooldown() - currentTime) / 20;
+                    String status = "Avatar: " + formatTime(cooldown);
+                    guiGraphics.drawString(mc.font, status, x, currentY, colors.cooldown, true);
+                } else {
+                    guiGraphics.drawString(mc.font, "Avatar: Ready", x, currentY, colors.ready, true);
+                }
+                break;
+                
+            // Other gods - show ready message (with shadow)
             case NONE:
                 // Should never happen due to early return, but handle it anyway
                 break;

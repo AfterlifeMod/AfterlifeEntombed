@@ -1,0 +1,14 @@
+{
+  "type": "origins:active_self",
+  "name": "Light of Isis",
+  "description": "Instantly heal to full health, remove all negative effects, and gain Regeneration 3 for 30 seconds (60s cooldown)",
+  "key": "primary",
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 1"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

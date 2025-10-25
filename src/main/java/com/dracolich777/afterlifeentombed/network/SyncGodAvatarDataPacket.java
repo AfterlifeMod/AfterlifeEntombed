@@ -65,6 +65,26 @@ public class SyncGodAvatarDataPacket {
     private final boolean avatarOfEarthActive;
     private final long avatarOfEarthEndTime;
 
+    // Horus ability fields
+    private final long singleCombatCooldown;
+    private final long warriorBondCooldown;
+    private final long eyeOfProtectionCooldown;
+    private final boolean eyeOfProtectionActive;
+    private final long eyeOfProtectionEndTime;
+    private final long avatarOfWarCooldown;
+    private final boolean avatarOfWarActive;
+    private final long avatarOfWarEndTime;
+    
+    // Isis ability fields
+    private final long lightOfIsisCooldown;
+    private final long strengthInNumbersCooldown;
+    private final long heartstealerCooldown;
+    private final boolean heartstealerActive;
+    private final long heartstealerEndTime;
+    private final long avatarOfHealingCooldown;
+    private final boolean avatarOfHealingActive;
+    private final long avatarOfHealingEndTime;
+
     public SyncGodAvatarDataPacket(GodType god, 
                                    boolean oneWithChaosActive, int oneWithChaosTimeUsed, long oneWithChaosCooldown,
                                    boolean damageNegationActive, float storedDamage, long damageNegationCooldown,
@@ -86,7 +106,13 @@ public class SyncGodAvatarDataPacket {
                                    long avatarOfWisdomCooldown, boolean avatarOfWisdomActive, long avatarOfWisdomEndTime,
                                    long telekinesisCooldown, long excavationCooldown,
                                    long earthRiseCooldown, long avatarOfEarthCooldown,
-                                   boolean avatarOfEarthActive, long avatarOfEarthEndTime) {
+                                   boolean avatarOfEarthActive, long avatarOfEarthEndTime,
+                                   long singleCombatCooldown, long warriorBondCooldown,
+                                   long eyeOfProtectionCooldown, boolean eyeOfProtectionActive, long eyeOfProtectionEndTime,
+                                   long avatarOfWarCooldown, boolean avatarOfWarActive, long avatarOfWarEndTime,
+                                   long lightOfIsisCooldown, long strengthInNumbersCooldown,
+                                   long heartstealerCooldown, boolean heartstealerActive, long heartstealerEndTime,
+                                   long avatarOfHealingCooldown, boolean avatarOfHealingActive, long avatarOfHealingEndTime) {
         this.godName = god.name();
         this.oneWithChaosActive = oneWithChaosActive;
         this.oneWithChaosTimeUsed = oneWithChaosTimeUsed;
@@ -133,6 +159,22 @@ public class SyncGodAvatarDataPacket {
         this.avatarOfEarthCooldown = avatarOfEarthCooldown;
         this.avatarOfEarthActive = avatarOfEarthActive;
         this.avatarOfEarthEndTime = avatarOfEarthEndTime;
+        this.singleCombatCooldown = singleCombatCooldown;
+        this.warriorBondCooldown = warriorBondCooldown;
+        this.eyeOfProtectionCooldown = eyeOfProtectionCooldown;
+        this.eyeOfProtectionActive = eyeOfProtectionActive;
+        this.eyeOfProtectionEndTime = eyeOfProtectionEndTime;
+        this.avatarOfWarCooldown = avatarOfWarCooldown;
+        this.avatarOfWarActive = avatarOfWarActive;
+        this.avatarOfWarEndTime = avatarOfWarEndTime;
+        this.lightOfIsisCooldown = lightOfIsisCooldown;
+        this.strengthInNumbersCooldown = strengthInNumbersCooldown;
+        this.heartstealerCooldown = heartstealerCooldown;
+        this.heartstealerActive = heartstealerActive;
+        this.heartstealerEndTime = heartstealerEndTime;
+        this.avatarOfHealingCooldown = avatarOfHealingCooldown;
+        this.avatarOfHealingActive = avatarOfHealingActive;
+        this.avatarOfHealingEndTime = avatarOfHealingEndTime;
     }
 
     public static void encode(SyncGodAvatarDataPacket packet, FriendlyByteBuf buf) {
@@ -187,6 +229,24 @@ public class SyncGodAvatarDataPacket {
         buf.writeLong(packet.avatarOfEarthCooldown);
         buf.writeBoolean(packet.avatarOfEarthActive);
         buf.writeLong(packet.avatarOfEarthEndTime);
+        // Horus ability fields
+        buf.writeLong(packet.singleCombatCooldown);
+        buf.writeLong(packet.warriorBondCooldown);
+        buf.writeLong(packet.eyeOfProtectionCooldown);
+        buf.writeBoolean(packet.eyeOfProtectionActive);
+        buf.writeLong(packet.eyeOfProtectionEndTime);
+        buf.writeLong(packet.avatarOfWarCooldown);
+        buf.writeBoolean(packet.avatarOfWarActive);
+        buf.writeLong(packet.avatarOfWarEndTime);
+        // Isis ability fields
+        buf.writeLong(packet.lightOfIsisCooldown);
+        buf.writeLong(packet.strengthInNumbersCooldown);
+        buf.writeLong(packet.heartstealerCooldown);
+        buf.writeBoolean(packet.heartstealerActive);
+        buf.writeLong(packet.heartstealerEndTime);
+        buf.writeLong(packet.avatarOfHealingCooldown);
+        buf.writeBoolean(packet.avatarOfHealingActive);
+        buf.writeLong(packet.avatarOfHealingEndTime);
     }
 
     public static SyncGodAvatarDataPacket decode(FriendlyByteBuf buf) {
@@ -241,6 +301,24 @@ public class SyncGodAvatarDataPacket {
         long avatarOfEarthCooldown = buf.readLong();
         boolean avatarOfEarthActive = buf.readBoolean();
         long avatarOfEarthEndTime = buf.readLong();
+        // Horus ability fields
+        long singleCombatCooldown = buf.readLong();
+        long warriorBondCooldown = buf.readLong();
+        long eyeOfProtectionCooldown = buf.readLong();
+        boolean eyeOfProtectionActive = buf.readBoolean();
+        long eyeOfProtectionEndTime = buf.readLong();
+        long avatarOfWarCooldown = buf.readLong();
+        boolean avatarOfWarActive = buf.readBoolean();
+        long avatarOfWarEndTime = buf.readLong();
+        // Isis ability fields
+        long lightOfIsisCooldown = buf.readLong();
+        long strengthInNumbersCooldown = buf.readLong();
+        long heartstealerCooldown = buf.readLong();
+        boolean heartstealerActive = buf.readBoolean();
+        long heartstealerEndTime = buf.readLong();
+        long avatarOfHealingCooldown = buf.readLong();
+        boolean avatarOfHealingActive = buf.readBoolean();
+        long avatarOfHealingEndTime = buf.readLong();
         
         try {
             GodType god = GodType.valueOf(godName);
@@ -265,31 +343,51 @@ public class SyncGodAvatarDataPacket {
                 avatarOfWisdomCooldown, avatarOfWisdomActive, avatarOfWisdomEndTime,
                 telekinesisCooldown, excavationCooldown,
                 earthRiseCooldown, avatarOfEarthCooldown,
-                avatarOfEarthActive, avatarOfEarthEndTime);
+                avatarOfEarthActive, avatarOfEarthEndTime,
+                singleCombatCooldown, warriorBondCooldown,
+                eyeOfProtectionCooldown, eyeOfProtectionActive, eyeOfProtectionEndTime,
+                avatarOfWarCooldown, avatarOfWarActive, avatarOfWarEndTime,
+                lightOfIsisCooldown, strengthInNumbersCooldown,
+                heartstealerCooldown, heartstealerActive, heartstealerEndTime,
+                avatarOfHealingCooldown, avatarOfHealingActive, avatarOfHealingEndTime);
         } catch (IllegalArgumentException e) {
             // Invalid god name, return NONE
             return new SyncGodAvatarDataPacket(GodType.NONE, 
+                // Seth
                 false, 0, 0,
-                false, 0, 0,
+                false, 0.0f, 0,
                 false, 0,
                 false, 0,
+                // Ra
                 0, 0,
                 false, 0,
                 0, 0,
                 false,
+                // Shu
                 0, 0,
                 0, false, 0,
                 0, 0,
+                // Anubis
                 0, 0,
                 false, 0,
                 0, 0,
                 false, 0,
+                // Thoth
                 0, 0,
                 false, 0,
                 0, false, 0,
+                // Geb
                 0, 0,
                 0, 0,
-                false, 0);
+                false, 0,
+                // Horus
+                0, 0,
+                0, false, 0,
+                0, false, 0,
+                // Isis
+                0, 0,
+                0, false, 0,
+                0, false, 0);
         }
     }
 
@@ -352,6 +450,24 @@ public class SyncGodAvatarDataPacket {
                         cap.setAvatarOfEarthCooldown(packet.avatarOfEarthCooldown);
                         cap.setAvatarOfEarthActive(packet.avatarOfEarthActive);
                         cap.setAvatarOfEarthEndTime(packet.avatarOfEarthEndTime);
+                        // Horus ability fields
+                        cap.setSingleCombatCooldown(packet.singleCombatCooldown);
+                        cap.setWarriorBondCooldown(packet.warriorBondCooldown);
+                        cap.setEyeOfProtectionCooldown(packet.eyeOfProtectionCooldown);
+                        cap.setEyeOfProtectionActive(packet.eyeOfProtectionActive);
+                        cap.setEyeOfProtectionEndTime(packet.eyeOfProtectionEndTime);
+                        cap.setAvatarOfWarCooldown(packet.avatarOfWarCooldown);
+                        cap.setAvatarOfWarActive(packet.avatarOfWarActive);
+                        cap.setAvatarOfWarEndTime(packet.avatarOfWarEndTime);
+                        // Isis ability fields
+                        cap.setLightOfIsisCooldown(packet.lightOfIsisCooldown);
+                        cap.setStrengthInNumbersCooldown(packet.strengthInNumbersCooldown);
+                        cap.setHeartstealerCooldown(packet.heartstealerCooldown);
+                        cap.setHeartstealerActive(packet.heartstealerActive);
+                        cap.setHeartstealerEndTime(packet.heartstealerEndTime);
+                        cap.setAvatarOfHealingCooldown(packet.avatarOfHealingCooldown);
+                        cap.setAvatarOfHealingActive(packet.avatarOfHealingActive);
+                        cap.setAvatarOfHealingEndTime(packet.avatarOfHealingEndTime);
                     } catch (IllegalArgumentException e) {
                         // Invalid god name, ignore
                     }

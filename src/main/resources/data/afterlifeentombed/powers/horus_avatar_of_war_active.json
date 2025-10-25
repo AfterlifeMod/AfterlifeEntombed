@@ -1,0 +1,11 @@
+{
+  "type": "origins:toggle",
+  "name": "Avatar of War Active",
+  "description": "You are currently in Avatar of War form with ultimate power.",
+  "active_by_default": false,
+  "key": {
+    "key": "key.saveToolbarActivator",
+    "continuous": false
+  },
+  "hidden": true
+}

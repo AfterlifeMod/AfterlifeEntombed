@@ -1,0 +1,17 @@
+{
+  "type": "origins:active_self",
+  "name": "Avatar of War",
+  "description": "Become the ultimate warrior! Gain creative flight, instant breaking, Resistance VII, Strength/Regen/Absorption 255, Haste/Speed VII. All abilities have no cooldown. Lasts 1 minute. 5 minute cooldown.",
+  "key": {
+    "key": "key.saveToolbarActivator",
+    "continuous": false
+  },
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 4"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

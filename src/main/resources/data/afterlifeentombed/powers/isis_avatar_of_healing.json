@@ -1,0 +1,16 @@
+{
+  "type": "origins:active_self",
+  "name": "Avatar of Healing",
+  "description": "Transform into the Avatar of Healing for 60 seconds. Grants creative flight, instant building, Regeneration and Absorption 255, Resistance and Haste 7, Strength 255, Speed 7, and removes all ability cooldowns. After ending, grants Slow Falling for 60 seconds (5 minute cooldown)",
+  "key": {
+    "key": "key.saveToolbarActivator"
+  },
+  "entity_action": {
+    "type": "origins:execute_command",
+    "command": "trigger god_avatar_ability set 4"
+  },
+  "cooldown": 1,
+  "hud_render": {
+    "should_render": false
+  }
+}

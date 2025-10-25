@@ -97,8 +97,17 @@ public class AvatarCommand {
                                         builder.suggest("earth_rise");
                                         builder.suggest("avatar_of_earth");
                                     }
-                                    case HORUS, ISIS -> {
-                                        // Abilities not yet implemented for these gods
+                                    case HORUS -> {
+                                        builder.suggest("single_combat");
+                                        builder.suggest("warrior_bond");
+                                        builder.suggest("eye_of_protection");
+                                        builder.suggest("avatar_of_war");
+                                    }
+                                    case ISIS -> {
+                                        builder.suggest("light_of_isis");
+                                        builder.suggest("strength_in_numbers");
+                                        builder.suggest("heartstealer");
+                                        builder.suggest("avatar_of_healing");
                                     }
                                     default -> {
                                         // No god selected
@@ -207,8 +216,8 @@ public class AvatarCommand {
                         case ANUBIS -> "afterlifeentombed:avatar_of_anubis";
                         case THOTH -> "afterlifeentombed:avatar_of_thoth";
                         case GEB -> "afterlifeentombed:avatar_of_geb";
-                        // Add more gods as they are implemented
-                        case HORUS, ISIS -> "afterlifeentombed:avatar_of_egypt"; // Fallback to egypt for unimplemented
+                        case HORUS -> "afterlifeentombed:avatar_of_horus";
+                        case ISIS -> "afterlifeentombed:avatar_of_isis";
                         default -> "afterlifeentombed:avatar_of_egypt";
                     };                        // Remove ALL existing avatar origins to prevent stacking
                         server.getCommands().performPrefixedCommand(
@@ -238,6 +247,14 @@ public class AvatarCommand {
                         server.getCommands().performPrefixedCommand(
                             server.createCommandSourceStack(),
                             "origin revoke " + target.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + target.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_horus"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + target.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_isis"
                         );
                         
                         // Now grant the new god-specific origin
@@ -269,6 +286,10 @@ public class AvatarCommand {
                             case SHU -> {
                                 // Spawn shu_jump2 particle
                                 AfterLibsAPI.spawnAfterlifeParticle(level, "shu_jump2", x, y + 1, z, 1.0f);
+                            }
+                            case ISIS -> {
+                                // Spawn healing_burst particle
+                                AfterLibsAPI.spawnAfterlifeParticle(level, "healing_burst", x, y + 1, z, 1.0f);
                             }
                             default -> {
                                 // Other gods will use available particles when their abilities are implemented
@@ -423,9 +444,45 @@ public class AvatarCommand {
                             }
                         }
                     }
-                    case HORUS, ISIS -> {
-                        context.getSource().sendFailure(Component.literal("God " + god.name() + " abilities not yet implemented"));
-                        handled = true;
+                    case HORUS -> {
+                        switch (ability) {
+                            case "single_combat" -> {
+                                cap.setSingleCombatCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "warrior_bond" -> {
+                                cap.setWarriorBondCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "eye_of_protection" -> {
+                                cap.setEyeOfProtectionCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "avatar_of_war" -> {
+                                cap.setAvatarOfWarCooldown(targetTime);
+                                handled = true;
+                            }
+                        }
+                    }
+                    case ISIS -> {
+                        switch (ability) {
+                            case "light_of_isis" -> {
+                                cap.setLightOfIsisCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "strength_in_numbers" -> {
+                                cap.setStrengthInNumbersCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "heartstealer" -> {
+                                cap.setHeartstealerCooldown(targetTime);
+                                handled = true;
+                            }
+                            case "avatar_of_healing" -> {
+                                cap.setAvatarOfHealingCooldown(targetTime);
+                                handled = true;
+                            }
+                        }
                     }
                     default -> {
                         context.getSource().sendFailure(Component.literal("No god selected"));
@@ -563,9 +620,37 @@ public class AvatarCommand {
                             }
                         }
                     }
-                    case HORUS, ISIS -> {
-                        context.getSource().sendFailure(Component.literal("God " + god.name() + " abilities not yet implemented"));
-                        handled = true;
+                    case HORUS -> {
+                        switch (ability) {
+                            case "eye_of_protection" -> {
+                                cap.setEyeOfProtectionActive(active);
+                                handled = true;
+                            }
+                            case "avatar_of_war" -> {
+                                cap.setAvatarOfWarActive(active);
+                                handled = true;
+                            }
+                            case "single_combat", "warrior_bond" -> {
+                                context.getSource().sendFailure(Component.literal(ability + " is a one-shot ability, cannot set active state"));
+                                handled = true;
+                            }
+                        }
+                    }
+                    case ISIS -> {
+                        switch (ability) {
+                            case "heartstealer" -> {
+                                cap.setHeartstealerActive(active);
+                                handled = true;
+                            }
+                            case "avatar_of_healing" -> {
+                                cap.setAvatarOfHealingActive(active);
+                                handled = true;
+                            }
+                            case "light_of_isis", "strength_in_numbers" -> {
+                                context.getSource().sendFailure(Component.literal(ability + " is a one-shot ability, cannot set active state"));
+                                handled = true;
+                            }
+                        }
                     }
                     default -> {
                         context.getSource().sendFailure(Component.literal("No god selected"));
@@ -707,7 +792,49 @@ public class AvatarCommand {
                             ", CD=" + Math.max(0, (cap.getAvatarOfEarthCooldown() - currentTime) / 20) + "s"), 
                         false);
                 }
-                case HORUS, ISIS, SHU -> {
+                case HORUS -> {
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Single Combat: CD=" + Math.max(0, (cap.getSingleCombatCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Warrior Bond: CD=" + Math.max(0, (cap.getWarriorBondCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Eye of Protection: Active=" + cap.isEyeOfProtectionActive() + 
+                            ", Remaining=" + Math.max(0, (cap.getEyeOfProtectionEndTime() - currentTime) / 20) + "s" +
+                            ", CD=" + Math.max(0, (cap.getEyeOfProtectionCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Avatar of War: Active=" + cap.isAvatarOfWarActive() + 
+                            ", Remaining=" + Math.max(0, (cap.getAvatarOfWarEndTime() - currentTime) / 20) + "s" +
+                            ", CD=" + Math.max(0, (cap.getAvatarOfWarCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                }
+                case ISIS -> {
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Light of Isis: CD=" + Math.max(0, (cap.getLightOfIsisCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Strength in Numbers: CD=" + Math.max(0, (cap.getStrengthInNumbersCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Heartstealer: Active=" + cap.isHeartstealerActive() + 
+                            ", Remaining=" + Math.max(0, (cap.getHeartstealerEndTime() - currentTime) / 20) + "s" +
+                            ", CD=" + Math.max(0, (cap.getHeartstealerCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                    
+                    context.getSource().sendSuccess(() -> 
+                        Component.literal("Avatar of Healing: Active=" + cap.isAvatarOfHealingActive() + 
+                            ", Remaining=" + Math.max(0, (cap.getAvatarOfHealingEndTime() - currentTime) / 20) + "s" +
+                            ", CD=" + Math.max(0, (cap.getAvatarOfHealingCooldown() - currentTime) / 20) + "s"), 
+                        false);
+                }
+                case SHU -> {
                     context.getSource().sendSuccess(() -> 
                         Component.literal("God " + god.name() + " abilities not yet implemented"), 
                         false);
@@ -751,6 +878,15 @@ public class AvatarCommand {
             cap.setAvatarOfEarthCooldown(0);
             cap.setAvatarOfEarthActive(false);
             cap.setAvatarOfEarthEndTime(0);
+            // Reset Horus abilities
+            cap.setSingleCombatCooldown(0);
+            cap.setWarriorBondCooldown(0);
+            cap.setEyeOfProtectionCooldown(0);
+            cap.setEyeOfProtectionActive(false);
+            cap.setEyeOfProtectionEndTime(0);
+            cap.setAvatarOfWarCooldown(0);
+            cap.setAvatarOfWarActive(false);
+            cap.setAvatarOfWarEndTime(0);
             
             // Remove the origin tag
             target.removeTag("afterlifeentombed:has_avatar_origin");
