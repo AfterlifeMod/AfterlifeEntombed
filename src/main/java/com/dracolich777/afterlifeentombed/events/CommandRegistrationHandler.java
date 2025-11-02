@@ -2,6 +2,7 @@ package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.commands.AvatarCommand;
+import com.dracolich777.afterlifeentombed.commands.BoonCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,5 +17,8 @@ public class CommandRegistrationHandler {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         AvatarCommand.register(event.getDispatcher());
         AfterlifeEntombedMod.LOGGER.info("Registered /avatar command");
+        
+        BoonCommand.register(event.getDispatcher());
+        AfterlifeEntombedMod.LOGGER.info("Registered /boon command");
     }
 }

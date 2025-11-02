@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.dracolich777.afterlibs.AfterLibs;
 import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
 import com.dracolich777.afterlifeentombed.capabilities.GodseekerSwordCapability;
+import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
 import com.dracolich777.afterlifeentombed.client.ClientControlHandler;
 import com.dracolich777.afterlifeentombed.events.ModEventBusSubscribers;
 import com.dracolich777.afterlifeentombed.events.PortalActivationHandler;
@@ -65,6 +66,7 @@ public class AfterlifeEntombedMod {
     @SubscribeEvent
     public void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.register(GodAvatarCapability.IGodAvatar.class);
+        event.register(PlayerBoonsCapability.IPlayerBoons.class);
     }
 
     @SubscribeEvent // Add this annotation

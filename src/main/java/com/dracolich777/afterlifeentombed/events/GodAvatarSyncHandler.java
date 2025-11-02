@@ -2,9 +2,11 @@ package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
+import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
 import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.network.SyncGodAvatarDataPacket;
+import com.dracolich777.afterlifeentombed.network.SyncPlayerBoonsPacket;
 import com.dracolich777.afterlifeentombed.network.SyncUnlockedGodsPacket;
 import com.dracolich777.afterlifeentombed.util.UnlockedGodsSavedData;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,7 +67,14 @@ public class GodAvatarSyncHandler {
                 }
             });
             
+            // Sync god avatar data
             syncToClient(serverPlayer);
+            
+            // CRITICAL: Also sync boons data on login
+            serverPlayer.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(boonsCap -> {
+                AfterlifeEntombedMod.LOGGER.info("Syncing {} boons to client on login", boonsCap.getActiveBoons().size());
+                GodAvatarPackets.sendToPlayer(serverPlayer, new SyncPlayerBoonsPacket(boonsCap.getActiveBoons()));
+            });
         }
     }
     
@@ -75,7 +84,27 @@ public class GodAvatarSyncHandler {
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            AfterlifeEntombedMod.LOGGER.info("=== RESPAWN EVENT: Syncing data for player {} ===", serverPlayer.getGameProfile().getName());
+            
+            // Sync god avatar data
             syncToClient(serverPlayer);
+            
+            // CRITICAL: Also sync boons data after respawn
+            serverPlayer.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(boonsCap -> {
+                int boonCount = boonsCap.getActiveBoons().size();
+                AfterlifeEntombedMod.LOGGER.info("Syncing {} boons to client on respawn", boonCount);
+                
+                GodAvatarPackets.sendToPlayer(serverPlayer, new SyncPlayerBoonsPacket(boonsCap.getActiveBoons()));
+                
+                AfterlifeEntombedMod.LOGGER.info("Boons sync packet sent on respawn");
+                
+                // Log each boon being synced
+                for (var boon : boonsCap.getActiveBoons()) {
+                    AfterlifeEntombedMod.LOGGER.info("  - Synced: {} ({})", boon.getType().getDisplayName(), boon.getType().name());
+                }
+            });
+            
+            AfterlifeEntombedMod.LOGGER.info("=== END RESPAWN SYNC ===");
         }
     }
     

@@ -1,9 +1,12 @@
 package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
+import com.dracolich777.afterlifeentombed.boons.ActiveBoon;
 import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
+import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
 import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
+import com.dracolich777.afterlifeentombed.network.SyncPlayerBoonsPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -15,8 +18,10 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -28,11 +33,14 @@ import java.util.UUID;
 public class GodAvatarCapabilityHandler {
     
     private static final ResourceLocation GOD_AVATAR_CAP = new ResourceLocation(AfterlifeEntombedMod.MOD_ID, "god_avatar");
+    private static final ResourceLocation PLAYER_BOONS_CAP = new ResourceLocation(AfterlifeEntombedMod.MOD_ID, "player_boons");
     
     // Store god info before player dies (during death event)
     private static final Map<UUID, GodType> playerDeathGods = new HashMap<>();
     // Store unlocked gods before player dies
     private static final Map<UUID, Set<GodType>> playerDeathUnlockedGods = new HashMap<>();
+    // Store boons before player dies
+    private static final Map<UUID, List<ActiveBoon>> playerDeathBoons = new HashMap<>();
     // Track which players just respawned
     private static final Map<UUID, Integer> playerRespawnCooldown = new HashMap<>();
     
@@ -63,6 +71,16 @@ public class GodAvatarCapabilityHandler {
                 playerRespawnCooldown.put(player.getUUID(), 0);
                 OriginValidationHandler.setPlayerInRespawnGrace(player.getUUID());
                 
+                // Also store boons before death
+                player.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(boonsCap -> {
+                    List<ActiveBoon> boons = new ArrayList<>(boonsCap.getActiveBoons());
+                    playerDeathBoons.put(player.getUUID(), boons);
+                    AfterlifeEntombedMod.LOGGER.info("Stored {} boons/curses before death", boons.size());
+                    for (ActiveBoon boon : boons) {
+                        AfterlifeEntombedMod.LOGGER.info("  - Stored: {} ({})", boon.getType().getDisplayName(), boon.getType().name());
+                    }
+                });
+                
                 AfterlifeEntombedMod.LOGGER.info("AFTER storing - Map has selected: {}, Map has unlocked: {}", 
                     playerDeathGods.get(player.getUUID()).name(),
                     playerDeathUnlockedGods.get(player.getUUID()).size());
@@ -77,8 +95,13 @@ public class GodAvatarCapabilityHandler {
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            GodAvatarCapability.GodAvatarProvider provider = new GodAvatarCapability.GodAvatarProvider();
-            event.addCapability(GOD_AVATAR_CAP, provider);
+            // Attach God Avatar capability
+            GodAvatarCapability.GodAvatarProvider avatarProvider = new GodAvatarCapability.GodAvatarProvider();
+            event.addCapability(GOD_AVATAR_CAP, avatarProvider);
+            
+            // Attach Player Boons capability
+            PlayerBoonsCapability.PlayerBoonsProvider boonsProvider = new PlayerBoonsCapability.PlayerBoonsProvider();
+            event.addCapability(PLAYER_BOONS_CAP, boonsProvider);
         }
     }
     
@@ -138,8 +161,7 @@ public class GodAvatarCapabilityHandler {
                 boolean newCapExists = event.getEntity().getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).isPresent();
                 AfterlifeEntombedMod.LOGGER.info("Old cap exists: {}, New cap exists: {}", oldCapExists, newCapExists);
                 
-                // Try to copy capability data from old player to new player
-                // Use manual NBT serialization/deserialization since old capability is invalidated
+                // Clone God Avatar capability
                 event.getOriginal().getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(oldCap -> {
                     // Old cap DOES exist - serialize its NBT
                     net.minecraft.nbt.CompoundTag capabilityNBT = oldCap.serializeNBT();
@@ -181,6 +203,75 @@ public class GodAvatarCapabilityHandler {
                         }
                     });
                 });
+                
+                // Clone Player Boons capability using NBT serialization (boons persist through death)
+                boolean oldBoonsExists = event.getOriginal().getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).isPresent();
+                boolean newBoonsExists = event.getEntity().getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).isPresent();
+                AfterlifeEntombedMod.LOGGER.info("Old boons cap exists: {}, New boons cap exists: {}", oldBoonsExists, newBoonsExists);
+                
+                // Try to clone from old player first
+                if (oldBoonsExists) {
+                    event.getOriginal().getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(oldBoons -> {
+                        AfterlifeEntombedMod.LOGGER.info("OLD PLAYER boons before serialization - {} active boons/curses", 
+                            oldBoons.getActiveBoons().size());
+                        
+                        for (ActiveBoon boon : oldBoons.getActiveBoons()) {
+                            AfterlifeEntombedMod.LOGGER.info("  - Old boon: {} ({})", boon.getType().getDisplayName(), boon.getType().name());
+                        }
+                        
+                        // Serialize the old boons to NBT
+                        CompoundTag boonsNBT = oldBoons.serializeNBT();
+                        
+                        AfterlifeEntombedMod.LOGGER.info("Serialized NBT contains: {}", boonsNBT.toString());
+                        
+                        event.getEntity().getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(newBoons -> {
+                            AfterlifeEntombedMod.LOGGER.info("NEW PLAYER boons before deserialization - {} active boons/curses", 
+                                newBoons.getActiveBoons().size());
+                            
+                            // Deserialize the NBT into the new boons capability
+                            newBoons.deserializeNBT(boonsNBT);
+                            
+                            AfterlifeEntombedMod.LOGGER.info("NEW PLAYER boons after deserialization - {} active boons/curses", 
+                                newBoons.getActiveBoons().size());
+                            
+                            // Log each restored boon
+                            for (ActiveBoon boon : newBoons.getActiveBoons()) {
+                                AfterlifeEntombedMod.LOGGER.info("  - Restored boon: {} ({})", boon.getType().getDisplayName(), boon.getType().name());
+                            }
+                            
+                            // Sync boons to client after death
+                            if (finalPlayer != null) {
+                                GodAvatarPackets.sendToPlayer(finalPlayer, new SyncPlayerBoonsPacket(newBoons.getActiveBoons()));
+                                AfterlifeEntombedMod.LOGGER.info("Synced {} boons to client after death", newBoons.getActiveBoons().size());
+                            }
+                        });
+                    });
+                } else if (playerDeathBoons.containsKey(playerUUID)) {
+                    // FALLBACK: Old capability doesn't exist, use stored boons from death event
+                    List<ActiveBoon> storedBoons = playerDeathBoons.get(playerUUID);
+                    AfterlifeEntombedMod.LOGGER.info("OLD PLAYER boons cap missing, using fallback storage - {} boons/curses", 
+                        storedBoons.size());
+                    
+                    event.getEntity().getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(newBoons -> {
+                        // Re-add all stored boons
+                        for (ActiveBoon boon : storedBoons) {
+                            newBoons.addBoon(boon);
+                            AfterlifeEntombedMod.LOGGER.info("  - Restored from fallback: {} ({})", boon.getType().getDisplayName(), boon.getType().name());
+                        }
+                        
+                        AfterlifeEntombedMod.LOGGER.info("After fallback restoration - {} boons/curses restored", 
+                            newBoons.getActiveBoons().size());
+                        
+                        // Sync boons to client after death
+                        if (finalPlayer != null) {
+                            GodAvatarPackets.sendToPlayer(finalPlayer, new SyncPlayerBoonsPacket(newBoons.getActiveBoons()));
+                            AfterlifeEntombedMod.LOGGER.info("Synced {} boons to client after death (fallback)", newBoons.getActiveBoons().size());
+                        }
+                        
+                        // Clean up the stored boons
+                        playerDeathBoons.remove(playerUUID);
+                    });
+                }
                 
                 // FALLBACK: If old cap doesn't exist, try using playerDeathGods map
                 if (!oldCapExists && playerDeathGods.containsKey(playerUUID)) {
@@ -244,6 +335,29 @@ public class GodAvatarCapabilityHandler {
                     cap.getSelectedGod().name(),
                     cap.getUnlockedGods().size());
             });
+            
+            // Also log loaded boons
+            player.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(cap -> {
+                AfterlifeEntombedMod.LOGGER.info("Loaded {} boons/curses for player {}", 
+                    cap.getActiveBoons().size(),
+                    player.getGameProfile().getName());
+            });
+        }
+    }
+    
+    /**
+     * Sync boons to client when player logs in
+     */
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            // Sync boons to client
+            player.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(cap -> {
+                GodAvatarPackets.sendToPlayer(player, new SyncPlayerBoonsPacket(cap.getActiveBoons()));
+                AfterlifeEntombedMod.LOGGER.info("Synced {} boons/curses to client for player {}", 
+                    cap.getActiveBoons().size(),
+                    player.getGameProfile().getName());
+            });
         }
     }
     
@@ -294,6 +408,7 @@ public class GodAvatarCapabilityHandler {
                                 case GEB -> originLayer = "afterlifeentombed:avatar_of_geb";
                                 case HORUS -> originLayer = "afterlifeentombed:avatar_of_horus";
                                 case ISIS -> originLayer = "afterlifeentombed:avatar_of_isis";
+                                case NONE -> originLayer = "afterlifeentombed:avatar_of_egypt"; // Fallback
                             }
                             
                             // Set origin to the player's selected god using correct command syntax

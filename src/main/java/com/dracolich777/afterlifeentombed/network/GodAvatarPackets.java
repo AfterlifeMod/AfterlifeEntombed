@@ -56,9 +56,29 @@ public class GodAvatarPackets {
                 SyncOreMarkersPacket::encode,
                 SyncOreMarkersPacket::decode,
                 SyncOreMarkersPacket::handle);
+        
+        // Boon system packets
+        INSTANCE.registerMessage(id(), OpenBoonSelectionPacket.class,
+                OpenBoonSelectionPacket::encode,
+                OpenBoonSelectionPacket::decode,
+                OpenBoonSelectionPacket::handle);
+        
+        INSTANCE.registerMessage(id(), SelectBoonPacket.class,
+                SelectBoonPacket::encode,
+                SelectBoonPacket::decode,
+                SelectBoonPacket::handle);
+        
+        INSTANCE.registerMessage(id(), SyncPlayerBoonsPacket.class,
+                SyncPlayerBoonsPacket::encode,
+                SyncPlayerBoonsPacket::decode,
+                SyncPlayerBoonsPacket::handle);
     }
     
     public static <MSG> void sendToServer(MSG message) {
         INSTANCE.sendToServer(message);
+    }
+    
+    public static <MSG> void sendToPlayer(net.minecraft.server.level.ServerPlayer player, MSG message) {
+        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 }
