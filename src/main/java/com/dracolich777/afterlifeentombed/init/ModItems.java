@@ -30,6 +30,7 @@ import com.dracolich777.afterlifeentombed.items.GodstoneOfSeth;
 import com.dracolich777.afterlifeentombed.items.GodstoneOfShu;
 import com.dracolich777.afterlifeentombed.items.GodstoneOfThoth;
 import com.dracolich777.afterlifeentombed.items.HammerOfGeb;
+import com.dracolich777.afterlifeentombed.items.HathorsRopeItem;
 import com.dracolich777.afterlifeentombed.items.HorusProtectionBow;
 import com.dracolich777.afterlifeentombed.items.PricklyPearArmor;
 import com.dracolich777.afterlifeentombed.items.PricklyPearArmorMaterial;
@@ -117,6 +118,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> WAND_OF_ISIS
             = ITEMS.register("wand_of_isis", () -> new WandOfIsis(new Item.Properties().stacksTo(1).fireResistant()));
+
+    public static final RegistryObject<Item> HATHORS_ROPE
+            = ITEMS.register("hathors_rope", () -> new HathorsRopeItem(new Item.Properties().stacksTo(1).fireResistant()));
 
     public static final RegistryObject<Item> GODSTEEL_INGOT_OF_RA = ITEMS.register("godsteel_ingot_of_ra",
             () -> new GodsteelIngotOfRa(new Item.Properties().stacksTo(64).fireResistant()));
@@ -226,6 +230,7 @@ public static final RegistryObject<Item> CLOAK_OF_KONSHU = ITEMS.register("cloak
                         output.accept(HAMMER_OF_GEB.get());
                         output.accept(GODSTONE_OF_ISIS.get());
                         output.accept(WAND_OF_ISIS.get());
+                        output.accept(HATHORS_ROPE.get());
                         output.accept(GODSTONE_OF_SETH.get());
                         output.accept(CROWN_OF_SETH.get());
                         output.accept(GODSTONE_OF_ANUBIS.get());

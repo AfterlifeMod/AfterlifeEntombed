@@ -2,6 +2,7 @@ package com.dracolich777.afterlifeentombed.boons;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
+import com.dracolich777.afterlifeentombed.init.ModGameRules;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -30,6 +31,11 @@ public class BoonEffectsHandler {
      */
     public static void tickBoonEffects(Player player) {
         if (player.level().isClientSide) return;
+
+        // Check if boons and curses are enabled via game rule
+        if (!player.level().getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES)) {
+            return;
+        }
 
         player.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(cap -> {
             Level level = player.level();

@@ -14,6 +14,7 @@ import com.dracolich777.afterlifeentombed.init.ModBlockEntities;
 import com.dracolich777.afterlifeentombed.init.ModBlocks;
 import com.dracolich777.afterlifeentombed.init.ModEffects;
 import com.dracolich777.afterlifeentombed.init.ModEntityTypes;
+import com.dracolich777.afterlifeentombed.init.ModGameRules;
 import com.dracolich777.afterlifeentombed.init.ModItems;
 import com.dracolich777.afterlifeentombed.init.ModMenuTypes;
 import com.dracolich777.afterlifeentombed.init.ModRecipeTypes;
@@ -77,6 +78,9 @@ public class AfterlifeEntombedMod {
             
             // Register network packets for God Avatar system
             GodAvatarPackets.register();
+            
+            // Register custom game rules
+            ModGameRules.register();
             
             // ModEvents.init();
             ModPotionTypes.registerPotionVariants();
