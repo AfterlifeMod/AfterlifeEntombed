@@ -6,7 +6,6 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +65,7 @@ public class ParticleManager {
                         VerboseLogger.info(ParticleManager.class, "Discovering particles from JAR: {}", effeksUri);
                     } else {
                         // Running from file system (development)
-                        effeksPath = Paths.get(effeksUri);
+                        effeksPath = Path.of(effeksUri);
                         VerboseLogger.info(ParticleManager.class, "Discovering particles from filesystem: {}", effeksPath);
                     }
                     

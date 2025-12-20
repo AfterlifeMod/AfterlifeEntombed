@@ -63,7 +63,7 @@ public class PricklyPearInfusionRecipe extends CustomRecipe {
         if (!armor.isEmpty() && !potion.isEmpty()) {
             List<MobEffectInstance> effects = PotionUtils.getMobEffects(potion);
             if (!effects.isEmpty()) {
-                MobEffectInstance effect = effects.get(0); // Use first effect
+                MobEffectInstance effect = effects.getFirst(); // Use first effect
                 PricklyPearArmor.storeEffect(armor, effect.getEffect(), 
                     effect.getDuration(), effect.getAmplifier());
             }

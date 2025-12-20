@@ -181,8 +181,8 @@ public class RaAvatarAbilities {
                 }
 
                 // 1 minute duration
-                if (activationTime >= 1200 && player instanceof ServerPlayer) {
-                    deactivateAvatarOfSun((ServerPlayer) player, cap, currentTime);
+                if (activationTime >= 1200 && player instanceof ServerPlayer serverPlayer) {
+                    deactivateAvatarOfSun(serverPlayer, cap, currentTime);
                 }
             }
         });

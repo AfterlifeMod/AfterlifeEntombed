@@ -67,7 +67,7 @@ public class AParticleCommand {
             
             if (success) {
                 source.sendSuccess(() -> Component.literal(
-                    String.format("Spawned particle '%s' at (%.2f, %.2f, %.2f) with scale %.2f", 
+                    "Spawned particle '%s' at (%.2f, %.2f, %.2f) with scale %.2f".formatted(
                         particleName, position.x, position.y, position.z, scale)), true);
                 return 1;
             } else {

@@ -129,8 +129,8 @@ public class SethAvatarAbilities {
                 cap.setOneWithChaosTimeUsed(timeUsed);
                 
                 // 2 minutes = 2400 ticks
-                if (timeUsed >= 2400 && player instanceof ServerPlayer) {
-                    deactivateOneWithChaos((ServerPlayer) player, cap);
+                if (timeUsed >= 2400 && player instanceof ServerPlayer serverPlayer) {
+                    deactivateOneWithChaos(serverPlayer, cap);
                 }
             }
             
@@ -163,8 +163,8 @@ public class SethAvatarAbilities {
                 // You may need to use a mod like Pehkui for proper size scaling
                 
                 // 1 minute = 1200 ticks
-                if (activationTime >= 1200 && player instanceof ServerPlayer) {
-                    deactivateChaosIncarnate((ServerPlayer) player, cap, currentTime);
+                if (activationTime >= 1200 && player instanceof ServerPlayer serverPlayer) {
+                    deactivateChaosIncarnate(serverPlayer, cap, currentTime);
                 }
             }
             
@@ -402,7 +402,7 @@ public class SethAvatarAbilities {
                         event.setAmount(event.getAmount() + cap.getStoredDamage());
                         
                         if (player instanceof ServerPlayer serverPlayer) {
-                            GodAvatarHudHelper.sendNotification(serverPlayer, "Released " + String.format("%.1f", cap.getStoredDamage()) + " damage!", GodAvatarHudHelper.COLOR_ERROR, 40);
+                            GodAvatarHudHelper.sendNotification(serverPlayer, "Released " + "%.1f".formatted(cap.getStoredDamage()) + " damage!", GodAvatarHudHelper.COLOR_ERROR, 40);
                         }
                         
                         cap.setStoredDamage(0);

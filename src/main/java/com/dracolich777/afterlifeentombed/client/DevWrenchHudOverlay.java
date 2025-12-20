@@ -39,7 +39,7 @@ public class DevWrenchHudOverlay {
             int y = 5;
             int lineHeight = 10;
 
-            String coords = String.format("Coords: X:%.0f Y:%.0f Z:%.0f", player.getX(), player.getY(), player.getZ());
+            String coords = "Coords: X:%.0f Y:%.0f Z:%.0f".formatted(player.getX(), player.getY(), player.getZ());
             guiGraphics.drawString(minecraft.font, Component.literal(coords), x, y, Color.CYAN.getRGB(), false);
             y += lineHeight;
 
@@ -48,15 +48,15 @@ public class DevWrenchHudOverlay {
                 if (hitResult.getType() == HitResult.Type.ENTITY) {
                     EntityHitResult entityHitResult = (EntityHitResult) hitResult;
                     if (entityHitResult.getEntity() instanceof LivingEntity targetEntity) {
-                        String targetInfo = String.format("Target: %s Health: %.1f/%.1f",
-                                targetEntity.getName().getString(), targetEntity.getHealth(), targetEntity.getMaxHealth());
+                        String targetInfo = "Target: %s Health: %.1f/%.1f".formatted(
+                            targetEntity.getName().getString(), targetEntity.getHealth(), targetEntity.getMaxHealth());
                         guiGraphics.drawString(minecraft.font, Component.literal(targetInfo), x, y, Color.RED.getRGB(), false);
                     }
                 } else if (hitResult.getType() == HitResult.Type.BLOCK) {
                     BlockHitResult blockHitResult = (BlockHitResult) hitResult;
-                    String blockInfo = String.format("Block: %s Pos: %.0f, %.0f, %.0f",
-                            player.level().getBlockState(blockHitResult.getBlockPos()).getBlock().getName().getString(),
-                            (double)blockHitResult.getBlockPos().getX(), (double)blockHitResult.getBlockPos().getY(), (double)blockHitResult.getBlockPos().getZ());
+                    String blockInfo = "Block: %s Pos: %.0f, %.0f, %.0f".formatted(
+                        player.level().getBlockState(blockHitResult.getBlockPos()).getBlock().getName().getString(),
+                        (double)blockHitResult.getBlockPos().getX(), (double)blockHitResult.getBlockPos().getY(), (double)blockHitResult.getBlockPos().getZ());
                     guiGraphics.drawString(minecraft.font, Component.literal(blockInfo), x, y, Color.GREEN.getRGB(), false);
                 }
             }

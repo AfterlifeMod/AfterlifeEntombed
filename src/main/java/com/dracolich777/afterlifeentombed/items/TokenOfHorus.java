@@ -200,8 +200,8 @@ public class TokenOfHorus extends Item implements ICurioItem {
                 int remainingSeconds = (int) (remainingTicks / 20);
                 int minutes = remainingSeconds / 60;
                 int seconds = remainingSeconds % 60;
-                tooltip.add(Component.translatable("item.afterlifeentombed.token_of_horus.cooldown", 
-                    String.format("%d:%02d", minutes, seconds))
+                tooltip.add(Component.translatable("item.afterlifeentombed.token_of_horus.cooldown",
+                        "%d:%02d".formatted(minutes, seconds))
                     .withStyle(ChatFormatting.RED));
             } else {
                 tooltip.add(Component.translatable("item.afterlifeentombed.token_of_horus.ready")

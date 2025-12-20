@@ -44,8 +44,8 @@ public class GodHoldBlock extends BaseEntityBlock {
     public InteractionResult use(@Nonnull BlockState pState, @Nonnull Level pLevel, @Nonnull BlockPos pPos, @Nonnull Player pPlayer, @Nonnull InteractionHand pHand, @Nonnull BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof GodHoldBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (GodHoldBlockEntity) entity, pPos);
+            if (entity instanceof GodHoldBlockEntity blockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer) pPlayer), blockEntity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

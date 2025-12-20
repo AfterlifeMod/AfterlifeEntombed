@@ -22,8 +22,8 @@ public class ModMenuTypes {
                     IForgeMenuType.create((windowId, inv, data) -> {
                         BlockPos pos = data.readBlockPos();
                         BlockEntity blockEntity = inv.player.level().getBlockEntity(pos);
-                        if (blockEntity instanceof GodHoldBlockEntity) {
-                            return new GodHoldMenu(windowId, inv, (GodHoldBlockEntity) blockEntity);
+                        if (blockEntity instanceof GodHoldBlockEntity entity) {
+                            return new GodHoldMenu(windowId, inv, entity);
                         }
                         throw new IllegalStateException("Block entity at " + pos + " is not a GodHoldBlockEntity");
                     }));
