@@ -169,8 +169,8 @@ public class GodseekerEntity extends AbstractVillager {
             ),
             new GodseekerTrade(
             new ItemStack(Items.DIAMOND, 3),
-            new ItemStack(Items.GOLD_BLOCK, 20),
-            new ItemStack(ModBlocks.DUSKSAND.get(), 4),
+            new ItemStack(Items.GOLD_INGOT, 10),
+            new ItemStack(ModBlocks.DUSKSAND.get(), 6),
             5, 0, 0.05F
             ), // new GodseekerTrade(
         //     new ItemStack(Items.NETHER_STAR, 10),
