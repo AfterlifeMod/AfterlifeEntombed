@@ -24,7 +24,7 @@ plugins {
 // Apply the Mixin plugin as per the documentation's recommended syntax
 apply plugin: 'org.spongepowered.mixin'
 
-version = '1.2.1'
+version = '1.2.2'
 group = 'com.dracolich777.afterlifeentombed'
 archivesBaseName = 'afterlifeentombed'
 
