@@ -43,7 +43,8 @@ public class RingOfRa extends Item implements ICurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return true; // Allow right-click equipping
+        // Only allow equipping from use if the slot is 'ring'
+        return "ring".equals(slotContext.identifier());
     }
     
     @Override
@@ -180,9 +181,8 @@ public class RingOfRa extends Item implements ICurioItem {
     
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        // Allow equipping in charm or ring slots
-        String slotId = slotContext.identifier();
-        return slotId.equals("charm") || slotId.equals("ring");
+        // Only allow equipping in the 'ring' curios slot
+        return "ring".equals(slotContext.identifier());
     }
     
     @Override

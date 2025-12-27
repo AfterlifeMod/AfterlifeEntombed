@@ -194,7 +194,13 @@ private boolean isTwoBlockStructure(Block block) {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return true;
+        // Only allow equipping from use if the slot is 'hands'
+        return "hands".equals(slotContext.identifier());
+    }
+    @Override
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        // Only allow equipping in the 'hands' curios slot
+        return "hands".equals(slotContext.identifier());
     }
 
     @Override

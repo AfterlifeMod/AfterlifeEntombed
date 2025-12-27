@@ -47,7 +47,8 @@ public class CollarOfAnubis extends Item implements ICurioItem {
 
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return true;
+        // Only allow equipping from use if the slot is 'necklace'
+        return "necklace".equals(slotContext.identifier());
     }
 
     @Override
@@ -81,7 +82,8 @@ public class CollarOfAnubis extends Item implements ICurioItem {
 
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-        return true;
+        // Only allow equipping in the 'necklace' curios slot
+        return "necklace".equals(slotContext.identifier());
     }
 
     @Override
