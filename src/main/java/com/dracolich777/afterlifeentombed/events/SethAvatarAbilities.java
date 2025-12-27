@@ -1,3 +1,4 @@
+
 package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
@@ -466,13 +467,6 @@ public class SethAvatarAbilities {
             return;
         }
         
-        // Check cooldown
-        if (currentTime < cap.getChaosIncarnateCooldown()) {
-            long remaining = (cap.getChaosIncarnateCooldown() - currentTime) / 20;
-            GodAvatarHudHelper.sendCooldownMessage(player, "Chaos Incarnate", remaining);
-            return;
-        }
-        
         // Check if holding a different god's stone to switch
         ItemStack mainHand = player.getMainHandItem();
         if (mainHand.getItem() instanceof GodstoneItem godstone) {
@@ -555,6 +549,15 @@ public class SethAvatarAbilities {
                 return;
             }
         }
+
+        // Check cooldown
+        if (currentTime < cap.getChaosIncarnateCooldown()) {
+            long remaining = (cap.getChaosIncarnateCooldown() - currentTime) / 20;
+            GodAvatarHudHelper.sendCooldownMessage(player, "Chaos Incarnate", remaining);
+            return;
+        }
+        
+        
         
         // Activate Chaos Incarnate
         cap.setChaosIncarnateActive(true);

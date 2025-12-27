@@ -1,13 +1,17 @@
 package com.dracolich777.afterlifeentombed.network;
 
+import java.util.function.Supplier;
+
 import com.dracolich777.afterlifeentombed.boons.BoonType;
 import com.dracolich777.afterlifeentombed.client.gui.BoonSelectionScreen;
 import com.dracolich777.afterlifeentombed.items.GodType;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
 
 /**
  * Packet sent from server to client to open the boon selection screen
@@ -45,10 +49,20 @@ public class OpenBoonSelectionPacket {
 
     public static void handle(OpenBoonSelectionPacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            // Client-side: Open the boon selection screen
-            Minecraft minecraft = Minecraft.getInstance();
-            minecraft.setScreen(new BoonSelectionScreen(packet.god, packet.choices, packet.isBlessing));
+            // Use DistExecutor to safely call client-only code
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> ClientHandler.openScreen(packet));
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    // Separate client handler to avoid loading client classes on server
+    public static class ClientHandler {
+
+        @OnlyIn(Dist.CLIENT)
+        public static void openScreen(OpenBoonSelectionPacket packet) {
+            Minecraft minecraft = Minecraft.getInstance();
+            minecraft.setScreen(new BoonSelectionScreen(packet.god, packet.choices, packet.isBlessing));
+        }
     }
 }

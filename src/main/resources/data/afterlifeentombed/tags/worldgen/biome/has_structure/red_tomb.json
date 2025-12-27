@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:wooded_badlands",
+    "minecraft:badlands",
+    "minecraft:eroded_badlands",
+    "afterlifeentombed:dusksand_flats"
+  ]
+}

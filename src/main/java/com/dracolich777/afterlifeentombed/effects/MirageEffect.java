@@ -764,6 +764,6 @@ public class MirageEffect extends MobEffect {
         return PHANTOM_STRUCTURES.stream()
                 .filter(structure -> structure.name.equals(name))
                 .findFirst()
-                .orElse(PHANTOM_STRUCTURES.getFirst()); // Fallback to first structure
+                .orElse(!PHANTOM_STRUCTURES.isEmpty() ? PHANTOM_STRUCTURES.get(0) : null); // Fallback to first structure (Java 17 compatible)
     }
 }

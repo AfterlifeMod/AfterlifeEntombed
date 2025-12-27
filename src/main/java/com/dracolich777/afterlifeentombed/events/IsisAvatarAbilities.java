@@ -1,3 +1,4 @@
+
 package com.dracolich777.afterlifeentombed.events;
 
 import com.dracolich777.afterlibs.api.AfterLibsAPI;
@@ -5,6 +6,11 @@ import com.dracolich777.afterlifeentombed.capabilities.GodAvatarCapability;
 import com.dracolich777.afterlifeentombed.client.hud.GodAvatarHudHelper;
 import com.dracolich777.afterlifeentombed.init.ModEffects;
 import com.dracolich777.afterlifeentombed.items.GodType;
+import com.dracolich777.afterlifeentombed.items.GodstoneItem;
+import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
+import com.dracolich777.afterlifeentombed.network.SyncGodAvatarPacket;
+
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -12,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -417,6 +424,89 @@ public class IsisAvatarAbilities {
                 deactivateAvatarOfHealing(player);
                 return;
             }
+
+            // Check if holding a different god's stone to switch
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.getItem() instanceof GodstoneItem godstone) {
+            GodType newGod = godstone.getGodType();
+            if (newGod != GodType.SETH && newGod != GodType.NONE) {
+                // Switch gods!
+                cap.setSelectedGod(newGod);
+                
+                // Consume the godstone
+                mainHand.shrink(1);
+                
+                // Spawn swap particles based on new god
+                if (player.level() instanceof ServerLevel level) {
+                    String particleName = switch (newGod) {
+                        case RA -> "ra_halo";
+                        case SHU -> "shujump";
+                        case ANUBIS -> "anubis_nuke";
+                        case GEB -> "seth_fog";
+                        case HORUS, ISIS, THOTH -> "seth_fog"; // Default to seth_fog for other gods
+                        default -> "seth_fog";
+                    };
+                    AfterLibsAPI.spawnAfterlifeParticle(level, particleName, player.getX(), player.getY() + 1, player.getZ(), 2.0f);
+                }
+                
+                // Switch to the new god's origin
+                var server = player.getServer();
+                if (server != null) {
+                    String originId = switch (newGod) {
+                        case RA -> "afterlifeentombed:avatar_of_ra";
+                        case SHU -> "afterlifeentombed:avatar_of_shu";
+                        case ANUBIS -> "afterlifeentombed:avatar_of_anubis";
+                        case THOTH -> "afterlifeentombed:avatar_of_thoth";
+                        case GEB -> "afterlifeentombed:avatar_of_geb";
+                        case HORUS, ISIS -> "afterlifeentombed:avatar_of_egypt";
+                        default -> null;
+                    };
+                    
+                    if (originId != null) {
+                        // Remove ALL existing avatar origins first
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_egypt"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_seth"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_ra"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_shu"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_anubis"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_thoth"
+                        );
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
+                        );
+                        
+                        // Now grant the new origin
+                        server.getCommands().performPrefixedCommand(
+                            server.createCommandSourceStack(),
+                            "origin set " + player.getGameProfile().getName() + " origins:origin " + originId
+                        );
+                    }
+                }
+                
+                GodAvatarHudHelper.sendNotification(player, "Now avatar of " + newGod.name(), GodAvatarHudHelper.COLOR_SPECIAL, 60);
+                // Sync to client
+                GodAvatarPackets.INSTANCE.sendToServer(new SyncGodAvatarPacket(newGod));
+                return;
+            }
+        }
             
             // Check cooldown
             long cooldownEnd = cap.getAvatarOfHealingCooldown();
@@ -429,17 +519,24 @@ public class IsisAvatarAbilities {
             // Activate Avatar of Healing
             cap.setAvatarOfHealingActive(true);
             cap.setAvatarOfHealingEndTime(currentTime + AVATAR_OF_HEALING_DURATION);
-            
+
+            // Apply standardised godly buffs for ultimate (1 minute duration)
+            player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 254, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 6, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 6, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1200, 254, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 254, false, false));
+            player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 6, false, false));
             // Grant creative flight
-            player.getAbilities().mayfly = true;
-            player.getAbilities().flying = true;
-            player.onUpdateAbilities();
-            
-            // Clear all cooldowns for instant build
+            if (!player.getAbilities().mayfly) {
+                player.getAbilities().mayfly = true;
+                player.onUpdateAbilities();
+            }
+            // Remove cooldowns on other active abilities
             cap.setLightOfIsisCooldown(0);
             cap.setStrengthInNumbersCooldown(0);
             cap.setHeartstealerCooldown(0);
-            
+
             // Add max health boost
             AttributeInstance maxHealth = player.getAttribute(Attributes.MAX_HEALTH);
             if (maxHealth != null) {
@@ -452,7 +549,7 @@ public class IsisAvatarAbilities {
                 );
                 maxHealth.addTransientModifier(healthModifier);
             }
-            
+
             // Grant the Origins toggle power
             var server = player.getServer();
             if (server != null) {
@@ -461,7 +558,7 @@ public class IsisAvatarAbilities {
                     "power grant " + player.getGameProfile().getName() + " afterlifeentombed:isis_avatar_of_healing_active"
                 );
             }
-            
+
             GodAvatarHudHelper.sendNotification(player, "✦ AVATAR OF HEALING ✦", GodAvatarHudHelper.COLOR_SPECIAL, 60);
         });
     }

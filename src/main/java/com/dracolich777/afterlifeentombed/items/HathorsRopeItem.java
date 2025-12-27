@@ -1,6 +1,7 @@
 package com.dracolich777.afterlifeentombed.items;
 
 import com.dracolich777.afterlifeentombed.init.ModDimensions;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -150,13 +151,13 @@ public class HathorsRopeItem extends Item {
      */
     private void spawnRopeParticles(Level level, BlockPos pos) {
         if (level instanceof ServerLevel serverLevel) {
-            // TODO: Replace "sethblackhaze" with "hathorsrope" when particle is created
+            // Use the custom Hathor's Rope transport particle
             com.dracolich777.afterlibs.api.AfterLibsAPI.spawnAfterlifeParticle(
-                serverLevel, 
-                "blood_lance", // Placeholder - replace with "hathorsrope" 
-                pos.getX() + 0.5, 
-                pos.getY() + 1.0, 
-                pos.getZ() + 0.5, 
+                    serverLevel,
+                    "hathor_transport", // Custom transport particle for Hathor's Rope
+                    pos.getX() + 0.5,
+                    pos.getY() + 1.0,
+                    pos.getZ() + 0.5,
                 1.0f
             );
         }

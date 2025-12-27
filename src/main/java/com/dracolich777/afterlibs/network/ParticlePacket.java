@@ -1,11 +1,9 @@
 package com.dracolich777.afterlibs.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkEvent;
-import net.minecraft.client.Minecraft;
-
-import com.dracolich777.afterlibs.particle.ParticleManager;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 import java.util.function.Supplier;
 
@@ -72,18 +70,30 @@ public class ParticlePacket {
     
     public static void handle(ParticlePacket packet, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
-            // This runs on the client side
-            Level level = Minecraft.getInstance().level;
+            // Use DistExecutor to only run client code on the client
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ()
+                    -> ClientPacketHandler.handleClientSide(packet)
+            );
+        });
+        context.get().setPacketHandled(true);
+    }
+
+    // Separate class to hold client-only code
+    private static class ClientPacketHandler {
+
+        static void handleClientSide(ParticlePacket packet) {
+            // Import moved inside method to avoid loading on server
+            net.minecraft.client.Minecraft minecraft = net.minecraft.client.Minecraft.getInstance();
+            net.minecraft.world.level.Level level = minecraft.level;
             
             if (level != null && level.isClientSide()) {
-                ParticleManager.spawnParticle(
+                com.dracolich777.afterlibs.particle.ParticleManager.spawnParticle(
                     level, packet.particleName, 
                     packet.x, packet.y, packet.z,
                     packet.scaleX, packet.scaleY, packet.scaleZ,
                     packet.yaw, packet.pitch, packet.roll
                 );
             }
-        });
-        context.get().setPacketHandled(true);
+        }
     }
 }

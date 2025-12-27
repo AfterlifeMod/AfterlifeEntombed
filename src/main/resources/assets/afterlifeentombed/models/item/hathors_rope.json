@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "afterlifeentombed:item/hathors_rope"
+    "layer0": "afterlifeentombed:item/rope_of_the_medjay"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "afterlifeentombed:red_tomb",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 48,
+    "separation": 24,
+    "salt": 40879232
+  }
+}

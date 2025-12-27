@@ -1,8 +1,8 @@
 package com.dracolich777.afterlifeentombed.network;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
+
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
@@ -22,56 +22,66 @@ public class GodAvatarPackets {
     }
 
     public static void register() {
-        INSTANCE.registerMessage(id(), SyncGodAvatarPacket.class,
-                SyncGodAvatarPacket::encode,
-                SyncGodAvatarPacket::decode,
-                SyncGodAvatarPacket::handle);
+        INSTANCE.messageBuilder(SyncGodAvatarPacket.class, id())
+                .encoder(SyncGodAvatarPacket::encode)
+                .decoder(SyncGodAvatarPacket::decode)
+                .consumerMainThread(SyncGodAvatarPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SyncGodAvatarDataPacket.class,
-                SyncGodAvatarDataPacket::encode,
-                SyncGodAvatarDataPacket::decode,
-                SyncGodAvatarDataPacket::handle);
+        INSTANCE.messageBuilder(SyncGodAvatarDataPacket.class, id())
+                .encoder(SyncGodAvatarDataPacket::encode)
+                .decoder(SyncGodAvatarDataPacket::decode)
+                .consumerMainThread(SyncGodAvatarDataPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), ActivateAbilityPacket.class,
-                ActivateAbilityPacket::encode,
-                ActivateAbilityPacket::decode,
-                ActivateAbilityPacket::handle);
+        INSTANCE.messageBuilder(ActivateAbilityPacket.class, id())
+                .encoder(ActivateAbilityPacket::encode)
+                .decoder(ActivateAbilityPacket::decode)
+                .consumerMainThread(ActivateAbilityPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), HudNotificationPacket.class,
-                HudNotificationPacket::encode,
-                HudNotificationPacket::new,
-                HudNotificationPacket::handle);
+        INSTANCE.messageBuilder(HudNotificationPacket.class, id())
+                .encoder(HudNotificationPacket::encode)
+                .decoder(HudNotificationPacket::new)
+                .consumerMainThread(HudNotificationPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SwitchGodPacket.class,
-                SwitchGodPacket::encode,
-                SwitchGodPacket::new,
-                SwitchGodPacket::handle);
+        INSTANCE.messageBuilder(SwitchGodPacket.class, id())
+                .encoder(SwitchGodPacket::encode)
+                .decoder(SwitchGodPacket::new)
+                .consumerMainThread(SwitchGodPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SyncUnlockedGodsPacket.class,
-                SyncUnlockedGodsPacket::encode,
-                SyncUnlockedGodsPacket::decode,
-                SyncUnlockedGodsPacket::handle);
+        INSTANCE.messageBuilder(SyncUnlockedGodsPacket.class, id())
+                .encoder(SyncUnlockedGodsPacket::encode)
+                .decoder(SyncUnlockedGodsPacket::decode)
+                .consumerMainThread(SyncUnlockedGodsPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SyncOreMarkersPacket.class,
-                SyncOreMarkersPacket::encode,
-                SyncOreMarkersPacket::decode,
-                SyncOreMarkersPacket::handle);
+        INSTANCE.messageBuilder(SyncOreMarkersPacket.class, id())
+                .encoder(SyncOreMarkersPacket::encode)
+                .decoder(SyncOreMarkersPacket::decode)
+                .consumerMainThread(SyncOreMarkersPacket::handle)
+                .add();
         
         // Boon system packets
-        INSTANCE.registerMessage(id(), OpenBoonSelectionPacket.class,
-                OpenBoonSelectionPacket::encode,
-                OpenBoonSelectionPacket::decode,
-                OpenBoonSelectionPacket::handle);
+        INSTANCE.messageBuilder(OpenBoonSelectionPacket.class, id())
+                .encoder(OpenBoonSelectionPacket::encode)
+                .decoder(OpenBoonSelectionPacket::decode)
+                .consumerMainThread(OpenBoonSelectionPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SelectBoonPacket.class,
-                SelectBoonPacket::encode,
-                SelectBoonPacket::decode,
-                SelectBoonPacket::handle);
+        INSTANCE.messageBuilder(SelectBoonPacket.class, id())
+                .encoder(SelectBoonPacket::encode)
+                .decoder(SelectBoonPacket::decode)
+                .consumerMainThread(SelectBoonPacket::handle)
+                .add();
         
-        INSTANCE.registerMessage(id(), SyncPlayerBoonsPacket.class,
-                SyncPlayerBoonsPacket::encode,
-                SyncPlayerBoonsPacket::decode,
-                SyncPlayerBoonsPacket::handle);
+        INSTANCE.messageBuilder(SyncPlayerBoonsPacket.class, id())
+                .encoder(SyncPlayerBoonsPacket::encode)
+                .decoder(SyncPlayerBoonsPacket::decode)
+                .consumerMainThread(SyncPlayerBoonsPacket::handle)
+                .add();
     }
     
     public static <MSG> void sendToServer(MSG message) {

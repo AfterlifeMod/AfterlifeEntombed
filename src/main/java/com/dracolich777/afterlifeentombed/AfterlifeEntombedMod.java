@@ -60,7 +60,10 @@ public class AfterlifeEntombedMod {
         modEventBus.register(ModEventBusSubscribers.class);
         GodseekerSwordCapability.register(modEventBus);
 
-        MinecraftForge.EVENT_BUS.register(ClientControlHandler.class);
+        // Segregate client-only registration using DistExecutor
+        net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(net.minecraftforge.api.distmarker.Dist.CLIENT, () -> () -> {
+            com.dracolich777.afterlifeentombed.client.ClientInit.registerClient(modEventBus);
+        });
         // MinecraftForge.EVENT_BUS.register(MobDropHandler.class);
     }
 

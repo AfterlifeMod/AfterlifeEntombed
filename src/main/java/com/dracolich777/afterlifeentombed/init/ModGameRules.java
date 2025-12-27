@@ -19,9 +19,9 @@ public class ModGameRules {
      */
     public static void register() {
         RULE_ENABLE_BOONS_AND_CURSES = GameRules.register(
-            "enableBoonsAndCurses",
+            "doBoonsAndCurses",
             GameRules.Category.UPDATES,
-            GameRules.BooleanValue.create(true)
+            GameRules.BooleanValue.create(false)
         );
     }
 }

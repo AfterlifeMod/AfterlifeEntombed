@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:desert",
+    "afterlifeentombed:sand_dunes"
+  ]
+}

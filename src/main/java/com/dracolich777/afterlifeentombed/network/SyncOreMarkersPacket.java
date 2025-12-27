@@ -1,15 +1,17 @@
 package com.dracolich777.afterlifeentombed.network;
 
-import com.dracolich777.afterlifeentombed.client.OreArrowRenderer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+
+import com.dracolich777.afterlifeentombed.client.OreArrowRenderer;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.network.NetworkEvent;
 
 /**
  * Packet to sync ore positions with ore type from server to client for arrow rendering
@@ -55,15 +57,23 @@ public class SyncOreMarkersPacket {
     
     public static void handle(SyncOreMarkersPacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            // Client-side only
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                if (packet.clear) {
-                    OreArrowRenderer.clearArrows();
-                } else {
-                    OreArrowRenderer.setOreData(packet.oreData);
-                }
-            });
+            // Use DistExecutor to safely call client-only code
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> ClientHandler.updateOreMarkers(packet.clear, packet.oreData));
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    // Separate client handler to avoid loading client classes on server
+    public static class ClientHandler {
+
+        @OnlyIn(Dist.CLIENT)
+        public static void updateOreMarkers(boolean clear, Map<BlockPos, String> oreData) {
+            if (clear) {
+                OreArrowRenderer.clearArrows();
+            } else {
+                OreArrowRenderer.setOreData(oreData);
+            }
+        }
     }
 }
