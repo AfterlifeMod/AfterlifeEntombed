@@ -541,8 +541,8 @@ public class BoonEffectsHandler {
                 
                 // Log when actually applying pull
                 if (player.tickCount % 100 == 0) {
-                    AfterlifeEntombedMod.LOGGER.info("APPLYING lava pull: distance={}, pull={}, newVel={}", 
-                        String.format("%.2f", length), pull, player.getDeltaMovement());
+                    AfterlifeEntombedMod.LOGGER.info("APPLYING lava pull: distance={}, pull={}, newVel={}",
+                        "%.2f".formatted(length), pull, player.getDeltaMovement());
                 }
             }
         }
@@ -593,8 +593,8 @@ public class BoonEffectsHandler {
                 
                 // Log when actually applying pull
                 if (player.tickCount % 100 == 0) {
-                    AfterlifeEntombedMod.LOGGER.info("APPLYING TNT pull: distance={}, pull={}, newVel={}", 
-                        String.format("%.2f", Math.sqrt(closestDist)), pull, player.getDeltaMovement());
+                    AfterlifeEntombedMod.LOGGER.info("APPLYING TNT pull: distance={}, pull={}, newVel={}",
+                        "%.2f".formatted(Math.sqrt(closestDist)), pull, player.getDeltaMovement());
                 }
             }
         }

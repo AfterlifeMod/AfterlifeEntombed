@@ -1,0 +1,90 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 2,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_ingot",
+          "weight": 40,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_ra",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_shu",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_geb",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_horus",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_isis",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_thoth",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:splash_potion_of_holy_fire",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:totem_of_undying",
+          "weight": 2
+        }
+      ]
+    }
+  ]
+}

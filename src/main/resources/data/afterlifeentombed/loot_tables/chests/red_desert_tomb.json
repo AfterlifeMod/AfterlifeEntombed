@@ -1,0 +1,61 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 2,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_ingot",
+          "weight": 35,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 7
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_scrap",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:enchanted_golden_apple",
+          "weight": 12
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_seth",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:godstone_of_anubis",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "afterlifeentombed:hathors_rope",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

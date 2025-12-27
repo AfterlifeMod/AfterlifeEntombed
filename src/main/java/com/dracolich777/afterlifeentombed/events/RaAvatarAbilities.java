@@ -62,6 +62,7 @@ public class RaAvatarAbilities {
                 .map(cap -> cap.getSelectedGod() == GodType.RA).orElse(false);
     }
 
+    
     /**
      * Check if it's daytime in the player's dimension
      */
@@ -181,8 +182,8 @@ public class RaAvatarAbilities {
                 }
 
                 // 1 minute duration
-                if (activationTime >= 1200 && player instanceof ServerPlayer) {
-                    deactivateAvatarOfSun((ServerPlayer) player, cap, currentTime);
+                if (activationTime >= 1200 && player instanceof ServerPlayer serverPlayer) {
+                    deactivateAvatarOfSun(serverPlayer, cap, currentTime);
                 }
             }
         });
@@ -490,20 +491,12 @@ public class RaAvatarAbilities {
             return;
         }
 
-        // Check cooldown - cooldown time must be greater than current time to still be
-        // active
-        if (cap.getAvatarOfSunCooldown() > currentTime) {
-            long remaining = (cap.getAvatarOfSunCooldown() - currentTime) / 20;
-            GodAvatarHudHelper.sendCooldownMessage(player, "Avatar of Sun", remaining);
-            return;
-        }
-
-        // Check if holding a different god's stone to switch
         ItemStack mainHand = player.getMainHandItem();
         if (mainHand.getItem() instanceof GodstoneItem godstone) {
             GodType newGod = godstone.getGodType();
             if (newGod != GodType.RA && newGod != GodType.NONE) {
                 // Switch gods!
+                cap.unlockGod(newGod);
                 cap.setSelectedGod(newGod);
 
                 // Consume the godstone
@@ -583,9 +576,34 @@ public class RaAvatarAbilities {
             }
         }
 
+        // Check cooldown - cooldown time must be greater than current time to still be
+        // active
+        if (cap.getAvatarOfSunCooldown() > currentTime) {
+            long remaining = (cap.getAvatarOfSunCooldown() - currentTime) / 20;
+            GodAvatarHudHelper.sendCooldownMessage(player, "Avatar of Sun", remaining);
+            return;
+        }
+
+        
+
         // Activate Avatar of Sun
         cap.setAvatarOfSunActive(true);
         cap.setAvatarOfSunCooldown(currentTime);
+
+        // Apply standardised godly buffs for ultimate (1 minute duration)
+        player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 254, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 6, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 1200, 6, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 1200, 254, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 254, false, false));
+        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 6, false, false));
+        // Grant creative flight
+        if (!player.getAbilities().mayfly) {
+            player.getAbilities().mayfly = true;
+            player.onUpdateAbilities();
+        }
+        // Remove cooldowns on other active abilities
+        cap.setNoAbilityCooldowns(true);
 
         // Grant the Origins power for size increase
         var server = player.getServer();

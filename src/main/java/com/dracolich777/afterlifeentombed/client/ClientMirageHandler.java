@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.joml.Matrix4f;
 
@@ -68,8 +69,8 @@ private static long lastUpdateTime = 0;
             this.fadeAlpha = 1.0f;
             this.isBeingLookedAt = false;
             this.ticksExisted = 0;
-            this.hazeOffset = (float)(Math.random() * Math.PI * 2);
-            this.hazePhase = (float)(Math.random() * Math.PI * 2);
+            this.hazeOffset = (float)(ThreadLocalRandom.current().nextDouble() * Math.PI * 2);
+            this.hazePhase = (float)(ThreadLocalRandom.current().nextDouble() * Math.PI * 2);
             this.isPhantomStructure = isPhantomStructure;
             this.structureName = structureName != null ? structureName : "";
             this.isFading = false;

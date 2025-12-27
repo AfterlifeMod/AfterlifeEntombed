@@ -13,6 +13,9 @@
   "container.afterlifeentombed.godhold": "Godhold",
   "block.afterlifeentombed.seth_curse_block": "Cursestone of Seth",
    "block.afterlifeentombed.geb_curse_block": "Cursestone of Geb",
+   "block.afterlifeentombed.ra_curse_block": "Cursestone of Ra",
+   "block.afterlifeentombed.isis_curse_block": "Cursestone of Isis",
+   "block.afterlifeentombed.anubis_curse_block": "Cursestone of Anubis",
    "block.afterlifeentombed.thoth_curse_block": "Cursestone of Thoth",
   
 
@@ -85,44 +88,44 @@
   "effect.afterlifeentombed.judged_worthy": "Judged Worthy",
   "effect.afterlifeentombed.swarmed_by_locusts": "Swarmed",
   
-  "item.minecraft.potion.effect.revenge_of_seth": "Potion of Revenge of Seth",
+  "item.minecraft.potion.effect.revenge_of_seth": "Potion of Seth's Revenge",
   "item.minecraft.potion.effect.holy_fire": "Potion of Holy Fire",
-  "item.minecraft.potion.effect.revenge_of_thoth": "Potion of Revenge of Thoth",
-  "item.minecraft.potion.effect.revenge_of_shu": "Potion of Revenge of Shu",
-  "item.minecraft.potion.effect.revenge_of_isis": "Potion of Revenge of Isis",
-  "item.minecraft.potion.effect.revenge_of_geb": "Potion of Revenge of Geb",
-  "item.minecraft.potion.effect.revenge_of_horus": "Potion of Revenge of Horus",
-  "item.minecraft.potion.effect.revenge_of_anubis": "Potion of Revenge of Anubis",
+  "item.minecraft.potion.effect.revenge_of_thoth": "Potion of Thoth's Revenge",
+  "item.minecraft.potion.effect.revenge_of_shu": "Potion of Shu's Revenge",
+  "item.minecraft.potion.effect.revenge_of_isis": "Potion of Isis' Revenge",
+  "item.minecraft.potion.effect.revenge_of_geb": "Potion of Geb's Revenge",
+  "item.minecraft.potion.effect.revenge_of_horus": "Potion of Horus' Revenge",
+  "item.minecraft.potion.effect.revenge_of_anubis": "Potion of Anubis' Revenge",
 
 
-  "item.minecraft.splash_potion.effect.revenge_of_seth": "Splash Potion of Revenge of Seth",
+  "item.minecraft.splash_potion.effect.revenge_of_seth": "Splash Potion of Seth's Revenge",
   "item.minecraft.splash_potion.effect.holy_fire": "Splash Potion of Holy Fire",
-  "item.minecraft.splash_potion.effect.revenge_of_thoth": "Splash Potion of Revenge of Thoth",
-  "item.minecraft.splash_potion.effect.revenge_of_shu": "Splash Potion of Revenge of Shu",
-  "item.minecraft.splash_potion.effect.revenge_of_isis": "Splash Potion of Revenge of Isis",
-  "item.minecraft.splash_potion.effect.revenge_of_geb": "Splash Potion of Revenge of Geb",
-  "item.minecraft.splash_potion.effect.revenge_of_horus": "Splash Potion of Revenge of Horus",
-  "item.minecraft.splash_potion.effect.revenge_of_anubis": "Splash Potion of Revenge of Anubis",
+  "item.minecraft.splash_potion.effect.revenge_of_thoth": "Splash Potion of Thoth's Revenge",
+  "item.minecraft.splash_potion.effect.revenge_of_shu": "Splash Potion of Shu's Revenge",
+  "item.minecraft.splash_potion.effect.revenge_of_isis": "Splash Potion of Isis' Revenge",
+  "item.minecraft.splash_potion.effect.revenge_of_geb": "Splash Potion of Geb's Revenge",
+  "item.minecraft.splash_potion.effect.revenge_of_horus": "Splash Potion of Horus' Revenge",
+  "item.minecraft.splash_potion.effect.revenge_of_anubis": "Splash Potion of Anubis' Revenge",
 
 
-  "item.minecraft.lingering_potion.effect.revenge_of_seth": "Lingering Potion of Revenge of Seth",
+  "item.minecraft.lingering_potion.effect.revenge_of_seth": "Lingering Potion of Seth's Revenge",
   "item.minecraft.lingering_potion.effect.holy_fire": "Lingering Potion of Holy Fire",
-  "item.minecraft.lingering_potion.effect.revenge_of_thoth": "Lingering Potion of Revenge of Thoth",
-  "item.minecraft.lingering_potion.effect.revenge_of_shu": "Lingering Potion of Revenge of Shu",
-  "item.minecraft.lingering_potion.effect.revenge_of_isis": "Lingering Potion of Revenge of Isis",
-  "item.minecraft.lingering_potion.effect.revenge_of_geb": "Lingering Potion of Revenge of Geb",
-  "item.minecraft.lingering_potion.effect.revenge_of_horus": "Lingering Potion of Revenge of Horus",
-  "item.minecraft.lingering_potion.effect.revenge_of_anubis": "Lingering Potion of Revenge of Anubis",
+  "item.minecraft.lingering_potion.effect.revenge_of_thoth": "Lingering Potion of Thoth's Revenge",
+  "item.minecraft.lingering_potion.effect.revenge_of_shu": "Lingering Potion of Shu's Revenge",
+  "item.minecraft.lingering_potion.effect.revenge_of_isis": "Lingering Potion of Isis' Revenge",
+  "item.minecraft.lingering_potion.effect.revenge_of_geb": "Lingering Potion of Geb's Revenge",
+  "item.minecraft.lingering_potion.effect.revenge_of_horus": "Lingering Potion of Horus' Revenge",
+  "item.minecraft.lingering_potion.effect.revenge_of_anubis": "Lingering Potion of Anubis' Revenge",
 
 
-  "item.minecraft.tipped_arrow.effect.revenge_of_seth": "Arrow of Revenge of Seth",
+  "item.minecraft.tipped_arrow.effect.revenge_of_seth": "Arrow of Seth's Revenge",
   "item.minecraft.tipped_arrow.effect.holy_fire": "Arrow of Holy Fire",
-  "item.minecraft.tipped_arrow.effect.revenge_of_thoth": "Arrow of Revenge of Thoth",
-  "item.minecraft.tipped_arrow.effect.revenge_of_shu": "Arrow of Revenge of Shu",
-  "item.minecraft.tipped_arrow.effect.revenge_of_isis": "Arrow of Revenge of Isis",
-  "item.minecraft.tipped_arrow.effect.revenge_of_geb": "Arrow of Revenge of Geb",
-  "item.minecraft.tipped_arrow.effect.revenge_of_horus": "Arrow of Revenge of Horus",
-  "item.minecraft.tipped_arrow.effect.revenge_of_anubis": "Arrow of Revenge of Anubis",
+  "item.minecraft.tipped_arrow.effect.revenge_of_thoth": "Arrow of Thoth's Revenge",
+  "item.minecraft.tipped_arrow.effect.revenge_of_shu": "Arrow of Shu's Revenge",
+  "item.minecraft.tipped_arrow.effect.revenge_of_isis": "Arrow of Isis' Revenge",
+  "item.minecraft.tipped_arrow.effect.revenge_of_geb": "Arrow of Geb's Revenge",
+  "item.minecraft.tipped_arrow.effect.revenge_of_horus": "Arrow of Horus' Revenge",
+  "item.minecraft.tipped_arrow.effect.revenge_of_anubis": "Arrow of Anubis' Revenge",
 
   "item.afterlifeentombed.armor_of_ra.tooltip.line1": "Blessed armor of the sun god Ra",
   "item.afterlifeentombed.armor_of_ra.tooltip.set_bonus": "Full Set Bonus:",
@@ -265,8 +268,8 @@
 
   "death.attack.holy_fire": "%1$s was consumed by holy fire",
   "death.attack.holy_fire.player": "%1$s was consumed by holy fire whilst fighting %2$s",
-  "death.attack.afterlifeentombed.horus_damage": "%1$s relied too much on the protection of Horus",
-  "death.attack.afterlifeentombed.horus_damage.player": "%1$s was oblitterated by Horus whilst fighting %2$s",
+  "death.attack.horus_damage": "%1$s relied too much on the protection of Horus",
+  "death.attack.horus_damage.player": "%1$s was oblitterated by Horus whilst fighting %2$s",
   "death.attack.smooth_brain": "%1$s was not wise enough to avoid peril",
   "death.attack.smooth_brain.player": "%1$s was not wise enough to triumph over %2$s",
 
@@ -274,5 +277,6 @@
   "enchantment.afterlifeentombed.skybound.desc": "Launches you upward when hitting enemies",
 
   "key.categories.afterlifeentombed": "Afterlife Entombed",
-  "key.afterlifeentombed.open_god_selection": "Open God Selection"
+  "key.afterlifeentombed.open_god_selection": "Open God Selection",
+  "gamerule.doBoonsAndCurses": "Enable Boons and Curses"
 }

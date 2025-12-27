@@ -186,10 +186,10 @@ public class GodAvatarHudOverlay {
                 if (cap.isDamageNegationActive()) {
                     long elapsed = currentTime - cap.getDamageNegationCooldown();
                     if (elapsed < 200) {
-                        String status = "Store: " + String.format("%.0f", cap.getStoredDamage());
+                        String status = "Store: " + "%.0f".formatted(cap.getStoredDamage());
                         guiGraphics.drawString(mc.font, status, x, currentY, colors.active, true);
                     } else {
-                        String status = "Stored: " + String.format("%.0f", cap.getStoredDamage());
+                        String status = "Stored: " + "%.0f".formatted(cap.getStoredDamage());
                         guiGraphics.drawString(mc.font, status, x, currentY, colors.ready, true);
                     }
                 } else if (currentTime < cap.getDamageNegationCooldown()) {

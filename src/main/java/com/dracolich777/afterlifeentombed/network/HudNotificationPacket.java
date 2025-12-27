@@ -1,10 +1,14 @@
 package com.dracolich777.afterlifeentombed.network;
 
-import com.dracolich777.afterlifeentombed.client.hud.GodAvatarHudOverlay;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.network.NetworkEvent;
-
 import java.util.function.Supplier;
+
+import com.dracolich777.afterlifeentombed.client.hud.GodAvatarHudOverlay;
+
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.network.NetworkEvent;
 
 /**
  * Packet to send HUD notifications from server to client
@@ -34,9 +38,19 @@ public class HudNotificationPacket {
     
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            // This runs on the client side
-            GodAvatarHudOverlay.showNotification(message, color, durationTicks);
+            // Use DistExecutor to safely call client-only code
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                    () -> () -> ClientHandler.showNotification(message, color, durationTicks));
         });
         ctx.get().setPacketHandled(true);
+    }
+
+    // Separate client handler to avoid loading client classes on server
+    public static class ClientHandler {
+
+        @OnlyIn(Dist.CLIENT)
+        public static void showNotification(String message, int color, int durationTicks) {
+            GodAvatarHudOverlay.showNotification(message, color, durationTicks);
+        }
     }
 }

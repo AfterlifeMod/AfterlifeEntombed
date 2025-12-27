@@ -47,7 +47,7 @@ public class PricklyPearArmor extends ArmorItem {
                     int seconds = durationSeconds % 60;
                     
                     String amplifierText = amplifier > 0 ? " " + (amplifier + 1) : "";
-                    String durationText = String.format("%d:%02d", minutes, seconds);
+                    String durationText = "%d:%02d".formatted(minutes, seconds);
                     
                     tooltip.add(Component.translatable("tooltip.afterlifeentombed.stored_effect", 
                         effectName + amplifierText, durationText)

@@ -698,7 +698,7 @@ public class AvatarCommand {
                     
                     context.getSource().sendSuccess(() -> 
                         Component.literal("Damage Negation: Active=" + cap.isDamageNegationActive() + 
-                            ", Stored=" + String.format("%.1f", cap.getStoredDamage()) +
+                            ", Stored=" + "%.1f".formatted(cap.getStoredDamage()) +
                             ", CD=" + Math.max(0, (cap.getDamageNegationCooldown() - currentTime) / 20) + "s"), 
                         false);
                     

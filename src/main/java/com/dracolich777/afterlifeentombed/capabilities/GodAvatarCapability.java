@@ -210,6 +210,18 @@ public class GodAvatarCapability {
         long getAvatarOfHealingEndTime();
         void setAvatarOfHealingEndTime(long endTime);
         
+        /**
+         * Enables or disables ability cooldowns for the avatar.
+         * @param noCooldowns true to disable cooldowns, false to enable them
+         */
+        void setNoAbilityCooldowns(boolean noCooldowns);
+
+        /**
+         * Checks if ability cooldowns are disabled.
+         * @return true if cooldowns are disabled, false otherwise
+         */
+        boolean hasNoAbilityCooldowns();
+
         CompoundTag serializeNBT();
         void deserializeNBT(CompoundTag nbt);
     }
@@ -311,6 +323,9 @@ public class GodAvatarCapability {
         private long avatarOfHealingCooldown = 0;
         private boolean avatarOfHealingActive = false;
         private long avatarOfHealingEndTime = 0;
+
+        // Track if ability cooldowns are disabled (for ultimate)
+        private boolean noAbilityCooldowns = false;
 
         @Override
         public GodType getSelectedGod() {
@@ -1018,6 +1033,16 @@ public class GodAvatarCapability {
         @Override
         public void setAvatarOfHealingEndTime(long endTime) {
             this.avatarOfHealingEndTime = endTime;
+        }
+
+        @Override
+        public void setNoAbilityCooldowns(boolean noCooldowns) {
+            this.noAbilityCooldowns = noCooldowns;
+        }
+
+        @Override
+        public boolean hasNoAbilityCooldowns() {
+            return this.noAbilityCooldowns;
         }
 
         @Override

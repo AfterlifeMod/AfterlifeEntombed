@@ -169,7 +169,7 @@ public class GebsMight extends SwordItem {
 
             if (remainingCooldown > 0) {
                 float seconds = remainingCooldown / 20.0f;
-                tooltip.add(Component.literal(String.format("Cooldown: %.1fs", seconds))
+                tooltip.add(Component.literal("Cooldown: %.1fs".formatted(seconds))
                         .withStyle(ChatFormatting.RED));
             } else {
                 tooltip.add(Component.literal("Earth Shockwave Ready")

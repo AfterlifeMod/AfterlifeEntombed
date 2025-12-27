@@ -151,21 +151,21 @@ public class ShabtiEntity extends LivingEntity {
 
         // Always show health as requested
         if (hasDisplayFlag(SHOW_HEALTH)) {
-            statusBuilder.append(String.format("Health: %.1f/%.1f", cachedOwner.getHealth(), cachedOwner.getMaxHealth()));
+            statusBuilder.append("Health: %.1f/%.1f".formatted(cachedOwner.getHealth(), cachedOwner.getMaxHealth()));
         }
 
         // Show armor level (defense points)
         if (statusBuilder.length() > 0) {
             statusBuilder.append("\n");
         }
-        statusBuilder.append(String.format("Armor: %.1f", cachedOwner.getArmorValue()));
+        statusBuilder.append("Armor: %.1f".formatted(cachedOwner.getArmorValue()));
 
         if (hasDisplayFlag(SHOW_HUNGER)) {
             FoodData foodData = cachedOwner.getFoodData();
             if (statusBuilder.length() > 0) {
                 statusBuilder.append("\n");
             }
-            statusBuilder.append(String.format("Hunger: %d/20", foodData.getFoodLevel()));
+            statusBuilder.append("Hunger: %d/20".formatted(foodData.getFoodLevel()));
         }
 
         // Always show XP as requested
@@ -173,7 +173,7 @@ public class ShabtiEntity extends LivingEntity {
             if (statusBuilder.length() > 0) {
                 statusBuilder.append("\n");
             }
-            statusBuilder.append(String.format("XP: %d (Lvl %d)", cachedOwner.totalExperience, cachedOwner.experienceLevel));
+            statusBuilder.append("XP: %d (Lvl %d)".formatted(cachedOwner.totalExperience, cachedOwner.experienceLevel));
         }
 
         // Always show coordinates as requested
@@ -181,7 +181,7 @@ public class ShabtiEntity extends LivingEntity {
             if (statusBuilder.length() > 0) {
                 statusBuilder.append("\n");
             }
-            statusBuilder.append(String.format("Pos: %.1f, %.1f, %.1f", cachedOwner.getX(), cachedOwner.getY(), cachedOwner.getZ()));
+            statusBuilder.append("Pos: %.1f, %.1f, %.1f".formatted(cachedOwner.getX(), cachedOwner.getY(), cachedOwner.getZ()));
         }
 
         if (hasDisplayFlag(SHOW_DIMENSION)) {
@@ -189,7 +189,7 @@ public class ShabtiEntity extends LivingEntity {
                 statusBuilder.append("\n");
             }
             String dimensionName = cachedOwner.level().dimension().location().toString();
-            statusBuilder.append(String.format("Dim: %s", dimensionName));
+            statusBuilder.append("Dim: %s".formatted(dimensionName));
         }
 
         this.entityData.set(OWNER_STATUS_INFO, statusBuilder.toString());
