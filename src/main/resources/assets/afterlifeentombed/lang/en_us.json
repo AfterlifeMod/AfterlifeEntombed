@@ -270,8 +270,8 @@
   "death.attack.holy_fire.player": "%1$s was consumed by holy fire whilst fighting %2$s",
   "death.attack.horus_damage": "%1$s relied too much on the protection of Horus",
   "death.attack.horus_damage.player": "%1$s was oblitterated by Horus whilst fighting %2$s",
-  "death.attack.smooth_brain": "%1$s was not wise enough to avoid peril",
-  "death.attack.smooth_brain.player": "%1$s was not wise enough to triumph over %2$s",
+  "death.attack.smooth_brain": "%1$s's brain was too smooth to avoid peril",
+  "death.attack.smooth_brain.player": "%1$s's brain was too smooth to to triumph over %2$s",
 
   "enchantment.afterlifeentombed.skybound": "Skybound",
   "enchantment.afterlifeentombed.skybound.desc": "Launches you upward when hitting enemies",
