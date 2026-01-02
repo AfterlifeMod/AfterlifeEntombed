@@ -1,19 +1,21 @@
 package com.dracolich777.afterlifeentombed.events;
 
+import java.util.Random;
+
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.boons.BoonEffectsHandler;
 import com.dracolich777.afterlifeentombed.boons.BoonType;
+import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
+import com.dracolich777.afterlifeentombed.init.ModGameRules;
 import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.network.OpenBoonSelectionPacket;
+
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.Random;
 
 /**
  * Handles the random triggering of divine boons and curses from the gods
@@ -35,6 +37,19 @@ public class DivineBoonHandler {
         if (event.phase != TickEvent.Phase.END) return;
         if (!(event.player instanceof ServerPlayer serverPlayer)) return;
         if (serverPlayer.level().isClientSide) return;
+        
+        // Check if boons and curses are enabled
+        boolean boonsEnabled = serverPlayer.level().getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES);
+        
+        // If disabled, clear all boons and return
+        if (!boonsEnabled) {
+            serverPlayer.getCapability(PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(cap -> {
+                if (!cap.getActiveBoons().isEmpty()) {
+                    cap.clearAllBoons();
+                }
+            });
+            return;
+        }
         
         // Apply active boon effects
         BoonEffectsHandler.tickBoonEffects(serverPlayer);

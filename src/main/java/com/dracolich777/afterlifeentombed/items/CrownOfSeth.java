@@ -59,7 +59,6 @@ public class CrownOfSeth extends Item implements ICurioItem {
                     entity.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 
                         Integer.MAX_VALUE, 0, false, false, true));
                     entityData.putBoolean("crown_invisibility_pending", false);
-                    AfterlifeEntombedMod.LOGGER.info("Crown invisibility applied after dissolve delay for: {}", entity);
                 }
             }
             
@@ -92,8 +91,6 @@ public class CrownOfSeth extends Item implements ICurioItem {
         LivingEntity entity = slotContext.entity();
         Level level = entity.level();
         
-        AfterlifeEntombedMod.LOGGER.info("CrownOfSeth onEquip called! Entity: {}, ClientSide: {}", entity, level.isClientSide());
-        
         // Play sound effect immediately (works on both sides)
         level.playSound(null, entity.blockPosition(), 
             SoundEvents.WITHER_AMBIENT, SoundSource.PLAYERS, 0.5f, 1.5f);
@@ -106,16 +103,10 @@ public class CrownOfSeth extends Item implements ICurioItem {
         
         // Send particle effect to client if on server side
         if (!level.isClientSide() && entity instanceof Player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown equipped, spawning seth_crown_disolve particle");
             // Spawn dissolve particle at head position with scale 1
-            double headY = entity.getY() + entity.getBbHeight() * 0.8; // Head height
+            double headY = entity.getY() + entity.getBbHeight() * 0.8;
             AfterLibsAPI.spawnAfterlifeParticle(level, "seth_crown_disolve", 
                 entity.getX(), headY, entity.getZ(), 1.0f);
-        }
-        
-        // Client side particle effects removed - now handled entirely by AfterLibs
-        if (level.isClientSide()) {
-            AfterlifeEntombedMod.LOGGER.info("CLIENT: Crown equipped, particle effects removed as per consolidation to AfterLibs");
         }
         
         // Schedule invisibility effect after a delay (60 ticks = 3 seconds)
@@ -133,13 +124,10 @@ public class CrownOfSeth extends Item implements ICurioItem {
         LivingEntity entity = slotContext.entity();
         Level level = entity.level();
         
-        AfterlifeEntombedMod.LOGGER.info("CrownOfSeth onUnequip called! Entity: {}, ClientSide: {}", entity, level.isClientSide());
-        
         // Send particle effect to client if on server side
         if (!level.isClientSide() && entity instanceof Player) {
-            AfterlifeEntombedMod.LOGGER.info("SERVER: Crown unequipped, spawning seth_crown_appear particle");
             // Spawn appear particle at head position with scale 1
-            double headY = entity.getY() + entity.getBbHeight() * 0.8; // Head height
+            double headY = entity.getY() + entity.getBbHeight() * 0.8;
             AfterLibsAPI.spawnAfterlifeParticle(level, "seth_crown_appear", 
                 entity.getX(), headY, entity.getZ(), 1.0f);
         }

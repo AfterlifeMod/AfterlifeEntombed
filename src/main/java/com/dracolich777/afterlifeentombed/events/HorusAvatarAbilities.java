@@ -594,13 +594,8 @@ public class HorusAvatarAbilities {
      * Ability 3: Eye of Protection - Regen + damage reflection
      */
     private static void activateEyeOfProtection(ServerPlayer player) {
-        com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Eye of Protection activated for player {}", player.getGameProfile().getName());
-        
         player.getCapability(GodAvatarCapability.GOD_AVATAR_CAPABILITY).ifPresent(cap -> {
             long currentTime = player.level().getGameTime();
-            
-            com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Current time: {}, Already active: {}, Cooldown: {}", 
-                currentTime, cap.isEyeOfProtectionActive(), cap.getEyeOfProtectionCooldown());
             
             // Check if already active - deactivate
             if (cap.isEyeOfProtectionActive()) {
@@ -619,8 +614,6 @@ public class HorusAvatarAbilities {
             // Activate
             cap.setEyeOfProtectionActive(true);
             cap.setEyeOfProtectionEndTime(currentTime + EYE_OF_PROTECTION_DURATION);
-            
-            com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Setting Eye of Protection active, end time: {}", currentTime + EYE_OF_PROTECTION_DURATION);
             
             // Grant the Origins toggle power
             var server = player.getServer();
