@@ -1,5 +1,5 @@
 {
-  "type": "afterlifeentombed:godhold_crafting",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "OEO",
     "ECE",

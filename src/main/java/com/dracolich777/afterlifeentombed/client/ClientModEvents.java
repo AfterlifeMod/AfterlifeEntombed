@@ -1,6 +1,7 @@
 package com.dracolich777.afterlifeentombed.client;
 
 import com.dracolich777.afterlifeentombed.client.gui.GodHoldScreen;
+import com.dracolich777.afterlifeentombed.client.gui.GodforgeScreen;
 import com.dracolich777.afterlifeentombed.client.model.ArmorOfRaModel;
 import com.dracolich777.afterlifeentombed.client.model.ModModelLayers;
 import com.dracolich777.afterlifeentombed.init.ModMenuTypes;
@@ -32,6 +33,7 @@ public class ClientModEvents {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             MenuScreens.register(ModMenuTypes.GODHOLD_MENU.get(), GodHoldScreen::new);
+            MenuScreens.register(ModMenuTypes.GODFORGE_MENU.get(), GodforgeScreen::new);
         });
     }
 }

@@ -2,6 +2,7 @@ package com.dracolich777.afterlifeentombed.init;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.blockentities.GodHoldBlockEntity;
+import com.dracolich777.afterlifeentombed.blockentities.GodforgeBlockEntity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,6 +18,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("godhold_block_entity", () ->
                     BlockEntityType.Builder.of(GodHoldBlockEntity::new,
                             ModBlocks.GODHOLD.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<GodforgeBlockEntity>> GODFORGE_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("godforge_block_entity", () ->
+                    BlockEntityType.Builder.of(GodforgeBlockEntity::new,
+                            ModBlocks.GODFORGE.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

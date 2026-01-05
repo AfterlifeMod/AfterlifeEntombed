@@ -1,0 +1,17 @@
+{
+  "type": "afterlifeentombed:godforge",
+  "input1": {
+    "item": "afterlifeentombed:godstone_of_seth"
+  },
+  "input2": {
+    "item": "minecraft:wither_skeleton_skull"
+  },
+  "input3": {
+    "item": "minecraft:netherite_sword"
+  },
+  "result": {
+    "item": "afterlifeentombed:seths_trickery",
+    "count": 1
+  },
+  "cookingtime": 800
+}

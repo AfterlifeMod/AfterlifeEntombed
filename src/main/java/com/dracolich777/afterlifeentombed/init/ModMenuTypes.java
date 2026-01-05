@@ -2,7 +2,9 @@ package com.dracolich777.afterlifeentombed.init;
 
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.blockentities.GodHoldBlockEntity;
+import com.dracolich777.afterlifeentombed.blockentities.GodforgeBlockEntity;
 import com.dracolich777.afterlifeentombed.menu.GodHoldMenu;
+import com.dracolich777.afterlifeentombed.menu.GodforgeMenu;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.inventory.MenuType;
@@ -26,6 +28,17 @@ public class ModMenuTypes {
                             return new GodHoldMenu(windowId, inv, entity);
                         }
                         throw new IllegalStateException("Block entity at " + pos + " is not a GodHoldBlockEntity");
+                    }));
+
+    public static final RegistryObject<MenuType<GodforgeMenu>> GODFORGE_MENU =
+            MENUS.register("godforge_menu", () ->
+                    IForgeMenuType.create((windowId, inv, data) -> {
+                        BlockPos pos = data.readBlockPos();
+                        BlockEntity blockEntity = inv.player.level().getBlockEntity(pos);
+                        if (blockEntity instanceof GodforgeBlockEntity entity) {
+                            return new GodforgeMenu(windowId, inv, entity, entity.getContainerData());
+                        }
+                        throw new IllegalStateException("Block entity at " + pos + " is not a GodforgeBlockEntity");
                     }));
 
     public static void register(IEventBus eventBus) {

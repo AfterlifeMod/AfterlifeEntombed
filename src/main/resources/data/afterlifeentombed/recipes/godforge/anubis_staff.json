@@ -1,0 +1,17 @@
+{
+  "type": "afterlifeentombed:godforge",
+  "input1": {
+    "item": "afterlifeentombed:godstone_of_anubis"
+  },
+  "input2": {
+    "item": "minecraft:nether_star"
+  },
+  "input3": {
+    "item": "minecraft:netherite_hoe"
+  },
+  "result": {
+    "item": "afterlifeentombed:anubis_judgement",
+    "count": 1
+  },
+  "cookingtime": 800
+}
