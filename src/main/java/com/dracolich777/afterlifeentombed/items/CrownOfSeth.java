@@ -36,9 +36,17 @@ public class CrownOfSeth extends Item implements ICurioItem {
         return Rarity.EPIC;
     }
 
+
+    @Override
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        // Only allow equipping in the 'head' curios slot
+        return "head".equals(slotContext.identifier());
+    }
+
     @Override
     public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-        return true;
+        // Only allow equipping from use if the slot is 'head'
+        return "head".equals(slotContext.identifier());
     }
 
     @Override

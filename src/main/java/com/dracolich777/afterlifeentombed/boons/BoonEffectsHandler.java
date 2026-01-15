@@ -32,8 +32,12 @@ public class BoonEffectsHandler {
     public static void tickBoonEffects(Player player) {
         if (player.level().isClientSide) return;
 
-        // Check if boons and curses are enabled via game rule
+
+        // If the gamerule is off, clear all boons/curses and return
         if (!player.level().getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES)) {
+            player.getCapability(com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability.PLAYER_BOONS_CAPABILITY).ifPresent(cap -> {
+                cap.getActiveBoons().clear();
+            });
             return;
         }
 
