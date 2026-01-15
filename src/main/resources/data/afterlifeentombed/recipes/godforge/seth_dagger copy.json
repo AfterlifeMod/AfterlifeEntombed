@@ -1,16 +1,16 @@
 {
   "type": "afterlifeentombed:godforge",
   "input1": {
-    "item": "afterlifeentombed:godstone_of_anubis"
+    "item": "afterlifeentombed:godstone_of_geb"
   },
   "input2": {
     "item": "afterlifeentombed:dusksteel_ingot"
   },
   "input3": {
-    "item": "minecraft:netherite_hoe"
+    "item": "minecraft:netherite_axe"
   },
   "result": {
-    "item": "afterlifeentombed:anubis_judgement",
+    "item": "afterlifeentombed:gebs_might",
     "count": 1
   },
   "cookingtime": 800
