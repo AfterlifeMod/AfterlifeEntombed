@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "afterlifeentombed:item/creative_icon"
+    "layer0": "afterlifeentombed:item/bao_2"
   }
 }

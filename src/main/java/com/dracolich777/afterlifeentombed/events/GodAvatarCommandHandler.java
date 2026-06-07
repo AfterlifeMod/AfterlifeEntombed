@@ -60,10 +60,6 @@ public class GodAvatarCommandHandler {
                     // Route to correct god's ability handler based on selected god
                     GodType selectedGod = godAvatar.getSelectedGod();
                     
-                    // Debug logging
-                    com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("GodAvatarCommandHandler: Player {} triggered ability {} for god {}", 
-                        player.getName().getString(), abilityId, selectedGod);
-                    
                     switch (selectedGod) {
                         case SETH -> SethAvatarAbilities.activateAbility(player, abilityId);
                         case RA -> RaAvatarAbilities.activateAbility(player, abilityId);

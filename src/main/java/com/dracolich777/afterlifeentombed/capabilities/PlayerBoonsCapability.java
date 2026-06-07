@@ -1,7 +1,15 @@
 package com.dracolich777.afterlifeentombed.capabilities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.dracolich777.afterlifeentombed.boons.ActiveBoon;
 import com.dracolich777.afterlifeentombed.boons.BoonType;
+
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -12,12 +20,6 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Capability for tracking active boons and curses on a player
@@ -30,6 +32,7 @@ public class PlayerBoonsCapability {
         void addBoon(ActiveBoon boon);
         void removeBoon(ActiveBoon boon);
         void clearExpiredBoons(long currentGameTime);
+        void clearAllBoons();
         boolean hasBoon(BoonType type);
         ActiveBoon getBoon(BoonType type);
         
@@ -79,6 +82,11 @@ public class PlayerBoonsCapability {
         @Override
         public void clearExpiredBoons(long currentGameTime) {
             activeBoons.removeIf(boon -> boon.isExpired(currentGameTime));
+        }
+
+        @Override
+        public void clearAllBoons() {
+            activeBoons.clear();
         }
 
         @Override

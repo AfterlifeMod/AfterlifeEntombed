@@ -1,0 +1,21 @@
+{
+  "type": "afterlifeentombed:godforge",
+  "requiresfuel": true,
+  "fuel": {
+    "item": "minecraft:emerald_block"
+  },
+  "input1": {
+    "item": "minecraft:end_crystal"
+  },
+  "input2": {
+    "item": "minecraft:shield"
+  },
+  "input3": {
+    "item": "minecraft:nether_brick"
+  },
+  "result": {
+    "item": "minecraft:ward_armor_trim_smithing_template",
+    "count": 1
+  },
+  "cookingtime": 200
+}

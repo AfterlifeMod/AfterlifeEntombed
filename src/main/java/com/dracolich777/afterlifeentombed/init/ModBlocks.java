@@ -5,6 +5,7 @@ import com.dracolich777.afterlifeentombed.blocks.DuatPortalBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksandBlock;
 import com.dracolich777.afterlifeentombed.blocks.DusksteelBlock;
 import com.dracolich777.afterlifeentombed.blocks.GodHoldBlock;
+import com.dracolich777.afterlifeentombed.blocks.GodforgeBlock;
 import com.dracolich777.afterlifeentombed.blocks.SethCurseBlock;
 import com.dracolich777.afterlifeentombed.blocks.GebCurseBlock;
 import com.dracolich777.afterlifeentombed.blocks.ThothCurseBlock;
@@ -110,6 +111,12 @@ public class ModBlocks {
     public static final RegistryObject<Item> GODHOLD_ITEM = ITEMS.register("godhold",
             () -> new BlockItem(GODHOLD.get(), new Item.Properties()));
 
+    public static final RegistryObject<Block> GODFORGE = BLOCKS.register("godforge",
+            GodforgeBlock::new);
+
+    public static final RegistryObject<Item> GODFORGE_ITEM = ITEMS.register("godforge",
+            () -> new BlockItem(GODFORGE.get(), new Item.Properties()));
+
     // Register the Creative Tab
     public static final RegistryObject<CreativeModeTab> AFTERLIFE_ENTOMBED_TAB = CREATIVE_MODE_TABS.register(
             "afterlife_entombed_blocks_tab",
@@ -129,6 +136,7 @@ public class ModBlocks {
                         output.accept(ANUBIS_CURSE_BLOCK_ITEM.get());
                         output.accept(DUAT_PORTAL_ITEM.get());
                         output.accept(GODHOLD_ITEM.get());
+                        output.accept(GODFORGE_ITEM.get());
                     })
                     .build()
     );

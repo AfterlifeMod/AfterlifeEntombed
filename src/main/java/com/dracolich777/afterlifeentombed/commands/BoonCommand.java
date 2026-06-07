@@ -1,9 +1,12 @@
 package com.dracolich777.afterlifeentombed.commands;
 
+import java.util.Collection;
+
 import com.dracolich777.afterlifeentombed.AfterlifeEntombedMod;
 import com.dracolich777.afterlifeentombed.boons.ActiveBoon;
 import com.dracolich777.afterlifeentombed.boons.BoonType;
 import com.dracolich777.afterlifeentombed.capabilities.PlayerBoonsCapability;
+import com.dracolich777.afterlifeentombed.init.ModGameRules;
 import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.network.OpenBoonSelectionPacket;
@@ -12,6 +15,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -19,8 +23,6 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-
-import java.util.Collection;
 
 /**
  * Command for manually triggering divine boon/curse events for testing
@@ -112,6 +114,13 @@ public class BoonCommand {
     
     private static int triggerBlessing(CommandContext<CommandSourceStack> context, String godName) {
         try {
+            // Check if boons and curses are enabled
+            ServerLevel level = context.getSource().getLevel();
+            if (!level.getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES)) {
+                context.getSource().sendFailure(Component.literal("Boons and curses are currently disabled. Enable the doBoonsAndCurses gamerule first.").withStyle(ChatFormatting.RED));
+                return 0;
+            }
+
             Collection<ServerPlayer> targets = EntityArgument.getPlayers(context, "targets");
             GodType god;
             
@@ -154,6 +163,13 @@ public class BoonCommand {
     
     private static int triggerCurse(CommandContext<CommandSourceStack> context, String godName) {
         try {
+            // Check if boons and curses are enabled
+            ServerLevel level = context.getSource().getLevel();
+            if (!level.getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES)) {
+                context.getSource().sendFailure(Component.literal("Boons and curses are currently disabled. Enable the doBoonsAndCurses gamerule first.").withStyle(ChatFormatting.RED));
+                return 0;
+            }
+
             Collection<ServerPlayer> targets = EntityArgument.getPlayers(context, "targets");
             GodType god;
             
@@ -278,6 +294,13 @@ public class BoonCommand {
      * Directly grants a specific boon to players
      */
     private static int giveBoon(CommandContext<CommandSourceStack> context, String boonName) throws CommandSyntaxException {
+        // Check if boons and curses are enabled
+        ServerLevel level = context.getSource().getLevel();
+        if (!level.getGameRules().getBoolean(ModGameRules.RULE_ENABLE_BOONS_AND_CURSES)) {
+            context.getSource().sendFailure(Component.literal("Boons and curses are currently disabled. Enable the doBoonsAndCurses gamerule first.").withStyle(ChatFormatting.RED));
+            return 0;
+        }
+
         Collection<ServerPlayer> targets = EntityArgument.getPlayers(context, "targets");
         
         // Validate boon name
@@ -330,6 +353,8 @@ public class BoonCommand {
     
     /**
      * Remove a specific boon or curse from players
+     * Note: This command works
+     * even when doBoonsAndCurses is false, to allow cleanup
      */
     private static int removeBoon(CommandContext<CommandSourceStack> context, String boonName, boolean isBlessing) throws CommandSyntaxException {
         Collection<ServerPlayer> targets = EntityArgument.getPlayers(context, "targets");

@@ -196,8 +196,6 @@ public class ThothAvatarAbilities {
      * Consumes random amount of XP (5-15 levels)
      */
     private static void activateDivineEnchant(ServerPlayer player, GodAvatarCapability.IGodAvatar cap, long currentTime) {
-        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Method called for player {}", player.getName().getString());
-        
         // Check if in Avatar of Wisdom mode (no cooldown)
         boolean unlimited = cap.isAvatarOfWisdomActive();
         
@@ -221,11 +219,6 @@ public class ThothAvatarAbilities {
             return;
         }
         
-        // Debug: Log item details
-        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Attempting to enchant {} (isEnchantable: {})", 
-            heldItem.getDescriptionId(), 
-            heldItem.isEnchantable());
-        
         // Get suitable enchantments for this item
         // Use category matching instead of canEnchant() which may be overly restrictive
         List<EnchantmentInstance> availableEnchants = new ArrayList<>();
@@ -247,8 +240,6 @@ public class ThothAvatarAbilities {
                 availableEnchants.add(new EnchantmentInstance(enchantment, maxLevel));
             }
         }
-        
-        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Found {} suitable enchantments", availableEnchants.size());
         
         if (availableEnchants.isEmpty()) {
             GodAvatarHudHelper.sendNotification(player, "No suitable enchantments for this item!", 
@@ -304,14 +295,6 @@ public class ThothAvatarAbilities {
         
         // Force inventory update to ensure client sees the change
         player.inventoryMenu.broadcastChanges();
-        
-        // Debug logging
-        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Applied {} level {} to {}", 
-            selectedEnchant.enchantment.getDescriptionId(), 
-            selectedEnchant.level,
-            heldItem.getDescriptionId());
-        AfterlifeEntombedMod.LOGGER.info("Divine Enchant: Item now has {} enchantments total", 
-            EnchantmentHelper.getEnchantments(heldItem).size());
         
         // Consume XP and set cooldown (skip if unlimited)
         if (!unlimited) {

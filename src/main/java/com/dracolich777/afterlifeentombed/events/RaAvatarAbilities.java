@@ -452,8 +452,6 @@ public class RaAvatarAbilities {
 
                     for (LivingEntity entity : entities) {
                         if (entity != player) {
-                            com.dracolich777.afterlifeentombed.AfterlifeEntombedMod.LOGGER.info("Holy Inferno damaging entity: {} (is player: {})", 
-                                entity.getClass().getSimpleName(), entity instanceof net.minecraft.world.entity.player.Player);
                             entity.hurt(serverLevel.damageSources().onFire(), 6.0f);
                             entity.setSecondsOnFire(10);
                         }
