@@ -47,8 +47,6 @@ public class GodAvatarCapabilityHandler {
     @SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.HIGHEST)
     public static void onLivingDeath(LivingDeathEvent event) {
         // Log ALL deaths, not just players
-        AfterlifeEntombedMod.LOGGER.info("=== DEATH EVENT FIRED for entity: {} ===", 
-            event.getEntity().getClass().getSimpleName());
         
         if (event.getEntity() instanceof ServerPlayer player) {
             AfterlifeEntombedMod.LOGGER.info("=== DEATH EVENT for PLAYER {} ===", player.getGameProfile().getName());
@@ -85,7 +83,6 @@ public class GodAvatarCapabilityHandler {
                     playerDeathGods.get(player.getUUID()).name(),
                     playerDeathUnlockedGods.get(player.getUUID()).size());
                     
-                AfterlifeEntombedMod.LOGGER.info("=== END DEATH EVENT ===");
             } else {
                 AfterlifeEntombedMod.LOGGER.warn("Capability NOT PRESENT on death for {}!", player.getGameProfile().getName());
             }

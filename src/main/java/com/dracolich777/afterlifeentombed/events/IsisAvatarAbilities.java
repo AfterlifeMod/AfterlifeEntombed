@@ -9,6 +9,7 @@ import com.dracolich777.afterlifeentombed.items.GodType;
 import com.dracolich777.afterlifeentombed.items.GodstoneItem;
 import com.dracolich777.afterlifeentombed.network.GodAvatarPackets;
 import com.dracolich777.afterlifeentombed.network.SyncGodAvatarPacket;
+import com.dracolich777.afterlifeentombed.util.GodSwitchHelper;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -426,87 +427,9 @@ public class IsisAvatarAbilities {
             }
 
             // Check if holding a different god's stone to switch
-        ItemStack mainHand = player.getMainHandItem();
-        if (mainHand.getItem() instanceof GodstoneItem godstone) {
-            GodType newGod = godstone.getGodType();
-            if (newGod != GodType.SETH && newGod != GodType.NONE) {
-                // Switch gods!
-                cap.setSelectedGod(newGod);
-                
-                // Consume the godstone
-                mainHand.shrink(1);
-                
-                // Spawn swap particles based on new god
-                if (player.level() instanceof ServerLevel level) {
-                    String particleName = switch (newGod) {
-                        case RA -> "ra_halo";
-                        case SHU -> "shujump";
-                        case ANUBIS -> "anubis_nuke";
-                        case GEB -> "seth_fog";
-                        case HORUS, ISIS, THOTH -> "seth_fog"; // Default to seth_fog for other gods
-                        default -> "seth_fog";
-                    };
-                    AfterLibsAPI.spawnAfterlifeParticle(level, particleName, player.getX(), player.getY() + 1, player.getZ(), 2.0f);
-                }
-                
-                // Switch to the new god's origin
-                var server = player.getServer();
-                if (server != null) {
-                    String originId = switch (newGod) {
-                        case RA -> "afterlifeentombed:avatar_of_ra";
-                        case SHU -> "afterlifeentombed:avatar_of_shu";
-                        case ANUBIS -> "afterlifeentombed:avatar_of_anubis";
-                        case THOTH -> "afterlifeentombed:avatar_of_thoth";
-                        case GEB -> "afterlifeentombed:avatar_of_geb";
-                        case HORUS, ISIS -> "afterlifeentombed:avatar_of_egypt";
-                        default -> null;
-                    };
-                    
-                    if (originId != null) {
-                        // Remove ALL existing avatar origins first
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_egypt"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_seth"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_ra"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_shu"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_anubis"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_thoth"
-                        );
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin revoke " + player.getGameProfile().getName() + " origins:origin afterlifeentombed:avatar_of_geb"
-                        );
-                        
-                        // Now grant the new origin
-                        server.getCommands().performPrefixedCommand(
-                            server.createCommandSourceStack(),
-                            "origin set " + player.getGameProfile().getName() + " origins:origin " + originId
-                        );
-                    }
-                }
-                
-                GodAvatarHudHelper.sendNotification(player, "Now avatar of " + newGod.name(), GodAvatarHudHelper.COLOR_SPECIAL, 60);
-                // Sync to client
-                GodAvatarPackets.INSTANCE.sendToServer(new SyncGodAvatarPacket(newGod));
+            if (GodSwitchHelper.tryGodSwitch(player, cap, GodType.ISIS)) {
                 return;
             }
-        }
             
             // Check cooldown
             long cooldownEnd = cap.getAvatarOfHealingCooldown();

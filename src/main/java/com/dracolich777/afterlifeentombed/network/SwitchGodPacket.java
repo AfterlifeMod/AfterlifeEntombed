@@ -124,8 +124,10 @@ public class SwitchGodPacket {
                         case RA -> AfterLibsAPI.spawnAfterlifeParticle(level, "ra_halo", x, y + 5, z, 0.5f);
                         case HORUS -> AfterLibsAPI.spawnAfterlifeParticle(level, "horus_shield", x, y + 1, z, 1.0f);
                         case SHU -> AfterLibsAPI.spawnAfterlifeParticle(level, "shu_jump2", x, y + 1, z, 1.0f);
-                        case ISIS -> AfterLibsAPI.spawnAfterlifeParticle(level, "healing_burst", x, y + 1, z, 1.0f);
+                        case ISIS -> AfterLibsAPI.spawnAfterlifeParticle(level, "isis_heal2", x, y + 1, z, 1.0f);
                         case GEB -> AfterLibsAPI.spawnAfterlifeParticle(level, "earth_aura", x, y + 1, z, 1.0f);
+                        case ANUBIS -> AfterLibsAPI.spawnAfterlifeParticle(level, "anubis_nuke", x, y + 1, z, 1.0f);
+                        case THOTH -> AfterLibsAPI.spawnAfterlifeParticle(level, "thoth_book", x, y + 1, z, 1.0f);
                     }
                 }
                 

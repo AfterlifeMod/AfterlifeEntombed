@@ -1,3 +1,4 @@
+package com.dracolich777.afterlifeentombed.events;
 
 // package com.dracolich777.afterlifeentombed.events;
 

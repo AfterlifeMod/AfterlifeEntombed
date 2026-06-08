@@ -200,8 +200,20 @@ public class GodAvatarCommandHandler {
                             AfterLibsAPI.spawnAfterlifeParticle(level, "shu_jump2", x, y + 1, z, 1.0f);
                         }
                         case ISIS -> {
-                            // Spawn healing_burst particle
-                            AfterLibsAPI.spawnAfterlifeParticle(level, "healing_burst", x, y + 1, z, 1.0f);
+                            // Spawn isis_heal2 particle
+                            AfterLibsAPI.spawnAfterlifeParticle(level, "isis_heal2", x, y + 1, z, 1.0f);
+                        }
+                        case ANUBIS -> {
+                            // Spawn anubis_nuke particle
+                            AfterLibsAPI.spawnAfterlifeParticle(level, "anubis_nuke", x, y + 1, z, 1.0f);
+                        }
+                        case THOTH -> {
+                            // Spawn thoth_wisdom particle
+                            AfterLibsAPI.spawnAfterlifeParticle(level, "thoth_book", x, y + 1, z, 1.0f);
+                        }
+                        case GEB -> {
+                            // Spawn earth_aura particle
+                            AfterLibsAPI.spawnAfterlifeParticle(level, "earth_aura", x, y + 1, z, 1.0f);
                         }
                         default -> {
                             // Other gods will use available particles when their abilities are implemented
