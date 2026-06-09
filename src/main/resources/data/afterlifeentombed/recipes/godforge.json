@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OEO",
+    "ECE",
+    "OEO"
+  ],
+  "key": {
+    "O": {
+      "item": "afterlifeentombed:dusksteel_block"
+    },
+    "E": {
+      "item": "minecraft:smithing_table"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "afterlifeentombed:godforge",
+    "count": 1
+  }
+}

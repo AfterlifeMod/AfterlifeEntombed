@@ -1,0 +1,9 @@
+{
+  "asset_name": "dusksteel",
+  "description": {
+    "color": "#790098",
+    "translate": "trim_material.afterlifeentombed.dusksteel"
+  },
+  "ingredient": "afterlifeentombed:dusksteel_ingot",
+  "item_model_index": 1.7771
+}

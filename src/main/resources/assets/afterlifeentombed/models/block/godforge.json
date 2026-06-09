@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "particle": "afterlifeentombed:block/godforge_top",
+    "bottom": "afterlifeentombed:block/godforge_bottom",
+    "top": "afterlifeentombed:block/godforge_top",
+    "side": "afterlifeentombed:block/godforge_front"
+  }
+}

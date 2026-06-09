@@ -281,5 +281,7 @@
 
   "key.categories.afterlifeentombed": "Afterlife Entombed",
   "key.afterlifeentombed.open_god_selection": "Open God Selection",
-  "gamerule.doBoonsAndCurses": "Enable Boons and Curses"
+  "gamerule.doBoonsAndCurses": "Enable Boons and Curses",
+
+  "trim_material.afterlifeentombed.dusksteel": "Dusksteel"
 }
